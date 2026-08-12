@@ -303,6 +303,53 @@
     .rental-icon { width: 28px; height: 28px; margin-bottom: 18px; border: 1px solid #7ad4de; border-radius: 6px 6px 2px 2px; transform: rotate(45deg); }
     .rental-tile span { display: block; width: 70%; height: 5px; border-radius: 3px; background: rgba(228,247,250,.32); }
 
+    .stack { padding: 20px 0 clamp(90px, 12vw, 150px); }
+    .stack-panel {
+      padding: clamp(36px, 6vw, 72px);
+      border: 1px solid var(--line-strong);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
+      overflow: hidden;
+      position: relative;
+    }
+    .stack-panel::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      top: -230px;
+      right: -120px;
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 55px color-mix(in srgb, var(--accent) 4%, transparent), 0 0 0 110px color-mix(in srgb, var(--accent-2) 3%, transparent);
+      pointer-events: none;
+    }
+    .stack-head { display: grid; grid-template-columns: 1fr .8fr; gap: 34px; align-items: end; position: relative; z-index: 1; }
+    .stack-head h2 { max-width: 720px; margin: 15px 0 0; font-size: clamp(38px, 5.2vw, 66px); line-height: 1; letter-spacing: -.055em; }
+    .stack-head p { max-width: 470px; justify-self: end; margin: 0; color: var(--ink-muted); font-size: 15px; line-height: 1.7; }
+    .stack-flow { margin-top: 48px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; position: relative; z-index: 1; }
+    .tech {
+      min-height: 52px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 8%, transparent);
+      transition: transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .tech:hover { transform: translateY(-3px); border-color: var(--accent); color: var(--accent-ink); }
+    .tech-code { color: var(--accent-ink); font-size: 10px; font-weight: 500; }
+    .tech-arrow { color: var(--ink-faint); font-size: 14px; }
+    .stack-foot { margin-top: 32px; padding-top: 25px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; border-top: 1px solid var(--line); position: relative; z-index: 1; }
+    .stack-note { color: var(--ink-faint); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    .stack-note strong { display: block; margin-bottom: 7px; color: var(--ink); font-family: Inter, ui-sans-serif, sans-serif; font-size: 13px; letter-spacing: -.01em; text-transform: none; }
+
     .contact { padding: 30px 0 70px; }
     .contact-panel {
       padding: clamp(42px, 7vw, 86px);
@@ -335,6 +382,8 @@
       .case-copy, .case:nth-child(even) .case-copy { order: 1; border: 0; border-bottom: 1px solid var(--line); }
       .case-visual, .case:nth-child(even) .case-visual { order: 2; min-height: 480px; }
       .case-main { padding: 40px 0 30px; }
+      .stack-head { grid-template-columns: 1fr; }
+      .stack-head p { justify-self: start; }
       .contact-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
@@ -374,6 +423,12 @@
       .rental-content h4 { font-size: 27px; }
       .rental-tile { height: 80px; padding: 9px; }
       .rental-icon { width: 20px; height: 20px; margin-bottom: 14px; }
+      .stack { padding-bottom: 80px; }
+      .stack-panel { padding: 32px 22px; border-radius: 16px; }
+      .stack-flow { margin-top: 34px; gap: 8px; }
+      .tech { min-height: 46px; padding-inline: 12px; font-size: 11px; }
+      .tech-arrow { display: none; }
+      .stack-foot { grid-template-columns: 1fr; }
       .contact-panel { padding: 35px 24px; border-radius: 16px; }
       .contact h2 { font-size: 48px; }
       footer { flex-direction: column; }
@@ -389,6 +444,7 @@
       <a class="brand mono" href="#top" aria-label="Gabriel Oliveira, home">&lt;<span>GO</span>/&gt;</a>
       <div class="nav-right mono">
         <a class="nav-link" href="#work">work.json</a>
+        <a class="nav-link" href="#stack">stack.md</a>
         <a class="nav-link" href="#contact">contact.sh</a>
         <span class="availability"><i></i> Available for select projects</span>
       </div>
@@ -514,6 +570,31 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack" id="stack">
+      <div class="wrap stack-panel reveal">
+        <div class="stack-head">
+          <div><span class="kicker mono">02 / TECHNOLOGY STACK</span><h2>Modern tools.<br>Production-ready results.</h2></div>
+          <p>I use a complete web stack to take projects from interface and interaction to scalable applications, databases, and reliable deployment.</p>
+        </div>
+        <div class="stack-flow mono" aria-label="Technology stack">
+          <span class="tech"><span class="tech-code">&lt;/&gt;</span>HTML</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">#</span>CSS</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">JS</span>JavaScript</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">TS</span>TypeScript</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">&#9883;</span>React</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">N</span>Next.js</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">N</span>Node.js</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">DB</span>SQL / PostgreSQL</span><span class="tech-arrow">&rarr;</span>
+          <span class="tech"><span class="tech-code">GIT</span>Git / GitHub</span>
+        </div>
+        <div class="stack-foot mono">
+          <div class="stack-note"><strong>Front-end craft</strong>Responsive, accessible interfaces</div>
+          <div class="stack-note"><strong>Full-stack capability</strong>Applications, APIs, and databases</div>
+          <div class="stack-note"><strong>Reliable delivery</strong>Versioned and deployment-ready</div>
         </div>
       </div>
     </section>
