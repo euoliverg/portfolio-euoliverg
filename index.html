@@ -27,7 +27,7 @@
       --bg-sunken: #e7eaf1;
       --ink: #12141c;
       --ink-muted: #565d6e;
-      --ink-faint: #8891a3;
+      --ink-faint: #60697c;
       --line: rgba(18, 20, 28, 0.1);
       --line-strong: rgba(18, 20, 28, 0.18);
       --accent: #b8863b;
@@ -45,7 +45,7 @@
         --bg-sunken: #0e1016;
         --ink: #edeff4;
         --ink-muted: #9298a8;
-        --ink-faint: #5c6274;
+        --ink-faint: #8a93a8;
         --line: rgba(255, 255, 255, 0.09);
         --line-strong: rgba(255, 255, 255, 0.16);
         --accent: #d9a94b;
@@ -79,8 +79,27 @@
     }
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    main:focus { outline: none; }
+    [id] { scroll-margin-top: 96px; }
     .mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
     .wrap { width: min(1240px, calc(100% - 40px)); margin-inline: auto; }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #1a1204;
+      background: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      transform: translateY(-160%);
+      transition: transform .2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
 
     .nav {
       position: fixed;
@@ -247,7 +266,7 @@
     }
     .browser-bar { height: 34px; padding: 0 12px; display: flex; align-items: center; gap: 10px; color: #7d8490; background: #eef0f3; border-bottom: 1px solid rgba(0,0,0,.08); }
     .browser-bar .window-dots i { background: #c6c9cf; }
-    .address { flex: 1; padding: 5px 10px; overflow: hidden; color: #7f8490; border-radius: 5px; background: #fff; font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
+    .address { flex: 1; padding: 5px 10px; overflow: hidden; color: #666b75; border-radius: 5px; background: #fff; font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
     .site { height: 370px; position: relative; overflow: hidden; font-family: Arial, sans-serif; }
     .site-nav { height: 48px; padding: 0 25px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; font-size: 8px; }
     .site-logo { font-size: 11px; font-weight: 800; letter-spacing: -.03em; }
@@ -258,7 +277,7 @@
     .site-alpha .site-button { color: #fff; background: #2f6fa8; }
     .alpha-content { width: 54%; padding: 55px 0 0 34px; position: relative; z-index: 2; }
     .alpha-content small { color: #2f6fa8; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
-    .alpha-content h4 { margin: 10px 0 12px; font-size: 32px; line-height: .95; letter-spacing: -.06em; }
+    .alpha-content .site-heading { margin: 10px 0 12px; font-size: 32px; line-height: .95; letter-spacing: -.06em; font-weight: 700; }
     .alpha-content p { max-width: 230px; margin: 0 0 18px; color: #5b7085; font-size: 9px; line-height: 1.6; }
     .alpha-cta { display: inline-block; padding: 10px 14px; color: #fff; border-radius: 4px; background: #2f6fa8; font-size: 8px; font-weight: 700; }
     .alpha-bubbles { position: absolute; width: 230px; height: 230px; right: -25px; bottom: -20px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #95c8e7 42%, #327eb6 75%); box-shadow: -40px -25px 0 -22px rgba(255,255,255,.7), -76px 28px 0 -50px #6ab3da; }
@@ -269,7 +288,7 @@
     .family-flare { position: absolute; width: 320px; height: 320px; right: -30px; top: 20px; border-radius: 50%; background: radial-gradient(circle at 42% 35%, #f6b55e, #e8752c 34%, #5b2417 68%, transparent 69%); filter: saturate(1.2); }
     .family-content { width: 55%; padding: 48px 0 0 34px; position: relative; z-index: 2; }
     .family-content small { color: #e8752c; font-size: 8px; font-weight: 800; letter-spacing: .15em; }
-    .family-content h4 { margin: 9px 0 15px; font-family: Georgia, serif; font-size: 38px; line-height: .88; font-style: italic; }
+    .family-content .site-heading { margin: 9px 0 15px; font-family: Georgia, serif; font-size: 38px; line-height: .88; font-style: italic; font-weight: 700; }
     .family-menu { display: grid; gap: 8px; }
     .family-menu span { width: 150px; height: 6px; border-radius: 5px; background: rgba(255,233,209,.22); }
     .family-menu span:nth-child(2) { width: 115px; background: #e8752c; }
@@ -280,7 +299,7 @@
     .hotel-arch { position: absolute; width: 48%; height: 270px; right: 40px; bottom: 0; border-radius: 160px 160px 0 0; background: linear-gradient(rgba(12,17,31,.12), rgba(12,17,31,.68)), linear-gradient(135deg, #d3b37b, #374561 48%, #111a2c); border: 1px solid rgba(232,209,155,.42); }
     .hotel-content { width: 50%; padding: 60px 0 0 34px; position: relative; z-index: 2; }
     .hotel-content small { color: #d8bc83; font-size: 8px; letter-spacing: .17em; text-transform: uppercase; }
-    .hotel-content h4 { margin: 12px 0 18px; font-family: Georgia, serif; font-size: 34px; line-height: .98; font-weight: 400; }
+    .hotel-content .site-heading { margin: 12px 0 18px; font-family: Georgia, serif; font-size: 34px; line-height: .98; font-weight: 400; }
     .hotel-rule { width: 150px; height: 1px; background: #d8bc83; }
 
     .site-veranda { color: #e6f1e9; background: #10281f; }
@@ -290,14 +309,14 @@
     .veranda-leaf::after { content: ""; position: absolute; width: 1px; height: 245px; left: 50%; top: 8px; background: rgba(230,241,233,.45); transform: rotate(40deg); }
     .veranda-content { width: 50%; padding: 58px 0 0 34px; position: relative; z-index: 2; }
     .veranda-content small { color: #8fd4a8; font-size: 8px; letter-spacing: .16em; }
-    .veranda-content h4 { margin: 12px 0 16px; font-family: Georgia, serif; font-size: 39px; line-height: .9; font-weight: 400; }
+    .veranda-content .site-heading { margin: 12px 0 16px; font-family: Georgia, serif; font-size: 39px; line-height: .9; font-weight: 400; }
     .veranda-content p { color: #afc8b8; font-size: 9px; line-height: 1.6; }
 
     .site-rental { color: #e4f7fa; background: linear-gradient(145deg, #0c2028, #154351); }
     .site-rental .site-button { color: #0c2028; background: #7ad4de; }
     .rental-content { padding: 43px 34px; position: relative; z-index: 2; }
     .rental-content small { color: #7ad4de; font-size: 8px; letter-spacing: .16em; }
-    .rental-content h4 { max-width: 390px; margin: 10px 0 20px; font-size: 35px; line-height: .95; letter-spacing: -.055em; }
+    .rental-content .site-heading { max-width: 390px; margin: 10px 0 20px; font-size: 35px; line-height: .95; letter-spacing: -.055em; font-weight: 700; }
     .rental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
     .rental-tile { height: 105px; padding: 12px; border: 1px solid rgba(122,212,222,.25); border-radius: 8px; background: rgba(255,255,255,.05); }
     .rental-icon { width: 28px; height: 28px; margin-bottom: 18px; border: 1px solid #7ad4de; border-radius: 6px 6px 2px 2px; transform: rotate(45deg); }
@@ -413,14 +432,14 @@
       .site-links { display: none; }
       .alpha-content, .family-content, .hotel-content, .veranda-content { width: 62%; padding-left: 22px; }
       .alpha-content { padding-top: 40px; }
-      .alpha-content h4, .hotel-content h4 { font-size: 26px; }
-      .family-content h4, .veranda-content h4 { font-size: 30px; }
+      .alpha-content .site-heading, .hotel-content .site-heading { font-size: 26px; }
+      .family-content .site-heading, .veranda-content .site-heading { font-size: 30px; }
       .alpha-bubbles { width: 160px; height: 160px; }
       .family-flare { width: 220px; height: 220px; right: -65px; }
       .hotel-arch { width: 44%; right: 20px; height: 205px; }
       .veranda-leaf { width: 190px; height: 190px; right: -20px; }
       .rental-content { padding: 28px 22px; }
-      .rental-content h4 { font-size: 27px; }
+      .rental-content .site-heading { font-size: 27px; }
       .rental-tile { height: 80px; padding: 9px; }
       .rental-icon { width: 20px; height: 20px; margin-bottom: 14px; }
       .stack { padding-bottom: 80px; }
@@ -439,9 +458,10 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <nav class="nav" aria-label="Primary navigation">
     <div class="nav-shell">
-      <a class="brand mono" href="#top" aria-label="Gabriel Oliveira, home">&lt;<span>GO</span>/&gt;</a>
+      <a class="brand mono" href="#main-content" aria-label="Gabriel Oliveira, home">&lt;<span>GO</span>/&gt;</a>
       <div class="nav-right mono">
         <a class="nav-link" href="#work">work.json</a>
         <a class="nav-link" href="#stack">stack.md</a>
@@ -451,7 +471,7 @@
     </div>
   </nav>
 
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <header class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy reveal">
@@ -469,18 +489,18 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" id="heroVisual" aria-label="A preview of selected portfolio projects">
+        <div class="hero-visual reveal" id="heroVisual" aria-hidden="true">
           <div class="hero-orbit"></div>
           <div class="hero-card main" data-tilt="hero">
             <div class="hero-card-label mono"><span>featured / citywide-rental</span><span>05 / 05</span></div>
             <div class="site site-rental">
               <div class="site-nav"><span class="site-logo">CITYWIDE</span><span class="site-links"><span>Rentals</span><span>About</span><span>Contact</span></span><span class="site-button">Get a quote</span></div>
-              <div class="rental-content"><small>Reliable rentals. Ready when you are.</small><h4>The right equipment for every job.</h4><div class="rental-grid"><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div></div></div>
+              <div class="rental-content"><small>Reliable rentals. Ready when you are.</small><div class="site-heading">The right equipment for every job.</div><div class="rental-grid"><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div></div></div>
             </div>
           </div>
           <div class="hero-card small">
             <div class="hero-card-label mono"><span>alfa-cleaning</span><span>live</span></div>
-            <div class="site site-alpha"><div class="alpha-content"><small>Clean spaces</small><h4>More time for what matters.</h4></div><div class="alpha-bubbles"></div></div>
+            <div class="site site-alpha"><div class="alpha-content"><small>Clean spaces</small><div class="site-heading">More time for what matters.</div></div><div class="alpha-bubbles"></div></div>
           </div>
         </div>
       </div>
@@ -507,10 +527,10 @@
               <div class="case-main"><h3>Alfa Cleaning WA</h3><p>A trust-first landing page built to turn local traffic into cleaning quote requests.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>LANDING PAGE</span><span>LOCAL SERVICES</span></div></div>
               <a class="case-link mono" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
             </div>
-            <div class="case-visual" style="background:linear-gradient(145deg,#dceaf5,#b6d0e3)">
+            <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#dceaf5,#b6d0e3)">
               <div class="browser" data-tilt>
                 <div class="browser-bar"><span class="window-dots"><i></i><i></i><i></i></span><span class="address mono">alfacleaningwa.com</span></div>
-                <div class="site site-alpha"><div class="site-nav"><span class="site-logo">ALFA CLEANING</span><span class="site-links"><span>Services</span><span>About</span><span>Reviews</span></span><span class="site-button">Free quote</span></div><div class="alpha-content"><small>Professional cleaning in Washington</small><h4>More time for what matters.</h4><p>Reliable residential and commercial cleaning, tailored to your space.</p><span class="alpha-cta">Get your free quote</span></div><div class="alpha-bubbles"></div></div>
+                <div class="site site-alpha"><div class="site-nav"><span class="site-logo">ALFA CLEANING</span><span class="site-links"><span>Services</span><span>About</span><span>Reviews</span></span><span class="site-button">Free quote</span></div><div class="alpha-content"><small>Professional cleaning in Washington</small><div class="site-heading">More time for what matters.</div><p>Reliable residential and commercial cleaning, tailored to your space.</p><span class="alpha-cta">Get your free quote</span></div><div class="alpha-bubbles"></div></div>
               </div>
             </div>
           </article>
@@ -521,10 +541,10 @@
               <div class="case-main"><h3>Fam&iacute;lia Arretado</h3><p>A bold digital presence that brings the restaurant's personality, menu, and Brazilian energy to the screen.</p><div class="case-tags mono"><span>ART DIRECTION</span><span>DIGITAL MENU</span><span>FOOD &amp; DINING</span></div></div>
               <a class="case-link mono" href="https://familiaarretado.com.br/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
             </div>
-            <div class="case-visual" style="background:linear-gradient(145deg,#3a1c12,#73351d)">
+            <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#3a1c12,#73351d)">
               <div class="browser" data-tilt>
                 <div class="browser-bar"><span class="window-dots"><i></i><i></i><i></i></span><span class="address mono">familiaarretado.com.br</span></div>
-                <div class="site site-family"><div class="site-nav"><span class="site-logo">ARRETADO</span><span class="site-links"><span>Our story</span><span>Menu</span><span>Locations</span></span><span class="site-button">Order now</span></div><div class="family-content"><small>A TASTE OF BRAZIL</small><h4>Flavor that brings people together.</h4><div class="family-menu"><span></span><span></span><span></span></div></div><div class="family-flare"></div></div>
+                <div class="site site-family"><div class="site-nav"><span class="site-logo">ARRETADO</span><span class="site-links"><span>Our story</span><span>Menu</span><span>Locations</span></span><span class="site-button">Order now</span></div><div class="family-content"><small>A TASTE OF BRAZIL</small><div class="site-heading">Flavor that brings people together.</div><div class="family-menu"><span></span><span></span><span></span></div></div><div class="family-flare"></div></div>
               </div>
             </div>
           </article>
@@ -535,10 +555,10 @@
               <div class="case-main"><h3>Fairmont Olympic Hotel</h3><p>A refined hospitality experience designed around heritage, luxury, and a clear path to booking.</p><div class="case-tags mono"><span>HOSPITALITY</span><span>PREMIUM EXPERIENCE</span><span>BOOKINGS</span></div></div>
               <a class="case-link mono" href="https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&amp;goto=fiche_hotel&amp;merchantid=seo-maps-US-A580&amp;sourceid=aw-cen" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
             </div>
-            <div class="case-visual" style="background:linear-gradient(145deg,#11182a,#263555)">
+            <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#11182a,#263555)">
               <div class="browser" data-tilt>
                 <div class="browser-bar"><span class="window-dots"><i></i><i></i><i></i></span><span class="address mono">fairmont.com/seattle</span></div>
-                <div class="site site-hotel"><div class="site-nav"><span class="site-logo">FAIRMONT</span><span class="site-links"><span>Stay</span><span>Dine</span><span>Experience</span></span><span class="site-button">Book your stay</span></div><div class="hotel-content"><small>Seattle's iconic destination</small><h4>Where history meets modern luxury.</h4><div class="hotel-rule"></div></div><div class="hotel-arch"></div></div>
+                <div class="site site-hotel"><div class="site-nav"><span class="site-logo">FAIRMONT</span><span class="site-links"><span>Stay</span><span>Dine</span><span>Experience</span></span><span class="site-button">Book your stay</span></div><div class="hotel-content"><small>Seattle's iconic destination</small><div class="site-heading">Where history meets modern luxury.</div><div class="hotel-rule"></div></div><div class="hotel-arch"></div></div>
               </div>
             </div>
           </article>
@@ -549,10 +569,10 @@
               <div class="case-main"><h3>Restaurante Veranda</h3><p>An atmospheric restaurant website that makes the ambience, menu, and reservation journey feel effortless.</p><div class="case-tags mono"><span>RESTAURANT</span><span>BRAND EXPERIENCE</span><span>RESERVATIONS</span></div></div>
               <a class="case-link mono" href="https://restauranteveranda.com.br/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
             </div>
-            <div class="case-visual" style="background:linear-gradient(145deg,#10291f,#2c5e46)">
+            <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#10291f,#2c5e46)">
               <div class="browser" data-tilt>
                 <div class="browser-bar"><span class="window-dots"><i></i><i></i><i></i></span><span class="address mono">restauranteveranda.com.br</span></div>
-                <div class="site site-veranda"><div class="site-nav"><span class="site-logo">VERANDA</span><span class="site-links"><span>Menu</span><span>Experience</span><span>Contact</span></span><span class="site-button">Reserve</span></div><div class="veranda-content"><small>NATURE. FLAVOR. CONNECTION.</small><h4>A table worth remembering.</h4><p>Seasonal ingredients, welcoming spaces, and moments made to be shared.</p></div><div class="veranda-leaf"></div></div>
+                <div class="site site-veranda"><div class="site-nav"><span class="site-logo">VERANDA</span><span class="site-links"><span>Menu</span><span>Experience</span><span>Contact</span></span><span class="site-button">Reserve</span></div><div class="veranda-content"><small>NATURE. FLAVOR. CONNECTION.</small><div class="site-heading">A table worth remembering.</div><p>Seasonal ingredients, welcoming spaces, and moments made to be shared.</p></div><div class="veranda-leaf"></div></div>
               </div>
             </div>
           </article>
@@ -563,10 +583,10 @@
               <div class="case-main"><h3>Citywide Rental WA</h3><p>A practical, high-clarity rental website built to help local customers find equipment and request a quote fast.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>RENTAL SERVICES</span><span>LEAD GENERATION</span></div></div>
               <a class="case-link mono" href="https://citywiderentalwa.com/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
             </div>
-            <div class="case-visual" style="background:linear-gradient(145deg,#10252d,#226174)">
+            <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#10252d,#226174)">
               <div class="browser" data-tilt>
                 <div class="browser-bar"><span class="window-dots"><i></i><i></i><i></i></span><span class="address mono">citywiderentalwa.com</span></div>
-                <div class="site site-rental"><div class="site-nav"><span class="site-logo">CITYWIDE</span><span class="site-links"><span>Rentals</span><span>About</span><span>Contact</span></span><span class="site-button">Get a quote</span></div><div class="rental-content"><small>RELIABLE RENTALS. READY WHEN YOU ARE.</small><h4>The right equipment for every job.</h4><div class="rental-grid"><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div></div></div></div>
+                <div class="site site-rental"><div class="site-nav"><span class="site-logo">CITYWIDE</span><span class="site-links"><span>Rentals</span><span>About</span><span>Contact</span></span><span class="site-button">Get a quote</span></div><div class="rental-content"><small>RELIABLE RENTALS. READY WHEN YOU ARE.</small><div class="site-heading">The right equipment for every job.</div><div class="rental-grid"><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div><div class="rental-tile"><div class="rental-icon"></div><span></span></div></div></div></div>
               </div>
             </div>
           </article>
