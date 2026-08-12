@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gabriel Oliveira &mdash; Web Designer &amp; Developer</title>
-  <meta name="description" content="Selected websites and landing pages by Gabriel Oliveira &mdash; crafted for clarity, credibility, and conversion.">
+  <meta name="description" content="Selected websites and landing pages by Gabriel Oliveira &mdash; independent web designer and developer based in Brazil.">
   <meta name="theme-color" content="#0a0c11">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -15,7 +15,7 @@
   <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:title" content="Gabriel Oliveira &mdash; Web Designer & Developer">
-  <meta property="og:description" content="Selected websites and landing pages crafted for clarity, credibility, and conversion.">
+  <meta property="og:description" content="A selection of live websites designed and developed by Gabriel Oliveira.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="android-chrome-512x512.png">
   <script>document.documentElement.classList.add('js');</script>
@@ -322,6 +322,23 @@
     .rental-icon { width: 28px; height: 28px; margin-bottom: 18px; border: 1px solid #7ad4de; border-radius: 6px 6px 2px 2px; transform: rotate(45deg); }
     .rental-tile span { display: block; width: 70%; height: 5px; border-radius: 3px; background: rgba(228,247,250,.32); }
 
+    .about { padding: 10px 0 clamp(90px, 12vw, 150px); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: clamp(40px, 8vw, 100px);
+      padding: clamp(38px, 7vw, 82px);
+      border: 1px solid var(--line-strong);
+      border-radius: 22px;
+      background: var(--bg-elevated);
+    }
+    .about h2 { max-width: 820px; margin: 20px 0 26px; font-size: clamp(40px, 5.8vw, 72px); line-height: .98; letter-spacing: -.055em; }
+    .about-copy p { max-width: 680px; margin: 0; color: var(--ink-muted); font-size: 16px; line-height: 1.75; }
+    .about-facts { align-self: end; display: grid; border-top: 1px solid var(--line); }
+    .about-fact { padding: 16px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); font-size: 11px; }
+    .about-fact span:first-child { color: var(--ink-faint); }
+    .about-fact span:last-child { color: var(--ink); text-align: right; }
+
     .stack { padding: 20px 0 clamp(90px, 12vw, 150px); }
     .stack-panel {
       padding: clamp(36px, 6vw, 72px);
@@ -401,6 +418,7 @@
       .case-copy, .case:nth-child(even) .case-copy { order: 1; border: 0; border-bottom: 1px solid var(--line); }
       .case-visual, .case:nth-child(even) .case-visual { order: 2; min-height: 480px; }
       .case-main { padding: 40px 0 30px; }
+      .about-grid { grid-template-columns: 1fr; }
       .stack-head { grid-template-columns: 1fr; }
       .stack-head p { justify-self: start; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -442,6 +460,9 @@
       .rental-content .site-heading { font-size: 27px; }
       .rental-tile { height: 80px; padding: 9px; }
       .rental-icon { width: 20px; height: 20px; margin-bottom: 14px; }
+      .about { padding-bottom: 80px; }
+      .about-grid { padding: 32px 22px; border-radius: 16px; }
+      .about h2 { font-size: 42px; }
       .stack { padding-bottom: 80px; }
       .stack-panel { padding: 32px 22px; border-radius: 16px; }
       .stack-flow { margin-top: 34px; gap: 8px; }
@@ -464,9 +485,9 @@
       <a class="brand mono" href="#main-content" aria-label="Gabriel Oliveira, home">&lt;<span>GO</span>/&gt;</a>
       <div class="nav-right mono">
         <a class="nav-link" href="#work">work.json</a>
+        <a class="nav-link" href="#about">about.txt</a>
         <a class="nav-link" href="#stack">stack.md</a>
-        <a class="nav-link" href="#contact">contact.sh</a>
-        <span class="availability"><i></i> Available for select projects</span>
+        <span class="availability"><i></i> Brazil / Working worldwide</span>
       </div>
     </div>
   </nav>
@@ -475,17 +496,17 @@
     <header class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy reveal">
-          <span class="kicker mono">Independent web designer &amp; developer</span>
-          <h1>I build websites that make brands <em>impossible</em> to ignore.</h1>
-          <p>Premium websites and high-converting landing pages for businesses ready to look as good online as they are in real life.</p>
+          <span class="kicker mono">Selected work by Gabriel Oliveira</span>
+          <h1>Digital work shaped with <em>clarity</em>, character, and care.</h1>
+          <p>A selection of live websites designed and developed across different industries, each with its own visual language and purpose.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#work">Explore selected work <span>&darr;</span></a>
-            <a class="button button-secondary" href="mailto:oliveirabtq@gmail.com">Start a project <span>&nearr;</span></a>
+            <a class="button button-secondary" href="#about">About the designer <span>&darr;</span></a>
           </div>
           <div class="hero-proof">
             <div class="proof"><strong>05</strong><span class="mono">live projects</span></div>
-            <div class="proof"><strong>04</strong><span class="mono">industries</span></div>
-            <div class="proof"><strong>02</strong><span class="mono">markets</span></div>
+            <div class="proof"><strong>US + BR</strong><span class="mono">live markets</span></div>
+            <div class="proof"><strong>D + C</strong><span class="mono">design and code</span></div>
           </div>
         </div>
 
@@ -516,16 +537,16 @@
     <section class="work" id="work">
       <div class="wrap">
         <div class="section-head reveal">
-          <div><span class="index mono">01 / SELECTED WORK</span><h2>Built to be seen.<br>Designed to perform.</h2></div>
-          <p>A focused selection of live websites across the United States and Brazil. Every project combines strong art direction with a clear business objective.</p>
+          <div><span class="index mono">01 / SELECTED WORK</span><h2>Five projects.<br>Five distinct worlds.</h2></div>
+          <p>Live work across the United States and Brazil, presented through its visual language, structure, and technical execution.</p>
         </div>
 
         <div class="project-list">
           <article class="case reveal">
             <div class="case-copy">
               <div class="case-top"><span class="case-number mono">PROJECT / 01</span><span class="live mono">Live website</span></div>
-              <div class="case-main"><h3>Alfa Cleaning WA</h3><p>A trust-first landing page built to turn local traffic into cleaning quote requests.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>LANDING PAGE</span><span>LOCAL SERVICES</span></div></div>
-              <a class="case-link mono" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
+              <div class="case-main"><h3>Alfa Cleaning WA</h3><p>A calm, polished digital identity for a Washington cleaning company, balancing clarity, trust, and approachable detail.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>LANDING PAGE</span><span>LOCAL SERVICES</span></div></div>
+              <a class="case-link mono" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <i>&nearr;</i></a>
             </div>
             <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#dceaf5,#b6d0e3)">
               <div class="browser" data-tilt>
@@ -539,7 +560,7 @@
             <div class="case-copy">
               <div class="case-top"><span class="case-number mono">PROJECT / 02</span><span class="live mono">Live website</span></div>
               <div class="case-main"><h3>Fam&iacute;lia Arretado</h3><p>A bold digital presence that brings the restaurant's personality, menu, and Brazilian energy to the screen.</p><div class="case-tags mono"><span>ART DIRECTION</span><span>DIGITAL MENU</span><span>FOOD &amp; DINING</span></div></div>
-              <a class="case-link mono" href="https://familiaarretado.com.br/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
+              <a class="case-link mono" href="https://familiaarretado.com.br/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <i>&nearr;</i></a>
             </div>
             <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#3a1c12,#73351d)">
               <div class="browser" data-tilt>
@@ -552,8 +573,8 @@
           <article class="case reveal">
             <div class="case-copy">
               <div class="case-top"><span class="case-number mono">PROJECT / 03</span><span class="live mono">Live website</span></div>
-              <div class="case-main"><h3>Fairmont Olympic Hotel</h3><p>A refined hospitality experience designed around heritage, luxury, and a clear path to booking.</p><div class="case-tags mono"><span>HOSPITALITY</span><span>PREMIUM EXPERIENCE</span><span>BOOKINGS</span></div></div>
-              <a class="case-link mono" href="https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&amp;goto=fiche_hotel&amp;merchantid=seo-maps-US-A580&amp;sourceid=aw-cen" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
+              <div class="case-main"><h3>Fairmont Olympic Hotel</h3><p>A refined hospitality page shaped by heritage, editorial restraint, and a carefully structured visual hierarchy.</p><div class="case-tags mono"><span>HOSPITALITY</span><span>EDITORIAL DESIGN</span><span>PREMIUM EXPERIENCE</span></div></div>
+              <a class="case-link mono" href="https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&amp;goto=fiche_hotel&amp;merchantid=seo-maps-US-A580&amp;sourceid=aw-cen" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <i>&nearr;</i></a>
             </div>
             <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#11182a,#263555)">
               <div class="browser" data-tilt>
@@ -567,7 +588,7 @@
             <div class="case-copy">
               <div class="case-top"><span class="case-number mono">PROJECT / 04</span><span class="live mono">Live website</span></div>
               <div class="case-main"><h3>Restaurante Veranda</h3><p>An atmospheric restaurant website that makes the ambience, menu, and reservation journey feel effortless.</p><div class="case-tags mono"><span>RESTAURANT</span><span>BRAND EXPERIENCE</span><span>RESERVATIONS</span></div></div>
-              <a class="case-link mono" href="https://restauranteveranda.com.br/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
+              <a class="case-link mono" href="https://restauranteveranda.com.br/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <i>&nearr;</i></a>
             </div>
             <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#10291f,#2c5e46)">
               <div class="browser" data-tilt>
@@ -580,8 +601,8 @@
           <article class="case reveal">
             <div class="case-copy">
               <div class="case-top"><span class="case-number mono">PROJECT / 05</span><span class="live mono">Live website</span></div>
-              <div class="case-main"><h3>Citywide Rental WA</h3><p>A practical, high-clarity rental website built to help local customers find equipment and request a quote fast.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>RENTAL SERVICES</span><span>LEAD GENERATION</span></div></div>
-              <a class="case-link mono" href="https://citywiderentalwa.com/" target="_blank" rel="noopener noreferrer">VIEW LIVE PROJECT <i>&nearr;</i></a>
+              <div class="case-main"><h3>Citywide Rental WA</h3><p>A clear, practical rental website with a sturdy visual system and straightforward information architecture.</p><div class="case-tags mono"><span>WEB DESIGN</span><span>RENTAL SERVICES</span><span>INFORMATION ARCHITECTURE</span></div></div>
+              <a class="case-link mono" href="https://citywiderentalwa.com/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <i>&nearr;</i></a>
             </div>
             <div class="case-visual" aria-hidden="true" style="background:linear-gradient(145deg,#10252d,#226174)">
               <div class="browser" data-tilt>
@@ -594,11 +615,27 @@
       </div>
     </section>
 
+    <section class="about" id="about">
+      <div class="wrap about-grid reveal">
+        <div class="about-copy">
+          <span class="kicker mono">02 / ABOUT</span>
+          <h2>I care about the details people feel before they notice.</h2>
+          <p>I'm Gabriel Oliveira, an independent web designer and developer based in Brazil. I work across design and code, building digital experiences with a strong point of view, thoughtful structure, and careful execution. The projects above are real, live work &mdash; not concepts or templates.</p>
+        </div>
+        <div class="about-facts mono" aria-label="Professional information">
+          <div class="about-fact"><span>BASE</span><span>Brazil</span></div>
+          <div class="about-fact"><span>REACH</span><span>Worldwide</span></div>
+          <div class="about-fact"><span>DISCIPLINE</span><span>Design + Development</span></div>
+          <div class="about-fact"><span>PORTFOLIO</span><span>100% live projects</span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="stack" id="stack">
       <div class="wrap stack-panel reveal">
         <div class="stack-head">
-          <div><span class="kicker mono">02 / TECHNOLOGY STACK</span><h2>Modern tools.<br>Production-ready results.</h2></div>
-          <p>I use a complete web stack to take projects from interface and interaction to scalable applications, databases, and reliable deployment.</p>
+          <div><span class="kicker mono">03 / TOOLS &amp; PROCESS</span><h2>The tools behind the work.</h2></div>
+          <p>I move between interface design and development, choosing the right level of technology for each project's real needs.</p>
         </div>
         <div class="stack-flow mono" aria-label="Technology stack">
           <span class="tech"><span class="tech-code">&lt;/&gt;</span>HTML</span><span class="tech-arrow">&rarr;</span>
@@ -612,9 +649,9 @@
           <span class="tech"><span class="tech-code">GIT</span>Git / GitHub</span>
         </div>
         <div class="stack-foot mono">
-          <div class="stack-note"><strong>Front-end craft</strong>Responsive, accessible interfaces</div>
-          <div class="stack-note"><strong>Full-stack capability</strong>Applications, APIs, and databases</div>
-          <div class="stack-note"><strong>Reliable delivery</strong>Versioned and deployment-ready</div>
+          <div class="stack-note"><strong>Design to code</strong>One continuous creative process</div>
+          <div class="stack-note"><strong>Full-stack when needed</strong>Interfaces, APIs, and databases</div>
+          <div class="stack-note"><strong>Careful delivery</strong>Accessible, versioned, and maintainable</div>
         </div>
       </div>
     </section>
@@ -622,7 +659,7 @@
     <section class="contact" id="contact">
       <div class="wrap contact-panel reveal">
         <div class="contact-grid">
-          <div><span class="kicker mono">Have a project in mind?</span><h2>Let's make your brand impossible to scroll past.</h2><p>Tell me what you are building. I will turn the idea into a focused, memorable website that feels made for your business.</p></div>
+          <div><span class="kicker mono">04 / CONTACT</span><h2>Thanks for spending time with my work.</h2><p>If the projects resonate with you, my inbox and profiles are always open for a thoughtful conversation.</p></div>
           <div class="contact-actions mono">
             <a href="mailto:oliveirabtq@gmail.com"><span>oliveirabtq@gmail.com</span><span>&nearr;</span></a>
             <a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer"><span>Instagram / @euoliverg</span><span>&nearr;</span></a>
