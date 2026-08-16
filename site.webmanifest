@@ -1,11 +1,14 @@
 {
-  "name": "Gabriel Oliveira — Web Design & Development",
-  "short_name": "Gabriel Oliveira",
+  "name": "Oliver — Web Developer",
+  "short_name": "Oliver",
+  "description": "Web developer focused on performant interfaces, corporate websites and modern web products.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
-    { "src": "android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
   ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#111318",
+  "background_color": "#111318",
   "display": "standalone"
 }

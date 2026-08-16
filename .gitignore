@@ -1,0 +1,3 @@
+dist/
+*.zip
+lighthouse-report.json

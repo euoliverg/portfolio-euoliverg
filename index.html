@@ -1,238 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabriel Oliveira &mdash; Web Designer &amp; Developer</title>
-  <meta name="description" content="Selected live websites by Gabriel Oliveira, an independent web designer and developer working across Brazil and the United States.">
-  <meta name="theme-color" content="#000000">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta property="og:title" content="Gabriel Oliveira &mdash; Web Designer &amp; Developer">
-  <meta property="og:description" content="Five live projects at the intersection of design and code.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.className = 'js';</script>
+
+  <title>Oliver — Web Developer</title>
+  <meta name="description" content="Web developer focused on performant interfaces, corporate websites and modern web products.">
+  <meta name="author" content="Gabriel Oliveira">
+  <meta name="theme-color" content="#111318">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://euoliverg.online/">
+
   <meta property="og:type" content="website">
-  <meta property="og:image" content="android-chrome-512x512.png">
-  <script>document.documentElement.classList.add('js');</script>
-  <style>
-    :root { --bg:#000; --panel:#050505; --soft:#0a0a0a; --ink:#f5f5f5; --muted:#b5b5b5; --faint:#8c8c8c; --line:rgba(255,255,255,.1); --strong:rgba(255,255,255,.18); --gold:#f5f5f5; --gold-ink:#f5f5f5; --blue:#d4d4d4; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:#000; font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
-    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.08; background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px); background-size:64px 64px; mask-image:linear-gradient(#000,transparent 56%); }
-    a { color:inherit; }
-    button { color:inherit; font:inherit; }
-    :focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
-    [id] { scroll-margin-top:82px; }
-    main:focus { outline:none; }
-    .mono { font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
-    .wrap { width:min(1160px,calc(100% - 32px)); margin-inline:auto; }
-    .skip { position:fixed; top:10px; left:10px; z-index:100; padding:11px 14px; border-radius:7px; background:var(--gold); color:#000; font-weight:800; text-decoration:none; transform:translateY(-150%); }
-    .skip:focus { transform:none; }
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Oliver — Web Developer">
+  <meta property="og:title" content="Oliver — Web Developer">
+  <meta property="og:description" content="Web developer focused on performant interfaces, corporate websites and modern web products.">
+  <meta property="og:url" content="https://euoliverg.online/">
+  <meta property="og:image" content="https://euoliverg.online/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Oliver web developer portfolio preview">
 
-    .nav { position:sticky; top:0; z-index:40; border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--bg) 82%,transparent); backdrop-filter:blur(18px); }
-    .nav-inner { min-height:54px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:18px; }
-    .brand { justify-self:start; font-size:14px; font-weight:850; text-decoration:none; }
-    .brand b { color:var(--gold); }
-    .nav-center { display:flex; gap:4px; }
-    .nav-center a { padding:8px 10px; border-radius:6px; color:var(--muted); font-size:10px; text-decoration:none; }
-    .nav-center a:hover { color:var(--ink); background:var(--soft); }
-    .nav-meta { justify-self:end; color:var(--faint); font-size:9px; letter-spacing:.06em; }
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Oliver — Web Developer">
+  <meta name="twitter:description" content="Web developer focused on performant interfaces, corporate websites and modern web products.">
+  <meta name="twitter:image" content="https://euoliverg.online/assets/og-cover.png">
 
-    .hero { padding:clamp(42px,6vw,68px) 0 clamp(36px,5vw,54px); }
-    .hero-grid { display:grid; grid-template-columns:1.4fr .6fr; gap:clamp(32px,6vw,72px); align-items:end; }
-    .eyebrow { display:flex; align-items:center; gap:10px; color:var(--gold-ink); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
-    .eyebrow::before { content:""; width:28px; height:1px; background:var(--gold); }
-    h1,h2,h3 { margin:0; text-wrap:balance; }
-    .hero h1 { max-width:760px; margin:15px 0 16px; font-size:clamp(46px,6.6vw,78px); line-height:.92; letter-spacing:-.065em; }
-    .hero h1 em { color:var(--faint); font-family:inherit; font-style:normal; font-weight:inherit; }
-    .hero-copy p { max-width:600px; margin:0; color:var(--muted); font-size:clamp(14px,1.3vw,16px); line-height:1.65; }
-    .hero-foot { margin-top:22px; display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px; }
-    .hero-link { min-height:38px; padding:0 13px; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--strong); border-radius:6px; background:var(--panel); font-size:9px; font-weight:800; text-decoration:none; transition:transform .2s ease,border-color .2s ease; }
-    .hero-link:hover { transform:translateY(-2px); border-color:var(--gold); }
-    .hero-link.primary { border-color:var(--gold); background:var(--gold); color:#000; }
-    .hero-note { color:var(--faint); font-size:9px; }
-    .console { overflow:hidden; border:1px solid var(--strong); border-radius:11px; background:var(--panel); box-shadow:0 26px 60px -46px rgba(0,0,0,.8); }
-    .console-bar { padding:9px 11px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); background:var(--soft); color:var(--faint); font-size:8px; }
-    .console-dots { display:flex; gap:5px; }
-    .console-dots i { width:6px; height:6px; border-radius:50%; background:var(--strong); }
-    .console-body { padding:14px; display:grid; gap:7px; font-size:9px; line-height:1.45; }
-    .code-line { display:grid; grid-template-columns:20px 1fr; gap:10px; color:var(--faint); }
-    .code-line span:last-child { color:var(--muted); }
-    .key { color:var(--blue); }
-    .value { color:var(--gold-ink); }
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
 
-    .section { padding:clamp(40px,5vw,56px) 0; border-top:1px solid var(--line); }
-    .section-head { margin-bottom:18px; display:flex; align-items:end; justify-content:space-between; gap:24px; }
-    .section-head h2 { margin-top:7px; font-size:clamp(28px,3.5vw,40px); letter-spacing:-.045em; }
-    .section-head p { max-width:400px; margin:0; color:var(--muted); font-size:11px; line-height:1.6; }
-
-    .showcase { min-height:430px; display:grid; grid-template-columns:240px 1fr; border:1px solid var(--strong); border-radius:12px; background:var(--panel); overflow:hidden; }
-    .project-tabs { padding:6px; display:grid; align-content:start; gap:3px; border-right:1px solid var(--line); background:var(--soft); }
-    .project-tab { width:100%; padding:11px 10px; display:grid; grid-template-columns:25px 1fr auto; align-items:center; gap:8px; border:1px solid transparent; border-radius:6px; background:transparent; text-align:left; cursor:pointer; transition:background .2s ease,border-color .2s ease; }
-    .project-tab:hover { background:var(--panel); }
-    .project-tab[aria-selected="true"] { border-color:var(--strong); background:var(--panel); box-shadow:0 8px 28px -24px rgba(0,0,0,.8); }
-    .tab-no { color:var(--faint); font-size:9px; }
-    .tab-copy b { display:block; font-size:11px; line-height:1.2; }
-    .tab-copy span { display:block; margin-top:4px; color:var(--faint); font-size:8px; }
-    .tab-status { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 12%,transparent); }
-    .stage { min-width:0; padding:clamp(16px,2.2vw,24px); display:grid; grid-template-rows:1fr auto; gap:14px; }
-    .browser { min-height:270px; overflow:hidden; border:1px solid var(--strong); border-radius:8px; color:var(--screen-ink); background:var(--screen-bg); transition:opacity .16s ease,transform .16s ease,background .25s ease; }
-    .browser.switching { opacity:.25; transform:scale(.985); }
-    .browser-top { height:28px; padding:0 9px; display:flex; align-items:center; gap:8px; color:#9b9b9b; background:#0b0b0b; border-bottom:1px solid var(--line); }
-    .browser-top .console-dots i { background:#444; }
-    .address { flex:1; padding:4px 8px; border:1px solid #1d1d1d; border-radius:4px; background:#050505; color:#a8a8a8; font-size:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .screen { min-height:240px; padding:16px 22px; position:relative; overflow:hidden; background:var(--screen-bg); }
-    .screen-nav { display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; font-size:7px; font-weight:800; letter-spacing:.06em; }
-    .screen-nav span:last-child { padding:6px 8px; border:1px solid currentColor; border-radius:4px; }
-    .screen-copy { width:min(58%,430px); margin-top:38px; position:relative; z-index:2; }
-    .screen-kicker { color:var(--screen-accent); font-size:7px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
-    .screen-title { margin-top:9px; font-size:clamp(24px,3.5vw,42px); line-height:.92; letter-spacing:-.055em; font-weight:800; }
-    .screen-lines { width:75%; margin-top:16px; display:grid; gap:7px; }
-    .screen-lines i { height:4px; border-radius:4px; background:currentColor; opacity:.25; }
-    .screen-lines i:last-child { width:58%; }
-    .screen-art { position:absolute; width:250px; height:250px; right:-42px; bottom:-105px; border:1px solid var(--screen-accent); border-radius:50%; opacity:.5; box-shadow:0 0 0 32px color-mix(in srgb,var(--screen-accent) 7%,transparent),0 0 0 64px color-mix(in srgb,var(--screen-accent) 3%,transparent); }
-    .screen-art::before { content:""; position:absolute; width:54%; height:54%; left:23%; top:23%; border:1px dashed var(--screen-accent); border-radius:18px; transform:rotate(38deg); }
-    .browser[data-theme="alpha"] { --screen-bg:linear-gradient(135deg,#080808,#1a1a1a); --screen-ink:#f2f2f2; --screen-accent:#fff; }
-    .browser[data-theme="family"] { --screen-bg:linear-gradient(135deg,#030303,#171717); --screen-ink:#f5f5f5; --screen-accent:#d6d6d6; }
-    .browser[data-theme="hotel"] { --screen-bg:linear-gradient(135deg,#070707,#202020); --screen-ink:#f3f3f3; --screen-accent:#bdbdbd; }
-    .browser[data-theme="veranda"] { --screen-bg:linear-gradient(135deg,#050505,#181818); --screen-ink:#f0f0f0; --screen-accent:#d0d0d0; }
-    .browser[data-theme="rental"] { --screen-bg:linear-gradient(135deg,#090909,#222); --screen-ink:#f5f5f5; --screen-accent:#c4c4c4; }
-    .stage-info { display:grid; grid-template-columns:1fr auto; align-items:end; gap:24px; }
-    .stage-copy { min-width:0; }
-    .stage-meta { color:var(--gold-ink); font-size:8px; letter-spacing:.08em; text-transform:uppercase; }
-    .stage-copy h3 { margin:6px 0 5px; font-size:clamp(19px,2.5vw,26px); letter-spacing:-.035em; }
-    .stage-copy p { max-width:560px; margin:0; color:var(--muted); font-size:10px; line-height:1.55; }
-    .stage-link { min-height:36px; padding:0 11px; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--strong); border-radius:6px; color:var(--ink); background:var(--soft); font-size:8px; font-weight:800; text-decoration:none; white-space:nowrap; }
-    .stage-link:hover { border-color:var(--gold); }
-
-    .proof-layout { display:grid; grid-template-columns:.68fr 1.32fr; gap:22px; align-items:start; }
-    .proof-copy h2 { margin:7px 0 11px; font-size:clamp(28px,3.5vw,40px); line-height:1; letter-spacing:-.045em; }
-    .proof-copy p { margin:0; color:var(--muted); font-size:11px; line-height:1.6; }
-    .stack { margin-top:14px; display:flex; flex-wrap:wrap; gap:5px; }
-    .stack span { padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--soft); color:var(--faint); font-size:8px; }
-    .proof-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--strong); border-radius:12px; background:var(--panel); overflow:hidden; }
-    .proof-card { min-height:130px; padding:13px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid var(--line); position:relative; overflow:hidden; }
-    .proof-card:last-child { border-right:0; }
-    .seal { width:38px; height:38px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:50%; color:var(--gold-ink); font-size:8px; font-weight:850; box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--gold) 10%,transparent); }
-    .proof-card::after { content:""; position:absolute; width:82px; height:82px; right:-34px; top:-34px; border:1px dashed var(--gold); border-radius:50%; opacity:.25; }
-    .proof-card h3 { margin:14px 0 4px; font-size:12px; }
-    .proof-card p { margin:0; color:var(--muted); font-size:9px; line-height:1.5; }
-    .proof-note { margin:10px 0 0; color:var(--faint); font-size:8px; }
-
-    .contact { padding:18px 0 24px; border-top:1px solid var(--line); }
-    .contact-bar { display:grid; grid-template-columns:1fr auto; align-items:center; gap:24px; }
-    .contact-copy h2 { font-size:clamp(22px,3vw,30px); letter-spacing:-.04em; }
-    .contact-copy p { margin:6px 0 0; color:var(--muted); font-size:10px; }
-    .links { display:flex; flex-wrap:wrap; gap:7px; }
-    .links a { padding:9px 11px; border:1px solid var(--line); border-radius:6px; color:var(--muted); font-size:9px; text-decoration:none; }
-    .links a:hover { color:var(--ink); border-color:var(--gold); }
-    footer { padding:0 0 22px; display:flex; justify-content:space-between; gap:20px; color:var(--faint); font-size:8px; }
-    .js .reveal { opacity:0; transform:translateY(8px); transition:opacity .4s ease,transform .4s ease; }
-    .js .reveal.in { opacity:1; transform:none; }
-
-    @media (max-width:900px) { .hero-grid,.proof-layout { grid-template-columns:1fr; } .console { max-width:560px; } .proof-grid { grid-template-columns:repeat(2,1fr); } .proof-card:nth-child(2) { border-right:0; } .proof-card:nth-child(-n+2) { border-bottom:1px solid var(--line); } }
-    @media (max-width:700px) { .nav-inner { grid-template-columns:1fr auto; } .nav-center { display:none; } .showcase { grid-template-columns:1fr; } .project-tabs { grid-template-columns:repeat(5,minmax(150px,1fr)); overflow-x:auto; border-right:0; border-bottom:1px solid var(--line); } .project-tab { grid-template-columns:22px 1fr; } .tab-status { display:none; } .stage { padding:16px; } .screen { min-height:250px; } .browser { min-height:280px; } .screen-copy { width:68%; margin-top:42px; } }
-    @media (max-width:540px) { .wrap { width:min(100% - 22px,1160px); } .nav-inner { min-height:56px; } .nav-meta { font-size:8px; } .hero { padding-top:48px; } .hero h1 { font-size:clamp(46px,14vw,66px); } .section-head { align-items:start; flex-direction:column; } .screen { padding:16px; } .screen-copy { width:76%; } .screen-art { width:220px; height:220px; } .stage-info,.contact-bar { grid-template-columns:1fr; align-items:start; } .stage-link { width:max-content; } .proof-grid { grid-template-columns:1fr; } .proof-card,.proof-card:nth-child(2) { border-right:0; border-bottom:1px solid var(--line); } .proof-card:last-child { border-bottom:0; } footer { flex-direction:column; } }
-    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; } }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gabriel Oliveira",
+    "alternateName": "Oliver",
+    "url": "https://euoliverg.online/",
+    "jobTitle": "Web Developer",
+    "email": "mailto:oliveirabtq@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/gabriel-oliveira-45056a324/",
+      "https://www.instagram.com/euoliverg/"
+    ],
+    "knowsAbout": [
+      "Frontend Development",
+      "Responsive Web Design",
+      "Web Performance",
+      "React",
+      "Next.js",
+      "Node.js"
+    ]
+  }
+  </script>
 </head>
 <body>
-  <a class="skip" href="#content">Skip to main content</a>
-  <nav class="nav" aria-label="Primary navigation">
-    <div class="wrap nav-inner">
-      <a class="brand mono" href="#content" aria-label="Gabriel Oliveira, home">&lt;<b>GO</b>/&gt;</a>
-      <div class="nav-center mono"><a href="#work">work.json</a><a href="#proof">proof.md</a><a href="#contact">contact.sh</a></div>
-      <span class="nav-meta mono">BRAZIL / WORLDWIDE</span>
-    </div>
-  </nav>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <main id="content" tabindex="-1">
-    <header class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy reveal">
-          <span class="eyebrow mono">Gabriel Oliveira / Selected work</span>
-          <h1>Selected web work.<br><em>Designed and engineered.</em></h1>
-          <p>Independent web designer and full-stack developer working across Brazil and the United States. Five projects, all live and accessible below.</p>
-          <div class="hero-foot"><a class="hero-link primary" href="#work">Explore the work <span>&darr;</span></a><a class="hero-link" href="mailto:oliveirabtq@gmail.com">Email me</a><span class="hero-note mono">DESIGN + FULL-STACK DEVELOPMENT</span></div>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Oliver, back to top">oliver<span>.dev</span></a>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="header-cta" href="mailto:oliveirabtq@gmail.com">Let's talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Web developer · Frontend · Software</p>
+          <h1 id="hero-title">I design and build <span>high-performance</span> web products.</h1>
+          <p class="hero-summary">Frontend-focused developer building fast, scalable and production-ready web experiences for businesses and digital products.</p>
+
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="#work">View selected work <span aria-hidden="true">↓</span></a>
+            <a class="button button-quiet" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="hero-meta" aria-label="Location and availability">
+            <span>Based in Brazil</span>
+            <span>Working worldwide</span>
+            <span class="availability">Available for selected projects</span>
+          </div>
         </div>
-        <aside class="console reveal" aria-label="Professional profile">
-          <div class="console-bar mono"><span class="console-dots"><i></i><i></i><i></i></span><span>profile.ts</span></div>
-          <div class="console-body mono">
-            <div class="code-line"><span>01</span><span><b class="key">const</b> designer = <b class="value">"Gabriel Oliveira"</b>;</span></div>
-            <div class="code-line"><span>02</span><span>role: <b class="value">"design + development"</b>,</span></div>
-            <div class="code-line"><span>03</span><span>projects: <b class="value">5</b>,</span></div>
-            <div class="code-line"><span>04</span><span>markets: [<b class="value">"US"</b>, <b class="value">"BR"</b>],</span></div>
-            <div class="code-line"><span>05</span><span>status: <b class="value">"independent practice"</b>;</span></div>
+
+        <aside class="engineering-panel" aria-label="Engineering principles">
+          <div class="panel-toolbar">
+            <span class="window-controls" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>portfolio.config.ts</span>
+            <span>main</span>
+          </div>
+
+          <div class="code-frame" aria-hidden="true">
+            <ol>
+              <li><code><b>const</b> product = {</code></li>
+              <li><code>&nbsp;&nbsp;performance: <em>"measured"</em>,</code></li>
+              <li><code>&nbsp;&nbsp;usability: <em>"intentional"</em>,</code></li>
+              <li><code>&nbsp;&nbsp;code: <em>"maintainable"</em>,</code></li>
+              <li><code>&nbsp;&nbsp;delivery: <em>"production-ready"</em></code></li>
+              <li><code>};</code></li>
+            </ol>
+          </div>
+
+          <div class="system-map" aria-hidden="true">
+            <span>Interface</span><i></i><span>Logic</span><i></i><span>Production</span>
+          </div>
+
+          <div class="panel-footer">
+            <span><i aria-hidden="true"></i> production</span>
+            <span>build: stable</span>
           </div>
         </aside>
       </div>
-    </header>
+    </section>
 
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-head reveal"><div><span class="eyebrow mono">01 / PROJECT INDEX</span><h2>One stage. Five worlds.</h2></div><p>Select a project to explore its visual direction and open the live website.</p></div>
-        <div class="showcase reveal">
-          <div class="project-tabs" role="tablist" aria-label="Portfolio projects">
-            <button class="project-tab" id="tab-alpha" role="tab" aria-selected="true" aria-controls="project-panel" tabindex="0" data-key="alpha"><span class="tab-no mono">01</span><span class="tab-copy"><b>Alfa Cleaning WA</b><span class="mono">LOCAL SERVICES / US</span></span><i class="tab-status"></i></button>
-            <button class="project-tab" id="tab-family" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="family"><span class="tab-no mono">02</span><span class="tab-copy"><b>Fam&iacute;lia Arretado</b><span class="mono">FOOD &amp; DINING / BR</span></span><i class="tab-status"></i></button>
-            <button class="project-tab" id="tab-hotel" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="hotel"><span class="tab-no mono">03</span><span class="tab-copy"><b>Fairmont Olympic</b><span class="mono">HOSPITALITY / US</span></span><i class="tab-status"></i></button>
-            <button class="project-tab" id="tab-veranda" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="veranda"><span class="tab-no mono">04</span><span class="tab-copy"><b>Restaurante Veranda</b><span class="mono">RESTAURANT / BR</span></span><i class="tab-status"></i></button>
-            <button class="project-tab" id="tab-rental" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="rental"><span class="tab-no mono">05</span><span class="tab-copy"><b>Citywide Rental WA</b><span class="mono">RENTALS / US</span></span><i class="tab-status"></i></button>
+    <section class="work section" id="work" aria-labelledby="work-title">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-index">01 / Selected projects</p>
+            <h2 id="work-title">Selected Work</h2>
           </div>
-          <div class="stage" id="project-panel" role="tabpanel" aria-labelledby="tab-alpha">
-            <div class="browser" id="browser" data-theme="alpha" aria-hidden="true">
-              <div class="browser-top"><span class="console-dots"><i></i><i></i><i></i></span><span class="address mono" id="address">alfacleaningwa.com</span></div>
-              <div class="screen"><div class="screen-nav"><span id="screenBrand">ALFA CLEANING</span><span id="screenAction">FREE QUOTE</span></div><div class="screen-copy"><div class="screen-kicker mono" id="screenKicker">PROFESSIONAL CLEANING</div><div class="screen-title" id="screenTitle">More time for what matters.</div><div class="screen-lines"><i></i><i></i></div></div><div class="screen-art"></div></div>
+          <p>Live digital products across local services, hospitality and corporate experiences.</p>
+        </div>
+
+        <div class="projects-grid" data-projects aria-live="polite"></div>
+        <noscript><p class="noscript-message">Enable JavaScript to view the selected project gallery.</p></noscript>
+      </div>
+    </section>
+
+    <section class="about section section-light" id="about" aria-labelledby="about-title">
+      <div class="shell">
+        <div class="about-grid">
+          <div class="about-intro reveal">
+            <p class="section-index">02 / About</p>
+            <h2 id="about-title">Clear thinking.<br>Reliable execution.</h2>
+          </div>
+
+          <div class="about-copy reveal">
+            <p class="about-lead">I'm a web developer focused on building fast, maintainable and user-centered digital products. I work across design implementation, frontend development, deployment and production optimization.</p>
+
+            <div class="principles">
+              <article>
+                <span>01</span>
+                <h3>Engineering</h3>
+                <p>Performance, responsive interfaces and maintainable code.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <h3>Product</h3>
+                <p>UX decisions grounded in clarity, usability and business goals.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <h3>Delivery</h3>
+                <p>Development, deployment, domains and production maintenance.</p>
+              </article>
             </div>
-            <div class="stage-info"><div class="stage-copy"><span class="stage-meta mono" id="projectMeta">LOCAL SERVICES / WASHINGTON, US</span><h3 id="projectTitle">Alfa Cleaning WA</h3><p id="projectDescription">A calm, trustworthy digital identity for a Washington cleaning company.</p></div><a class="stage-link mono" id="projectLink" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <span>&nearr;</span></a></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="proof">
-      <div class="wrap proof-layout">
-        <div class="proof-copy reveal"><span class="eyebrow mono">02 / PROFESSIONAL SIGNALS</span><h2>What the work demonstrates.</h2><p>Clear evidence from published projects and a disciplined delivery workflow.</p><div class="stack mono"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>Git / GitHub</span></div><p class="proof-note mono">PORTFOLIO EVIDENCE / BASED ON LIVE WORK</p></div>
-        <div class="proof-grid reveal">
-          <article class="proof-card"><span class="seal mono">05</span><div><h3>Published work</h3><p>Five live websites linked directly from the portfolio.</p></div></article>
-          <article class="proof-card"><span class="seal mono">02</span><div><h3>Active markets</h3><p>Work across the United States and Brazil.</p></div></article>
-          <article class="proof-card"><span class="seal mono">D+C</span><div><h3>End-to-end craft</h3><p>Design and development in one continuous process.</p></div></article>
-          <article class="proof-card"><span class="seal mono">GIT</span><div><h3>Versioned delivery</h3><p>Structured Git and GitHub workflow for every update.</p></div></article>
+    <section class="capabilities section" id="stack" aria-labelledby="stack-title">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-index">03 / Capabilities</p>
+            <h2 id="stack-title">Core Stack</h2>
+          </div>
+          <p>A focused toolkit for shipping dependable interfaces and production websites.</p>
+        </div>
+
+        <div class="stack-groups reveal">
+          <article>
+            <p>Frontend</p>
+            <ul>
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li>
+            </ul>
+          </article>
+          <article>
+            <p>Runtime &amp; data</p>
+            <ul>
+              <li>Node.js</li><li>SQL</li><li>PostgreSQL</li>
+            </ul>
+          </article>
+          <article>
+            <p>Workflow &amp; delivery</p>
+            <ul>
+              <li>Git</li><li>GitHub</li><li>Vercel</li><li>Netlify</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="expertise-block reveal" aria-labelledby="expertise-title">
+          <p class="section-index">What I work on</p>
+          <h3 id="expertise-title" class="visually-hidden">Areas of expertise</h3>
+          <ol class="expertise-list">
+            <li><span>01</span>Frontend Development</li>
+            <li><span>02</span>Responsive Interfaces</li>
+            <li><span>03</span>Corporate Websites</li>
+            <li><span>04</span>Performance Optimization</li>
+            <li><span>05</span>Deployment &amp; Production</li>
+            <li><span>06</span>Website Maintenance</li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact"><div class="wrap contact-bar reveal"><div class="contact-copy"><h2>Thanks for viewing my work.</h2><p>Brazil-based, working worldwide.</p></div><div class="links mono"><a href="mailto:oliveirabtq@gmail.com">Email</a><a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/gabriel-oliveira-45056a324/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div></section>
-  </main>
-  <footer class="wrap mono"><span>&copy; 2026 Gabriel Oliveira</span><span>DESIGN / CODE / CRAFT</span></footer>
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <div class="shell">
+        <div class="contact-card reveal">
+          <div>
+            <p class="section-index">04 / Contact</p>
+            <h2 id="contact-title">Let's build something useful.</h2>
+            <p>Available for freelance projects, collaborations and selected opportunities.</p>
+          </div>
 
-  <script>
-    const projects={
-      alpha:{theme:'alpha',address:'alfacleaningwa.com',brand:'ALFA CLEANING',action:'FREE QUOTE',kicker:'PROFESSIONAL CLEANING',screen:'More time for what matters.',meta:'LOCAL SERVICES / WASHINGTON, US',title:'Alfa Cleaning WA',description:'A calm, trustworthy digital identity for a Washington cleaning company.',url:'https://alfacleaningwa.com/'},
-      family:{theme:'family',address:'familiaarretado.com.br',brand:'ARRETADO',action:'MENU',kicker:'A TASTE OF BRAZIL',screen:'Brazilian flavor. Bold identity.',meta:'FOOD & DINING / BRAZIL',title:'Família Arretado',description:'A bold restaurant experience with personality and Brazilian energy.',url:'https://familiaarretado.com.br/'},
-      hotel:{theme:'hotel',address:'fairmont.com/seattle',brand:'FAIRMONT',action:'BOOK',kicker:'SEATTLE’S ICONIC DESTINATION',screen:'Heritage meets modern luxury.',meta:'HOSPITALITY / SEATTLE, US',title:'Fairmont Olympic Hotel',description:'Editorial restraint and a refined hierarchy for a premium hospitality experience.',url:'https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&goto=fiche_hotel&merchantid=seo-maps-US-A580&sourceid=aw-cen'},
-      veranda:{theme:'veranda',address:'restauranteveranda.com.br',brand:'VERANDA',action:'RESERVE',kicker:'NATURE / FLAVOR / CONNECTION',screen:'A table worth remembering.',meta:'RESTAURANT / BRAZIL',title:'Restaurante Veranda',description:'Atmosphere, menu, and reservations inside a refined visual system.',url:'https://restauranteveranda.com.br/'},
-      rental:{theme:'rental',address:'citywiderentalwa.com',brand:'CITYWIDE',action:'RENTALS',kicker:'READY WHEN YOU ARE',screen:'The right equipment for every job.',meta:'RENTALS / WASHINGTON, US',title:'Citywide Rental WA',description:'Clear information architecture for a local rental business.',url:'https://citywiderentalwa.com/'}
-    };
-    const tabs=[...document.querySelectorAll('.project-tab')];
-    const panel=document.getElementById('project-panel');
-    const browser=document.getElementById('browser');
-    const fields={address:'address',brand:'screenBrand',action:'screenAction',kicker:'screenKicker',screen:'screenTitle',meta:'projectMeta',title:'projectTitle',description:'projectDescription'};
-    function selectProject(tab,focus=false){
-      const project=projects[tab.dataset.key];
-      tabs.forEach(item=>{const active=item===tab;item.setAttribute('aria-selected',active);item.tabIndex=active?0:-1;});
-      panel.setAttribute('aria-labelledby',tab.id);browser.classList.add('switching');
-      window.setTimeout(()=>{browser.dataset.theme=project.theme;Object.entries(fields).forEach(([key,id])=>document.getElementById(id).textContent=project[key]);document.getElementById('projectLink').href=project.url;browser.classList.remove('switching');},120);
-      if(focus)tab.focus();
-    }
-    tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>selectProject(tab));tab.addEventListener('keydown',event=>{let next=null;if(event.key==='ArrowDown'||event.key==='ArrowRight')next=(index+1)%tabs.length;if(event.key==='ArrowUp'||event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;if(next!==null){event.preventDefault();selectProject(tabs[next],true);}});});
-    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target);}}),{threshold:.1});
-    document.querySelectorAll('.reveal').forEach(element=>reduced?element.classList.add('in'):observer.observe(element));
-  </script>
+          <div class="contact-actions">
+            <a class="button button-dark" href="mailto:oliveirabtq@gmail.com">Start a conversation <span aria-hidden="true">↗</span></a>
+            <div class="contact-links" aria-label="Contact links">
+              <a href="mailto:oliveirabtq@gmail.com">Email</a>
+              <a href="https://www.linkedin.com/in/gabriel-oliveira-45056a324/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <p>© 2026 Oliver</p>
+      <p>Built with HTML, CSS &amp; JavaScript · Deployed on Vercel</p>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
