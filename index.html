@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gabriel Oliveira &mdash; Web Designer &amp; Developer</title>
-  <meta name="description" content="Selected live websites by Gabriel Oliveira, an independent web designer and developer based in Brazil.">
+  <meta name="description" content="Selected live websites by Gabriel Oliveira, an independent web designer and developer working across Brazil and the United States.">
   <meta name="theme-color" content="#0a0c11">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -13,135 +13,228 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <meta property="og:title" content="Gabriel Oliveira &mdash; Web Designer &amp; Developer">
-  <meta property="og:description" content="Five live websites. Design and development by Gabriel Oliveira.">
+  <meta property="og:description" content="Five live projects at the intersection of design and code.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="android-chrome-512x512.png">
   <script>document.documentElement.classList.add('js');</script>
   <style>
-    :root { --bg:#f2f4f8; --panel:#fff; --soft:#e7eaf1; --ink:#12141c; --muted:#565d6e; --faint:#60697c; --line:rgba(18,20,28,.12); --strong:rgba(18,20,28,.2); --gold:#b8863b; --gold-ink:#705018; --mx:50%; --my:10%; }
-    @media (prefers-color-scheme:dark) { :root { --bg:#0a0c11; --panel:#14171f; --soft:#0e1016; --ink:#edeff4; --muted:#a1a8b8; --faint:#8a93a8; --line:rgba(255,255,255,.1); --strong:rgba(255,255,255,.18); --gold:#d9a94b; --gold-ink:#f0cd8a; } }
+    :root { --bg:#f2f4f8; --panel:#fff; --soft:#e7eaf1; --ink:#12141c; --muted:#565d6e; --faint:#60697c; --line:rgba(18,20,28,.12); --strong:rgba(18,20,28,.2); --gold:#b8863b; --gold-ink:#705018; --blue:#3564d6; --mx:50%; --my:10%; }
+    @media (prefers-color-scheme:dark) { :root { --bg:#0a0c11; --panel:#14171f; --soft:#0e1016; --ink:#edeff4; --muted:#a1a8b8; --faint:#8a93a8; --line:rgba(255,255,255,.1); --strong:rgba(255,255,255,.18); --gold:#d9a94b; --gold-ink:#f0cd8a; --blue:#6fa1ff; } }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:radial-gradient(560px 360px at var(--mx) var(--my),color-mix(in srgb,var(--gold) 8%,transparent),transparent 74%),var(--bg); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
-    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.22; background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:52px 52px; mask-image:linear-gradient(#000,transparent 72%); }
+    body { margin:0; color:var(--ink); background:radial-gradient(620px 400px at var(--mx) var(--my),color-mix(in srgb,var(--gold) 8%,transparent),transparent 72%),var(--bg); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.2; background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:56px 56px; mask-image:linear-gradient(#000,transparent 70%); }
     a { color:inherit; }
+    button { color:inherit; font:inherit; }
     :focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
-    [id] { scroll-margin-top:84px; }
+    [id] { scroll-margin-top:82px; }
     main:focus { outline:none; }
     .mono { font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
-    .wrap { width:min(1120px,calc(100% - 32px)); margin-inline:auto; }
+    .wrap { width:min(1160px,calc(100% - 32px)); margin-inline:auto; }
     .skip { position:fixed; top:10px; left:10px; z-index:100; padding:11px 14px; border-radius:7px; background:var(--gold); color:#1a1204; font-weight:800; text-decoration:none; transform:translateY(-150%); }
-    .skip:focus { transform:translateY(0); }
-    .nav { position:sticky; top:0; z-index:30; border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--bg) 82%,transparent); backdrop-filter:blur(16px); }
-    .nav-inner { height:64px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
-    .brand { font-weight:800; font-size:14px; text-decoration:none; }
+    .skip:focus { transform:none; }
+
+    .nav { position:sticky; top:0; z-index:40; border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--bg) 82%,transparent); backdrop-filter:blur(18px); }
+    .nav-inner { min-height:62px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:18px; }
+    .brand { justify-self:start; font-size:14px; font-weight:850; text-decoration:none; }
     .brand b { color:var(--gold); }
-    .nav-links { display:flex; align-items:center; gap:4px; }
-    .nav-links a { padding:9px 10px; border-radius:7px; color:var(--muted); font-size:11px; text-decoration:none; }
-    .nav-links a:hover { color:var(--ink); background:var(--soft); }
-    .location { margin-left:8px; padding-left:14px; border-left:1px solid var(--line); color:var(--faint); font-size:10px; }
-    .hero { padding:clamp(64px,10vw,112px) 0 clamp(50px,8vw,88px); }
-    .hero-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:clamp(36px,7vw,86px); align-items:end; }
-    .label { color:var(--gold-ink); font-size:11px; letter-spacing:.09em; text-transform:uppercase; }
+    .nav-center { display:flex; gap:4px; }
+    .nav-center a { padding:8px 10px; border-radius:6px; color:var(--muted); font-size:10px; text-decoration:none; }
+    .nav-center a:hover { color:var(--ink); background:var(--soft); }
+    .nav-meta { justify-self:end; color:var(--faint); font-size:9px; letter-spacing:.06em; }
+
+    .hero { padding:clamp(56px,8vw,92px) 0 clamp(48px,7vw,78px); }
+    .hero-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:clamp(40px,8vw,100px); align-items:end; }
+    .eyebrow { display:flex; align-items:center; gap:10px; color:var(--gold-ink); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:28px; height:1px; background:var(--gold); }
     h1,h2,h3 { margin:0; text-wrap:balance; }
-    .hero h1 { max-width:760px; margin:18px 0 22px; font-size:clamp(48px,7.2vw,84px); line-height:.94; letter-spacing:-.065em; }
+    .hero h1 { max-width:820px; margin:18px 0 20px; font-size:clamp(50px,7.7vw,94px); line-height:.9; letter-spacing:-.07em; }
     .hero h1 em { color:var(--gold-ink); font-family:Georgia,serif; font-weight:400; }
-    .hero-copy p { max-width:610px; margin:0; color:var(--muted); font-size:clamp(15px,1.6vw,18px); line-height:1.7; }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
-    .btn { min-height:46px; padding:0 17px; display:inline-flex; align-items:center; gap:10px; border:1px solid var(--strong); border-radius:8px; background:var(--panel); font-size:12px; font-weight:750; text-decoration:none; transition:transform .2s ease,border-color .2s ease; }
-    .btn:hover { transform:translateY(-2px); border-color:var(--gold); }
-    .btn.primary { border-color:var(--gold); background:var(--gold); color:#1a1204; }
-    .profile-card { padding:24px; border:1px solid var(--strong); border-radius:14px; background:color-mix(in srgb,var(--panel) 88%,transparent); }
-    .profile-top { display:flex; align-items:center; justify-content:space-between; gap:18px; padding-bottom:20px; border-bottom:1px solid var(--line); }
-    .profile-mark { width:52px; height:52px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:50%; color:var(--gold-ink); font-size:13px; box-shadow:inset 0 0 0 5px color-mix(in srgb,var(--gold) 10%,transparent); }
-    .profile-status { color:var(--muted); font-size:10px; text-align:right; line-height:1.6; }
-    .profile-status i { display:inline-block; width:6px; height:6px; margin-right:6px; border-radius:50%; background:var(--gold); }
-    .facts { margin-top:18px; display:grid; gap:11px; }
-    .fact { display:flex; justify-content:space-between; gap:18px; color:var(--faint); font-size:10px; }
-    .fact b { color:var(--ink); font-weight:600; text-align:right; }
-    .section { padding:clamp(56px,8vw,86px) 0; border-top:1px solid var(--line); }
-    .section-head { margin-bottom:28px; display:flex; align-items:end; justify-content:space-between; gap:24px; }
-    .section-head h2 { margin-top:10px; font-size:clamp(30px,4.5vw,48px); letter-spacing:-.045em; }
-    .section-head p { max-width:430px; margin:0; color:var(--muted); font-size:13px; line-height:1.65; }
-    .projects { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
-    .project { grid-column:span 4; min-width:0; border:1px solid var(--strong); border-radius:13px; background:var(--panel); overflow:hidden; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
-    .project:nth-child(1),.project:nth-child(2) { grid-column:span 6; }
-    .project:hover { transform:translateY(-4px); border-color:color-mix(in srgb,var(--gold) 70%,var(--strong)); box-shadow:0 18px 45px -32px rgba(0,0,0,.7); }
-    .thumb { height:132px; padding:16px; position:relative; overflow:hidden; }
-    .project:nth-child(1) .thumb,.project:nth-child(2) .thumb { height:158px; }
-    .mini-nav { display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; font-size:7px; font-weight:800; letter-spacing:.04em; }
-    .mini-nav span:last-child { padding:5px 8px; border:1px solid currentColor; border-radius:4px; }
-    .mini-copy { width:58%; margin-top:24px; position:relative; z-index:2; }
-    .mini-copy b { display:block; font-size:clamp(16px,2vw,24px); line-height:.95; letter-spacing:-.05em; }
-    .mini-copy i { display:block; width:65%; height:4px; margin-top:10px; border-radius:3px; background:currentColor; opacity:.35; }
-    .thumb::after { content:""; position:absolute; width:150px; height:150px; right:-34px; bottom:-58px; border:1px solid currentColor; border-radius:50%; opacity:.28; box-shadow:0 0 0 22px color-mix(in srgb,currentColor 7%,transparent); }
-    .alpha { color:#153657; background:linear-gradient(135deg,#f5f9fc,#c7e0ef); }
-    .family { color:#ffe9d1; background:linear-gradient(135deg,#29150e,#6b2d18); }
-    .hotel { color:#f7eddb; background:linear-gradient(135deg,#0b1020,#273553); }
-    .veranda { color:#e6f1e9; background:linear-gradient(135deg,#10281f,#2c6047); }
-    .rental { color:#e4f7fa; background:linear-gradient(135deg,#0c2028,#205d6e); }
-    .project-body { padding:17px; }
-    .project-meta { display:flex; justify-content:space-between; gap:12px; color:var(--faint); font-size:9px; text-transform:uppercase; letter-spacing:.07em; }
-    .project-meta span:last-child { color:var(--gold-ink); }
-    .project h3 { margin:11px 0 7px; font-size:18px; letter-spacing:-.025em; }
-    .project p { min-height:38px; margin:0 0 15px; color:var(--muted); font-size:11px; line-height:1.55; }
-    .project-link { display:inline-flex; align-items:center; gap:7px; color:var(--ink); font-size:10px; font-weight:800; text-decoration:none; }
-    .project-link span { color:var(--gold-ink); font-size:14px; }
-    .trust-layout { display:grid; grid-template-columns:.78fr 1.22fr; gap:28px; align-items:start; }
-    .trust-copy h2 { margin:10px 0 14px; font-size:clamp(30px,4.5vw,48px); line-height:1; letter-spacing:-.045em; }
-    .trust-copy p { margin:0; color:var(--muted); font-size:13px; line-height:1.7; }
-    .credentials { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
-    .credential { min-height:154px; padding:17px; display:flex; flex-direction:column; justify-content:space-between; border:1px solid var(--strong); border-radius:11px; background:var(--panel); position:relative; overflow:hidden; }
-    .credential::after { content:""; position:absolute; width:82px; height:82px; right:-28px; top:-28px; border:1px dashed var(--gold); border-radius:50%; opacity:.32; }
-    .cred-top { display:flex; align-items:center; justify-content:space-between; gap:15px; }
-    .seal { width:36px; height:36px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:50%; color:var(--gold-ink); font-size:9px; font-weight:800; box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--gold) 10%,transparent); }
-    .cred-code { color:var(--faint); font-size:8px; letter-spacing:.08em; }
-    .credential h3 { margin:18px 0 5px; font-size:15px; }
-    .credential p { margin:0; color:var(--muted); font-size:10px; line-height:1.5; }
-    .stack-line { margin-top:18px; padding-top:18px; display:flex; flex-wrap:wrap; gap:7px; border-top:1px solid var(--line); }
-    .stack-line span { padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--soft); color:var(--faint); font-size:9px; }
-    .credential-note { margin:12px 0 0; color:var(--faint); font-size:9px; }
-    .contact { padding:28px 0 40px; border-top:1px solid var(--line); }
-    .contact-bar { padding:22px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; border:1px solid var(--strong); border-radius:12px; background:var(--panel); }
-    .contact-copy h2 { font-size:clamp(22px,3vw,32px); letter-spacing:-.035em; }
-    .contact-copy p { margin:7px 0 0; color:var(--muted); font-size:11px; }
-    .socials { display:flex; flex-wrap:wrap; gap:7px; }
-    .socials a { padding:9px 11px; border:1px solid var(--line); border-radius:7px; color:var(--muted); font-size:10px; text-decoration:none; }
-    .socials a:hover { color:var(--ink); border-color:var(--gold); }
-    footer { padding:0 0 24px; display:flex; justify-content:space-between; gap:20px; color:var(--faint); font-size:9px; }
-    .js .reveal { opacity:0; transform:translateY(14px); transition:opacity .55s ease,transform .55s ease; }
+    .hero-copy p { max-width:640px; margin:0; color:var(--muted); font-size:clamp(15px,1.45vw,17px); line-height:1.7; }
+    .hero-foot { margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; }
+    .hero-link { min-height:42px; padding:0 15px; display:inline-flex; align-items:center; gap:10px; border:1px solid var(--strong); border-radius:7px; background:var(--panel); font-size:10px; font-weight:800; text-decoration:none; transition:transform .2s ease,border-color .2s ease; }
+    .hero-link:hover { transform:translateY(-2px); border-color:var(--gold); }
+    .hero-link.primary { border-color:var(--gold); background:var(--gold); color:#1a1204; }
+    .hero-note { color:var(--faint); font-size:9px; }
+    .console { overflow:hidden; border:1px solid var(--strong); border-radius:11px; background:var(--panel); box-shadow:0 26px 60px -46px rgba(0,0,0,.8); }
+    .console-bar { padding:9px 11px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); background:var(--soft); color:var(--faint); font-size:8px; }
+    .console-dots { display:flex; gap:5px; }
+    .console-dots i { width:6px; height:6px; border-radius:50%; background:var(--strong); }
+    .console-body { padding:18px; display:grid; gap:10px; font-size:10px; line-height:1.5; }
+    .code-line { display:grid; grid-template-columns:20px 1fr; gap:10px; color:var(--faint); }
+    .code-line span:last-child { color:var(--muted); }
+    .key { color:var(--blue); }
+    .value { color:var(--gold-ink); }
+
+    .section { padding:clamp(54px,7vw,78px) 0; border-top:1px solid var(--line); }
+    .section-head { margin-bottom:24px; display:flex; align-items:end; justify-content:space-between; gap:28px; }
+    .section-head h2 { margin-top:8px; font-size:clamp(30px,4vw,46px); letter-spacing:-.05em; }
+    .section-head p { max-width:430px; margin:0; color:var(--muted); font-size:12px; line-height:1.65; }
+
+    .showcase { min-height:510px; display:grid; grid-template-columns:270px 1fr; border:1px solid var(--strong); border-radius:15px; background:var(--panel); overflow:hidden; }
+    .project-tabs { padding:8px; display:grid; align-content:start; gap:4px; border-right:1px solid var(--line); background:var(--soft); }
+    .project-tab { width:100%; padding:14px 12px; display:grid; grid-template-columns:28px 1fr auto; align-items:center; gap:10px; border:1px solid transparent; border-radius:8px; background:transparent; text-align:left; cursor:pointer; transition:background .2s ease,border-color .2s ease,transform .2s ease; }
+    .project-tab:hover { background:var(--panel); }
+    .project-tab[aria-selected="true"] { border-color:var(--strong); background:var(--panel); box-shadow:0 8px 28px -24px rgba(0,0,0,.8); }
+    .tab-no { color:var(--faint); font-size:9px; }
+    .tab-copy b { display:block; font-size:11px; line-height:1.2; }
+    .tab-copy span { display:block; margin-top:4px; color:var(--faint); font-size:8px; }
+    .tab-status { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 12%,transparent); }
+    .stage { min-width:0; padding:clamp(20px,3vw,34px); display:grid; grid-template-rows:1fr auto; gap:20px; }
+    .browser { min-height:320px; overflow:hidden; border:1px solid rgba(255,255,255,.18); border-radius:10px; color:var(--screen-ink); background:var(--screen-bg); box-shadow:0 30px 60px -40px rgba(0,0,0,.8); transform-style:preserve-3d; transition:opacity .18s ease,transform .18s ease,background .35s ease; }
+    .browser.switching { opacity:.25; transform:scale(.985); }
+    .browser-top { height:30px; padding:0 10px; display:flex; align-items:center; gap:9px; color:#656b76; background:#eef0f3; border-bottom:1px solid rgba(0,0,0,.08); }
+    .browser-top .console-dots i { background:#c1c5cb; }
+    .address { flex:1; padding:4px 8px; border-radius:4px; background:#fff; color:#656b76; font-size:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .screen { min-height:290px; padding:18px 26px; position:relative; overflow:hidden; background:var(--screen-bg); }
+    .screen-nav { display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; font-size:7px; font-weight:800; letter-spacing:.06em; }
+    .screen-nav span:last-child { padding:6px 8px; border:1px solid currentColor; border-radius:4px; }
+    .screen-copy { width:min(56%,430px); margin-top:54px; position:relative; z-index:2; }
+    .screen-kicker { color:var(--screen-accent); font-size:7px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    .screen-title { margin-top:10px; font-size:clamp(26px,4vw,50px); line-height:.9; letter-spacing:-.06em; font-weight:800; }
+    .screen-lines { width:75%; margin-top:16px; display:grid; gap:7px; }
+    .screen-lines i { height:4px; border-radius:4px; background:currentColor; opacity:.25; }
+    .screen-lines i:last-child { width:58%; }
+    .screen-art { position:absolute; width:300px; height:300px; right:-42px; bottom:-110px; border:1px solid var(--screen-accent); border-radius:50%; opacity:.65; box-shadow:0 0 0 38px color-mix(in srgb,var(--screen-accent) 9%,transparent),0 0 0 76px color-mix(in srgb,var(--screen-accent) 5%,transparent); }
+    .screen-art::before { content:""; position:absolute; width:54%; height:54%; left:23%; top:23%; border:1px dashed var(--screen-accent); border-radius:18px; transform:rotate(38deg); }
+    .browser[data-theme="alpha"] { --screen-bg:linear-gradient(135deg,#f5f9fc,#c6dfef); --screen-ink:#153657; --screen-accent:#2f6fa8; }
+    .browser[data-theme="family"] { --screen-bg:linear-gradient(135deg,#29150e,#71321b); --screen-ink:#ffe9d1; --screen-accent:#e8752c; }
+    .browser[data-theme="hotel"] { --screen-bg:linear-gradient(135deg,#0b1020,#283858); --screen-ink:#f7eddb; --screen-accent:#d8bc83; }
+    .browser[data-theme="veranda"] { --screen-bg:linear-gradient(135deg,#10281f,#2c6047); --screen-ink:#e6f1e9; --screen-accent:#8fd4a8; }
+    .browser[data-theme="rental"] { --screen-bg:linear-gradient(135deg,#0c2028,#236578); --screen-ink:#e4f7fa; --screen-accent:#7ad4de; }
+    .stage-info { display:grid; grid-template-columns:1fr auto; align-items:end; gap:24px; }
+    .stage-copy { min-width:0; }
+    .stage-meta { color:var(--gold-ink); font-size:8px; letter-spacing:.08em; text-transform:uppercase; }
+    .stage-copy h3 { margin:7px 0 6px; font-size:clamp(21px,3vw,30px); letter-spacing:-.04em; }
+    .stage-copy p { max-width:590px; margin:0; color:var(--muted); font-size:11px; line-height:1.6; }
+    .stage-link { min-height:40px; padding:0 13px; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--strong); border-radius:7px; color:var(--ink); background:var(--soft); font-size:9px; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .stage-link:hover { border-color:var(--gold); }
+
+    .proof-layout { display:grid; grid-template-columns:.72fr 1.28fr; gap:28px; align-items:start; }
+    .proof-copy h2 { margin:8px 0 13px; font-size:clamp(30px,4vw,46px); line-height:1; letter-spacing:-.05em; }
+    .proof-copy p { margin:0; color:var(--muted); font-size:12px; line-height:1.65; }
+    .stack { margin-top:18px; display:flex; flex-wrap:wrap; gap:6px; }
+    .stack span { padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--soft); color:var(--faint); font-size:8px; }
+    .proof-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--strong); border-radius:12px; background:var(--panel); overflow:hidden; }
+    .proof-card { min-height:158px; padding:16px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid var(--line); position:relative; overflow:hidden; }
+    .proof-card:last-child { border-right:0; }
+    .seal { width:38px; height:38px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:50%; color:var(--gold-ink); font-size:8px; font-weight:850; box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--gold) 10%,transparent); }
+    .proof-card::after { content:""; position:absolute; width:82px; height:82px; right:-34px; top:-34px; border:1px dashed var(--gold); border-radius:50%; opacity:.25; }
+    .proof-card h3 { margin:18px 0 5px; font-size:13px; }
+    .proof-card p { margin:0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .proof-note { margin:10px 0 0; color:var(--faint); font-size:8px; }
+
+    .contact { padding:24px 0 34px; border-top:1px solid var(--line); }
+    .contact-bar { display:grid; grid-template-columns:1fr auto; align-items:center; gap:24px; }
+    .contact-copy h2 { font-size:clamp(22px,3vw,30px); letter-spacing:-.04em; }
+    .contact-copy p { margin:6px 0 0; color:var(--muted); font-size:10px; }
+    .links { display:flex; flex-wrap:wrap; gap:7px; }
+    .links a { padding:9px 11px; border:1px solid var(--line); border-radius:6px; color:var(--muted); font-size:9px; text-decoration:none; }
+    .links a:hover { color:var(--ink); border-color:var(--gold); }
+    footer { padding:0 0 22px; display:flex; justify-content:space-between; gap:20px; color:var(--faint); font-size:8px; }
+    .js .reveal { opacity:0; transform:translateY(12px); transition:opacity .5s ease,transform .5s ease; }
     .js .reveal.in { opacity:1; transform:none; }
-    @media (max-width:820px) { .hero-grid,.trust-layout { grid-template-columns:1fr; } .profile-card { max-width:520px; } .project,.project:nth-child(1),.project:nth-child(2) { grid-column:span 6; } .project:nth-child(5) { grid-column:span 12; } .section-head { align-items:start; flex-direction:column; } }
-    @media (max-width:560px) { .wrap { width:min(100% - 22px,1120px); } .nav-inner { height:58px; } .location { display:none; } .nav-links a { padding-inline:7px; font-size:9px; } .hero { padding-top:52px; } .hero h1 { font-size:clamp(44px,14vw,64px); } .projects { grid-template-columns:1fr; } .project,.project:nth-child(1),.project:nth-child(2),.project:nth-child(5) { grid-column:auto; } .project:nth-child(1) .thumb,.project:nth-child(2) .thumb,.thumb { height:126px; } .credentials { grid-template-columns:1fr; } .credential { min-height:132px; } .contact-bar { align-items:flex-start; flex-direction:column; } footer { flex-direction:column; } }
+
+    @media (max-width:900px) { .hero-grid,.proof-layout { grid-template-columns:1fr; } .console { max-width:560px; } .proof-grid { grid-template-columns:repeat(2,1fr); } .proof-card:nth-child(2) { border-right:0; } .proof-card:nth-child(-n+2) { border-bottom:1px solid var(--line); } }
+    @media (max-width:700px) { .nav-inner { grid-template-columns:1fr auto; } .nav-center { display:none; } .showcase { grid-template-columns:1fr; } .project-tabs { grid-template-columns:repeat(5,minmax(150px,1fr)); overflow-x:auto; border-right:0; border-bottom:1px solid var(--line); } .project-tab { grid-template-columns:22px 1fr; } .tab-status { display:none; } .stage { padding:16px; } .screen { min-height:250px; } .browser { min-height:280px; } .screen-copy { width:68%; margin-top:42px; } }
+    @media (max-width:540px) { .wrap { width:min(100% - 22px,1160px); } .nav-inner { min-height:56px; } .nav-meta { font-size:8px; } .hero { padding-top:48px; } .hero h1 { font-size:clamp(46px,14vw,66px); } .section-head { align-items:start; flex-direction:column; } .screen { padding:16px; } .screen-copy { width:76%; } .screen-art { width:220px; height:220px; } .stage-info,.contact-bar { grid-template-columns:1fr; align-items:start; } .stage-link { width:max-content; } .proof-grid { grid-template-columns:1fr; } .proof-card,.proof-card:nth-child(2) { border-right:0; border-bottom:1px solid var(--line); } .proof-card:last-child { border-bottom:0; } footer { flex-direction:column; } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; } }
   </style>
 </head>
 <body>
   <a class="skip" href="#content">Skip to main content</a>
-  <nav class="nav" aria-label="Primary navigation"><div class="wrap nav-inner"><a class="brand mono" href="#content" aria-label="Gabriel Oliveira, home">&lt;<b>GO</b>/&gt;</a><div class="nav-links mono"><a href="#work">work.json</a><a href="#credentials">credentials.md</a><a href="#contact">contact.sh</a><span class="location">Brazil / Worldwide</span></div></div></nav>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="brand mono" href="#content" aria-label="Gabriel Oliveira, home">&lt;<b>GO</b>/&gt;</a>
+      <div class="nav-center mono"><a href="#work">work.json</a><a href="#proof">proof.md</a><a href="#contact">contact.sh</a></div>
+      <span class="nav-meta mono">BRAZIL / WORLDWIDE</span>
+    </div>
+  </nav>
+
   <main id="content" tabindex="-1">
-    <header class="hero"><div class="wrap hero-grid"><div class="hero-copy reveal"><span class="label mono">Independent web designer &amp; developer</span><h1>Selected digital work, built with <em>care.</em></h1><p>I'm Gabriel Oliveira. I design and develop focused web experiences across Brazil and the United States. Every project below is live.</p><div class="hero-actions"><a class="btn primary" href="#work">View selected work <span>&darr;</span></a><a class="btn" href="mailto:oliveirabtq@gmail.com">oliveirabtq@gmail.com</a></div></div><aside class="profile-card reveal" aria-label="Professional summary"><div class="profile-top"><span class="profile-mark mono">GO</span><span class="profile-status mono"><i></i>Independent practice<br>Design + development</span></div><div class="facts mono"><div class="fact"><span>LIVE WORK</span><b>05 projects</b></div><div class="fact"><span>MARKETS</span><b>United States + Brazil</b></div><div class="fact"><span>DISCIPLINE</span><b>Web design + Full-stack</b></div><div class="fact"><span>DELIVERY</span><b>Git / GitHub workflow</b></div></div></aside></div></header>
-    <section class="section" id="work"><div class="wrap"><div class="section-head reveal"><div><span class="label mono">01 / SELECTED WORK</span><h2>Five live projects.</h2></div><p>A compact selection across local services, hospitality, restaurants, and rentals.</p></div><div class="projects">
-      <article class="project reveal"><div class="thumb alpha" aria-hidden="true"><div class="mini-nav"><span>ALFA CLEANING</span><span>FREE QUOTE</span></div><div class="mini-copy"><b>More time for what matters.</b><i></i></div></div><div class="project-body"><div class="project-meta mono"><span>01 / Local services</span><span>Live</span></div><h3>Alfa Cleaning WA</h3><p>Calm, trustworthy visual identity for a Washington cleaning company.</p><a class="project-link mono" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">OPEN SITE <span>&nearr;</span></a></div></article>
-      <article class="project reveal"><div class="thumb family" aria-hidden="true"><div class="mini-nav"><span>ARRETADO</span><span>MENU</span></div><div class="mini-copy"><b>Brazilian flavor, bold identity.</b><i></i></div></div><div class="project-body"><div class="project-meta mono"><span>02 / Food &amp; dining</span><span>Live</span></div><h3>Fam&iacute;lia Arretado</h3><p>A bold restaurant experience with personality and Brazilian energy.</p><a class="project-link mono" href="https://familiaarretado.com.br/" target="_blank" rel="noopener noreferrer">OPEN SITE <span>&nearr;</span></a></div></article>
-      <article class="project reveal"><div class="thumb hotel" aria-hidden="true"><div class="mini-nav"><span>FAIRMONT</span><span>BOOK</span></div><div class="mini-copy"><b>Heritage meets modern luxury.</b><i></i></div></div><div class="project-body"><div class="project-meta mono"><span>03 / Hospitality</span><span>Live</span></div><h3>Fairmont Olympic Hotel</h3><p>Editorial restraint and a premium hospitality hierarchy.</p><a class="project-link mono" href="https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&amp;goto=fiche_hotel&amp;merchantid=seo-maps-US-A580&amp;sourceid=aw-cen" target="_blank" rel="noopener noreferrer">OPEN SITE <span>&nearr;</span></a></div></article>
-      <article class="project reveal"><div class="thumb veranda" aria-hidden="true"><div class="mini-nav"><span>VERANDA</span><span>RESERVE</span></div><div class="mini-copy"><b>A table worth remembering.</b><i></i></div></div><div class="project-body"><div class="project-meta mono"><span>04 / Restaurant</span><span>Live</span></div><h3>Restaurante Veranda</h3><p>Atmosphere, menu, and reservations in a refined visual system.</p><a class="project-link mono" href="https://restauranteveranda.com.br/" target="_blank" rel="noopener noreferrer">OPEN SITE <span>&nearr;</span></a></div></article>
-      <article class="project reveal"><div class="thumb rental" aria-hidden="true"><div class="mini-nav"><span>CITYWIDE</span><span>RENTALS</span></div><div class="mini-copy"><b>Ready for every job.</b><i></i></div></div><div class="project-body"><div class="project-meta mono"><span>05 / Rentals</span><span>Live</span></div><h3>Citywide Rental WA</h3><p>Clear information architecture for a local rental business.</p><a class="project-link mono" href="https://citywiderentalwa.com/" target="_blank" rel="noopener noreferrer">OPEN SITE <span>&nearr;</span></a></div></article>
-    </div></div></section>
-    <section class="section" id="credentials"><div class="wrap trust-layout"><div class="trust-copy reveal"><span class="label mono">02 / PROFESSIONAL CREDENTIALS</span><h2>Trust, backed by visible work.</h2><p>These certificate-style credentials summarize facts demonstrated by this portfolio and its delivery workflow.</p><div class="stack-line mono" aria-label="Technology stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>Git / GitHub</span></div><p class="credential-note mono">Portfolio-based credentials, grounded in live work and workflow.</p></div><div class="credentials">
-      <article class="credential reveal"><div class="cred-top"><span class="seal mono">05</span><span class="cred-code mono">PORTFOLIO RECORD</span></div><div><h3>Published work</h3><p>Five projects linked directly to live websites.</p></div></article>
-      <article class="credential reveal"><div class="cred-top"><span class="seal mono">02</span><span class="cred-code mono">INTERNATIONAL SCOPE</span></div><div><h3>Two active markets</h3><p>Digital work across the United States and Brazil.</p></div></article>
-      <article class="credential reveal"><div class="cred-top"><span class="seal mono">D+C</span><span class="cred-code mono">END-TO-END PRACTICE</span></div><div><h3>Design + development</h3><p>One continuous workflow from interface to code.</p></div></article>
-      <article class="credential reveal"><div class="cred-top"><span class="seal mono">GIT</span><span class="cred-code mono">VERSION CONTROLLED</span></div><div><h3>Reliable delivery</h3><p>Structured Git and GitHub workflow for every update.</p></div></article>
-    </div></div></section>
-    <section class="contact" id="contact"><div class="wrap contact-bar reveal"><div class="contact-copy"><h2>Thanks for viewing my work.</h2><p>Profiles and contact, kept simple.</p></div><div class="socials mono"><a href="mailto:oliveirabtq@gmail.com">Email</a><a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/gabriel-oliveira-45056a324/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div></section>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow mono">Gabriel Oliveira / Selected work</span>
+          <h1>Design precision.<br><em>Engineering depth.</em></h1>
+          <p>Independent web designer and developer crafting focused digital experiences across Brazil and the United States. Five projects, all live.</p>
+          <div class="hero-foot"><a class="hero-link primary" href="#work">Explore the work <span>&darr;</span></a><a class="hero-link" href="mailto:oliveirabtq@gmail.com">Email me</a><span class="hero-note mono">DESIGN + FULL-STACK DEVELOPMENT</span></div>
+        </div>
+        <aside class="console reveal" aria-label="Professional profile">
+          <div class="console-bar mono"><span class="console-dots"><i></i><i></i><i></i></span><span>profile.ts</span></div>
+          <div class="console-body mono">
+            <div class="code-line"><span>01</span><span><b class="key">const</b> designer = <b class="value">"Gabriel Oliveira"</b>;</span></div>
+            <div class="code-line"><span>02</span><span>role: <b class="value">"design + development"</b>,</span></div>
+            <div class="code-line"><span>03</span><span>projects: <b class="value">5</b>,</span></div>
+            <div class="code-line"><span>04</span><span>markets: [<b class="value">"US"</b>, <b class="value">"BR"</b>],</span></div>
+            <div class="code-line"><span>05</span><span>status: <b class="value">"independent practice"</b>;</span></div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><div><span class="eyebrow mono">01 / PROJECT INDEX</span><h2>One stage. Five worlds.</h2></div><p>Select a project to explore its visual direction and open the live website.</p></div>
+        <div class="showcase reveal">
+          <div class="project-tabs" role="tablist" aria-label="Portfolio projects">
+            <button class="project-tab" id="tab-alpha" role="tab" aria-selected="true" aria-controls="project-panel" tabindex="0" data-key="alpha"><span class="tab-no mono">01</span><span class="tab-copy"><b>Alfa Cleaning WA</b><span class="mono">LOCAL SERVICES / US</span></span><i class="tab-status"></i></button>
+            <button class="project-tab" id="tab-family" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="family"><span class="tab-no mono">02</span><span class="tab-copy"><b>Fam&iacute;lia Arretado</b><span class="mono">FOOD &amp; DINING / BR</span></span><i class="tab-status"></i></button>
+            <button class="project-tab" id="tab-hotel" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="hotel"><span class="tab-no mono">03</span><span class="tab-copy"><b>Fairmont Olympic</b><span class="mono">HOSPITALITY / US</span></span><i class="tab-status"></i></button>
+            <button class="project-tab" id="tab-veranda" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="veranda"><span class="tab-no mono">04</span><span class="tab-copy"><b>Restaurante Veranda</b><span class="mono">RESTAURANT / BR</span></span><i class="tab-status"></i></button>
+            <button class="project-tab" id="tab-rental" role="tab" aria-selected="false" aria-controls="project-panel" tabindex="-1" data-key="rental"><span class="tab-no mono">05</span><span class="tab-copy"><b>Citywide Rental WA</b><span class="mono">RENTALS / US</span></span><i class="tab-status"></i></button>
+          </div>
+          <div class="stage" id="project-panel" role="tabpanel" aria-labelledby="tab-alpha">
+            <div class="browser" id="browser" data-theme="alpha" aria-hidden="true">
+              <div class="browser-top"><span class="console-dots"><i></i><i></i><i></i></span><span class="address mono" id="address">alfacleaningwa.com</span></div>
+              <div class="screen"><div class="screen-nav"><span id="screenBrand">ALFA CLEANING</span><span id="screenAction">FREE QUOTE</span></div><div class="screen-copy"><div class="screen-kicker mono" id="screenKicker">PROFESSIONAL CLEANING</div><div class="screen-title" id="screenTitle">More time for what matters.</div><div class="screen-lines"><i></i><i></i></div></div><div class="screen-art"></div></div>
+            </div>
+            <div class="stage-info"><div class="stage-copy"><span class="stage-meta mono" id="projectMeta">LOCAL SERVICES / WASHINGTON, US</span><h3 id="projectTitle">Alfa Cleaning WA</h3><p id="projectDescription">A calm, trustworthy digital identity for a Washington cleaning company.</p></div><a class="stage-link mono" id="projectLink" href="https://alfacleaningwa.com/" target="_blank" rel="noopener noreferrer">OPEN LIVE SITE <span>&nearr;</span></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="wrap proof-layout">
+        <div class="proof-copy reveal"><span class="eyebrow mono">02 / VERIFIED SIGNALS</span><h2>Evidence over claims.</h2><p>Certificate-style credentials grounded in published work and a professional delivery workflow.</p><div class="stack mono"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>Git / GitHub</span></div><p class="proof-note mono">PORTFOLIO-BASED CREDENTIALS / NO THIRD-PARTY CLAIMS</p></div>
+        <div class="proof-grid reveal">
+          <article class="proof-card"><span class="seal mono">05</span><div><h3>Published work</h3><p>Five live websites linked directly from the portfolio.</p></div></article>
+          <article class="proof-card"><span class="seal mono">02</span><div><h3>Active markets</h3><p>Work across the United States and Brazil.</p></div></article>
+          <article class="proof-card"><span class="seal mono">D+C</span><div><h3>End-to-end craft</h3><p>Design and development in one continuous process.</p></div></article>
+          <article class="proof-card"><span class="seal mono">GIT</span><div><h3>Versioned delivery</h3><p>Structured Git and GitHub workflow for every update.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact"><div class="wrap contact-bar reveal"><div class="contact-copy"><h2>Thanks for viewing my work.</h2><p>Brazil-based, working worldwide.</p></div><div class="links mono"><a href="mailto:oliveirabtq@gmail.com">Email</a><a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/gabriel-oliveira-45056a324/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div></section>
   </main>
-  <footer class="wrap mono"><span>&copy; 2026 Gabriel Oliveira</span><span>Brazil / Worldwide</span></footer>
+  <footer class="wrap mono"><span>&copy; 2026 Gabriel Oliveira</span><span>DESIGN / CODE / CRAFT</span></footer>
+
   <script>
+    const projects={
+      alpha:{theme:'alpha',address:'alfacleaningwa.com',brand:'ALFA CLEANING',action:'FREE QUOTE',kicker:'PROFESSIONAL CLEANING',screen:'More time for what matters.',meta:'LOCAL SERVICES / WASHINGTON, US',title:'Alfa Cleaning WA',description:'A calm, trustworthy digital identity for a Washington cleaning company.',url:'https://alfacleaningwa.com/'},
+      family:{theme:'family',address:'familiaarretado.com.br',brand:'ARRETADO',action:'MENU',kicker:'A TASTE OF BRAZIL',screen:'Brazilian flavor. Bold identity.',meta:'FOOD & DINING / BRAZIL',title:'Família Arretado',description:'A bold restaurant experience with personality and Brazilian energy.',url:'https://familiaarretado.com.br/'},
+      hotel:{theme:'hotel',address:'fairmont.com/seattle',brand:'FAIRMONT',action:'BOOK',kicker:'SEATTLE’S ICONIC DESTINATION',screen:'Heritage meets modern luxury.',meta:'HOSPITALITY / SEATTLE, US',title:'Fairmont Olympic Hotel',description:'Editorial restraint and a refined hierarchy for a premium hospitality experience.',url:'https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&goto=fiche_hotel&merchantid=seo-maps-US-A580&sourceid=aw-cen'},
+      veranda:{theme:'veranda',address:'restauranteveranda.com.br',brand:'VERANDA',action:'RESERVE',kicker:'NATURE / FLAVOR / CONNECTION',screen:'A table worth remembering.',meta:'RESTAURANT / BRAZIL',title:'Restaurante Veranda',description:'Atmosphere, menu, and reservations inside a refined visual system.',url:'https://restauranteveranda.com.br/'},
+      rental:{theme:'rental',address:'citywiderentalwa.com',brand:'CITYWIDE',action:'RENTALS',kicker:'READY WHEN YOU ARE',screen:'The right equipment for every job.',meta:'RENTALS / WASHINGTON, US',title:'Citywide Rental WA',description:'Clear information architecture for a local rental business.',url:'https://citywiderentalwa.com/'}
+    };
+    const tabs=[...document.querySelectorAll('.project-tab')];
+    const panel=document.getElementById('project-panel');
+    const browser=document.getElementById('browser');
+    const fields={address:'address',brand:'screenBrand',action:'screenAction',kicker:'screenKicker',screen:'screenTitle',meta:'projectMeta',title:'projectTitle',description:'projectDescription'};
+    function selectProject(tab,focus=false){
+      const project=projects[tab.dataset.key];
+      tabs.forEach(item=>{const active=item===tab;item.setAttribute('aria-selected',active);item.tabIndex=active?0:-1;});
+      panel.setAttribute('aria-labelledby',tab.id);browser.classList.add('switching');
+      window.setTimeout(()=>{browser.dataset.theme=project.theme;Object.entries(fields).forEach(([key,id])=>document.getElementById(id).textContent=project[key]);document.getElementById('projectLink').href=project.url;browser.classList.remove('switching');},120);
+      if(focus)tab.focus();
+    }
+    tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>selectProject(tab));tab.addEventListener('keydown',event=>{let next=null;if(event.key==='ArrowDown'||event.key==='ArrowRight')next=(index+1)%tabs.length;if(event.key==='ArrowUp'||event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;if(next!==null){event.preventDefault();selectProject(tabs[next],true);}});});
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduced){window.addEventListener('pointermove',(event)=>{document.documentElement.style.setProperty('--mx',`${event.clientX}px`);document.documentElement.style.setProperty('--my',`${event.clientY}px`);},{passive:true});}
-    const observer=new IntersectionObserver((entries)=>{entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target);}});},{threshold:.1});
-    document.querySelectorAll('.reveal').forEach((element)=>reduced?element.classList.add('in'):observer.observe(element));
+    if(!reduced){window.addEventListener('pointermove',event=>{document.documentElement.style.setProperty('--mx',`${event.clientX}px`);document.documentElement.style.setProperty('--my',`${event.clientY}px`);},{passive:true});browser.addEventListener('pointermove',event=>{const rect=browser.getBoundingClientRect();const x=(event.clientX-rect.left)/rect.width-.5;const y=(event.clientY-rect.top)/rect.height-.5;browser.style.transform=`perspective(1000px) rotateX(${-y*2.5}deg) rotateY(${x*3}deg)`;});browser.addEventListener('pointerleave',()=>browser.style.transform='');}
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(element=>reduced?element.classList.add('in'):observer.observe(element));
   </script>
 </body>
 </html>
