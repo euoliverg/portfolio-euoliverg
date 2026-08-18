@@ -717,6 +717,81 @@ a {
   color: var(--muted);
 }
 
+.collaborations {
+  padding-top: 0;
+  background: #14161b;
+}
+
+.collaboration-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.collaboration-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 270px;
+  padding: 26px;
+}
+
+.collaboration-item + .collaboration-item {
+  border-left: 1px solid var(--border);
+}
+
+.collaboration-label,
+.collaboration-status {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.collaboration-label {
+  margin: 0 0 38px;
+  color: var(--accent);
+}
+
+.collaboration-item h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 660;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.collaboration-role {
+  margin: 7px 0 0;
+  color: #c5c8cd;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.collaboration-scope {
+  margin: 24px 0 30px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.62;
+}
+
+.collaboration-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  color: #858a93;
+}
+
+.collaboration-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5f917a;
+  box-shadow: 0 0 0 3px rgba(95, 145, 122, 0.1);
+}
+
 .section-light {
   background: var(--paper);
   color: var(--dark-text);
@@ -1067,6 +1142,19 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .collaboration-list {
+    grid-template-columns: 1fr;
+  }
+
+  .collaboration-item {
+    min-height: auto;
+  }
+
+  .collaboration-item + .collaboration-item {
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
   .stack-groups article {
     min-height: auto;
   }
@@ -1181,6 +1269,18 @@ a {
 
   .section-heading {
     margin-bottom: 32px;
+  }
+
+  .collaborations {
+    padding-top: 0;
+  }
+
+  .collaboration-item {
+    padding: 22px 0;
+  }
+
+  .collaboration-label {
+    margin-bottom: 26px;
   }
 
   .work-groups {
