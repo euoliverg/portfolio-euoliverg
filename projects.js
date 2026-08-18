@@ -53,5 +53,16 @@ export const projects = [
     imageAlt: 'Restaurante Veranda website home page',
     url: 'https://restauranteveranda.com.br/',
     size: 'wide'
+  },
+  {
+    index: '06',
+    name: 'GSN Construction LLC',
+    category: 'Home Improvement · United States',
+    description: 'A contractor website organizing service categories, coverage areas and direct estimate requests into a clear, conversion-focused layout for Seattle homeowners.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    image: 'assets/projects/gsn-construction.png',
+    imageAlt: 'GSN Construction LLC website home page with services and free estimate call-to-action',
+    url: 'https://gsnconstructionllc.com/',
+    size: 'featured'
   }
 ];
