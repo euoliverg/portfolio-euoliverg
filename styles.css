@@ -686,7 +686,6 @@ dialog::backdrop { background: rgba(0,0,0,.78); backdrop-filter: blur(7px); }
   :root { --shell: min(100% - 48px, 1280px); }
   .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(380px, .8fr); gap: 50px; }
   .hero h1 { font-size: clamp(3.25rem, 6.5vw, 5.1rem); }
-  .trust-grid { grid-template-columns: repeat(3, 1fr); padding-block: 15px; row-gap: 12px; }
   .work-group-grid { grid-template-columns: repeat(2, 1fr); }
   .value-grid { grid-template-columns: repeat(2, 1fr); }
   .value-grid article:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
@@ -759,8 +758,6 @@ dialog::backdrop { background: rgba(0,0,0,.78); backdrop-filter: blur(7px); }
   .hero-stat-chip { top: -16px; left: -12px; padding: 8px 11px; gap: 8px; }
   .hero-stat-chip strong { font-size: 1rem; }
   .hero-proof-inner { animation: none; }
-  .trust-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-grid span { white-space: normal; }
   .section { padding-block: 68px; }
   .section-heading { margin-bottom: 35px; }
   .section-heading h2, .company-profile h2, .about-copy h2, .contact-intro h2 { font-size: clamp(2.35rem, 11vw, 3.6rem); }
