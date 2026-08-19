@@ -56,10 +56,19 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;');
 
+const industryIcons = {
+  'Vehicle Rental': '<path d="M5 17h14M6 17v-4.5a1 1 0 0 1 .3-.7l1.6-1.6a2 2 0 0 1 1.4-.6h5.4a2 2 0 0 1 1.4.6l1.6 1.6a1 1 0 0 1 .3.7V17"/><circle cx="8.5" cy="17" r="1.5"/><circle cx="15.5" cy="17" r="1.5"/>',
+  'Cleaning Services': '<path d="M12 4v3M12 17v3M4 12h3M17 12h3M6.3 6.3l2.1 2.1M15.6 15.6l2.1 2.1M17.7 6.3l-2.1 2.1M8.4 15.6l-2.1 2.1"/>',
+  'Construction & Home Improvement': '<path d="M5 11 12 5l7 6"/><path d="M7 10v8h10v-8"/><path d="M10.5 18v-4h3v4"/>',
+  'Food & Hospitality': '<path d="M8 3.5v6A1.5 1.5 0 0 1 6.5 11H6v9.5"/><path d="M6 3.5v5M8 3.5v5"/><path d="M16 3.5c-1.2 0-2 1.8-2 4s.8 3.6 2 4v9"/>',
+  'Enterprise Hospitality': '<rect x="6" y="3.5" width="12" height="17" rx="1"/><path d="M9 7.5h1.4M13.6 7.5H15M9 11h1.4M13.6 11H15M9 14.5h1.4M13.6 14.5H15"/>'
+};
+
 const projectCard = (project) => {
   const caseLink = project.caseStudy
     ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study ↗</button>`
     : '';
+  const icon = industryIcons[project.industry] ?? '';
 
   return `
     <article class="project reveal">
@@ -69,7 +78,10 @@ const projectCard = (project) => {
           <p>${escapeHtml(new URL(project.url).hostname.replace('www.', ''))}</p>
           <strong><i aria-hidden="true"></i>Live</strong>
         </div>
-        <div class="project-cover" aria-hidden="true"><span>${escapeHtml(project.monogram)}</span></div>
+        <div class="project-cover" aria-hidden="true">
+          <div class="cover-icon-wrap"><svg class="cover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></div>
+          <span>${escapeHtml(project.monogram)}</span>
+        </div>
       </a>
 
       <div class="project-info">
