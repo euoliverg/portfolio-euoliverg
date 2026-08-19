@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://euoliverg.online/sitemap.xml
+Sitemap: https://oliver.dev/sitemap.xml

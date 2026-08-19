@@ -6,7 +6,26 @@ const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 const caseDialog = document.querySelector('[data-case-dialog]');
 const proofDialog = document.querySelector('[data-proof-dialog]');
+const heroProof = document.querySelector('[data-hero-proof]');
+const heroFrame = document.querySelector('.browser-frame');
+const heroBrandCard = document.querySelector('.hero-brand-card');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (heroProof && heroFrame && !reduceMotion) {
+  heroProof.addEventListener('mousemove', (event) => {
+    const rect = heroProof.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    heroFrame.style.transform = `rotate(1deg) rotateX(${(-y * 9).toFixed(2)}deg) rotateY(${(x * 12).toFixed(2)}deg) translateZ(20px)`;
+    if (heroBrandCard) {
+      heroBrandCard.style.transform = `rotate(-4deg) translate(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px) translateZ(-30px)`;
+    }
+  });
+  heroProof.addEventListener('mouseleave', () => {
+    heroFrame.style.transform = '';
+    if (heroBrandCard) heroBrandCard.style.transform = '';
+  });
+}
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')

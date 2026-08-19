@@ -225,7 +225,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .button-secondary { border-color: var(--line-strong); background: rgba(255,255,255,.035); color: var(--white); }
 .button-secondary:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.065); }
 .hero-note { margin: 26px 0 0; color: #7f848d; font-size: .56rem; }
-.hero-proof { position: relative; padding: 0 0 74px 38px; }
+.hero-proof { position: relative; padding: 0 0 74px 38px; perspective: 1600px; }
 .browser-frame {
   position: relative;
   z-index: 2;
@@ -235,6 +235,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: #0e1014;
   box-shadow: 0 34px 90px rgba(0,0,0,.5);
   transform: rotate(1deg);
+  transition: transform 200ms ease-out;
+  will-change: transform;
 }
 .browser-toolbar {
   display: grid;
@@ -284,6 +286,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-radius: 14px;
   background: #000;
   transform: rotate(-4deg);
+  transition: transform 200ms ease-out;
+  will-change: transform;
 }
 .hero-brand-card img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; }
 
@@ -436,15 +440,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-size: .65rem;
   font-weight: 750;
 }
-.company-logo {
-  width: 154px;
-  height: 82px;
-  margin-bottom: 28px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
-  background: #000;
-  mix-blend-mode: multiply;
+.company-mark {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 26px;
+  font-family: var(--mono);
+  font-weight: 750;
+  font-size: 1.05rem;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.company-mark span {
+  padding: 3px 6px;
+  border: 1px solid var(--dark-line);
+  border-radius: 5px;
+  color: var(--yellow-dark);
+  font-size: .56rem;
+  letter-spacing: .06em;
 }
 .company-profile h2 { max-width: 750px; font-size: clamp(2.5rem, 4vw, 4.3rem); }
 .company-profile > div > p:last-child { max-width: 740px; margin: 24px 0 0; color: var(--dark-muted); font-size: .94rem; }
@@ -688,7 +701,6 @@ dialog::backdrop { background: rgba(0,0,0,.78); backdrop-filter: blur(7px); }
   .project-heading > span { text-align: left; }
   .project-status { margin-left: 0; }
   .feedback-meta { align-items: start; flex-direction: column; }
-  .company-logo { width: 130px; height: 72px; }
   .company-details { grid-template-columns: 1fr; }
   .company-details > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--dark-line); }
   .value-grid { grid-template-columns: 1fr; }
