@@ -21,8 +21,6 @@ const requiredFiles = [
   'robots.txt',
   'sitemap.xml',
   'assets/og-cover.png',
-  'assets/brand/noryx-logo.png',
-  'assets/brand/noryx-mark.png',
   'assets/proof/citywide-client-feedback.png',
   ...projects.map((project) => project.image)
 ];

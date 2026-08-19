@@ -8,22 +8,44 @@ const caseDialog = document.querySelector('[data-case-dialog]');
 const proofDialog = document.querySelector('[data-proof-dialog]');
 const heroProof = document.querySelector('[data-hero-proof]');
 const heroFrame = document.querySelector('.browser-frame');
+const heroGlare = document.querySelector('.browser-glare');
 const heroBrandCard = document.querySelector('.hero-brand-card');
+const heroStatChip = document.querySelector('.hero-stat-chip');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+document.querySelectorAll('[data-project-count]').forEach((el) => {
+  el.textContent = String(projects.length).padStart(2, '0');
+});
+
 if (heroProof && heroFrame && !reduceMotion) {
+  let rafId = null;
+
   heroProof.addEventListener('mousemove', (event) => {
     const rect = heroProof.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    heroFrame.style.transform = `rotate(1deg) rotateX(${(-y * 9).toFixed(2)}deg) rotateY(${(x * 12).toFixed(2)}deg) translateZ(20px)`;
-    if (heroBrandCard) {
-      heroBrandCard.style.transform = `rotate(-4deg) translate(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px) translateZ(-30px)`;
-    }
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      heroFrame.style.transform = `rotate(1deg) rotateX(${(-y * 16).toFixed(2)}deg) rotateY(${(x * 22).toFixed(2)}deg) translateZ(50px)`;
+      if (heroGlare) {
+        heroGlare.style.setProperty('--gx', `${((x + 0.5) * 100).toFixed(1)}%`);
+        heroGlare.style.setProperty('--gy', `${((y + 0.5) * 100).toFixed(1)}%`);
+      }
+      if (heroBrandCard) {
+        heroBrandCard.style.transform = `rotate(-4deg) rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 14).toFixed(2)}deg) translate(${(x * 14).toFixed(1)}px, ${(y * 10).toFixed(1)}px) translateZ(-70px)`;
+      }
+      if (heroStatChip) {
+        heroStatChip.style.transform = `translate(${(x * -12).toFixed(1)}px, ${(y * -10).toFixed(1)}px) translateZ(90px)`;
+      }
+    });
   });
+
   heroProof.addEventListener('mouseleave', () => {
+    if (rafId) cancelAnimationFrame(rafId);
     heroFrame.style.transform = '';
     if (heroBrandCard) heroBrandCard.style.transform = '';
+    if (heroStatChip) heroStatChip.style.transform = '';
   });
 }
 
