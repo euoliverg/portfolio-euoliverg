@@ -11,7 +11,6 @@ const requiredFiles = [
   'styles.css',
   'main.js',
   'projects.js',
-  'favicon.svg',
   'favicon.ico',
   'favicon-16x16.png',
   'favicon-32x32.png',
@@ -22,6 +21,9 @@ const requiredFiles = [
   'robots.txt',
   'sitemap.xml',
   'assets/og-cover.png',
+  'assets/brand/noryx-logo.png',
+  'assets/brand/noryx-mark.png',
+  'assets/proof/citywide-client-feedback.png',
   ...projects.map((project) => project.image)
 ];
 

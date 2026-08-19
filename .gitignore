@@ -1,3 +1,5 @@
 dist/
 *.zip
 lighthouse-report.json
+lighthouse-*.json
+lighthouse-*.png
