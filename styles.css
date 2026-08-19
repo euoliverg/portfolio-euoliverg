@@ -461,63 +461,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-browser p { margin: 0; text-transform: none; letter-spacing: 0; }
 .project-browser strong { justify-self: end; display: flex; align-items: center; gap: 6px; color: var(--green); font-size: inherit; }
 .project-browser strong i { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
-.project-cover {
-  position: relative;
-  display: grid;
-  place-items: center;
+.project-visual > img {
+  width: 100%;
   aspect-ratio: 1.78;
-  overflow: hidden;
-  background: radial-gradient(130% 100% at 50% -8%, #1c2027 0%, #0a0b0d 66%);
+  object-fit: cover;
+  object-position: top;
+  background: #0d0f12;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1), filter 300ms ease;
 }
-.project-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(circle at 50% 46%, black 0%, transparent 75%);
-  mask-image: radial-gradient(circle at 50% 46%, black 0%, transparent 75%);
-}
-.cover-ring {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 1px solid rgba(240,189,61,.16);
-  transition: transform 380ms cubic-bezier(.2,.8,.2,1);
-}
-.cover-ring::before {
-  content: "";
-  position: absolute;
-  inset: 20px;
-  border-radius: 50%;
-  border: 1px solid rgba(240,189,61,.11);
-}
-.work-group-selected .cover-ring, .work-group-selected .cover-ring::before { border-color: rgba(148,164,179,.2); }
-.project:hover .cover-ring { transform: scale(1.08); }
-.cover-initial {
-  position: relative;
-  z-index: 1;
-  font-family: var(--mono);
-  font-weight: 800;
-  font-size: clamp(4rem, 10vw, 5.6rem);
-  line-height: 1;
-  letter-spacing: -.02em;
-  background: linear-gradient(160deg, #fce6ab 0%, #f0bd3d 44%, #a5741f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 10px 22px rgba(0,0,0,.5));
-}
-.work-group-selected .cover-initial {
-  background: linear-gradient(160deg, #eef2f5 0%, #9aacba 44%, #4d5c6a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+.project:hover .project-visual > img { transform: scale(1.035); filter: saturate(1.08); }
 .project-info { padding: 13px 14px 15px; }
 .project-name {
   display: inline-flex;

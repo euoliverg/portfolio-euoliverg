@@ -56,11 +56,10 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;');
 
-const projectCard = (project) => {
+const projectCard = (project, position) => {
   const caseLink = project.caseStudy
     ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study ↗</button>`
     : '';
-  const initial = project.name.trim().charAt(0).toUpperCase();
 
   return `
     <article class="project reveal">
@@ -70,10 +69,7 @@ const projectCard = (project) => {
           <p>${escapeHtml(new URL(project.url).hostname.replace('www.', ''))}</p>
           <strong><i aria-hidden="true"></i>Live</strong>
         </div>
-        <div class="project-cover" aria-hidden="true">
-          <span class="cover-ring"></span>
-          <span class="cover-initial">${escapeHtml(initial)}</span>
-        </div>
+        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1000" height="562" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
       </a>
 
       <div class="project-info">
