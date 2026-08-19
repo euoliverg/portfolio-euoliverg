@@ -57,8 +57,8 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll("'", '&#039;');
 
 const projectCard = (project, position) => {
-  const caseButton = project.caseStudy
-    ? `<button class="project-action project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study <span aria-hidden="true">↗</span></button>`
+  const caseLink = project.caseStudy
+    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study ↗</button>`
     : '';
 
   return `
@@ -70,17 +70,12 @@ const projectCard = (project, position) => {
           <strong><i aria-hidden="true"></i>Live</strong>
         </div>
         <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1440" height="900" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
-        <span class="project-open" aria-hidden="true">Visit website ↗</span>
       </a>
 
       <div class="project-info">
-        <p class="project-meta"><span>${escapeHtml(project.index)}</span>${escapeHtml(project.industry)}</p>
-        <div class="project-heading"><h4>${escapeHtml(project.name)}</h4><p>${escapeHtml(project.location)}</p></div>
-        <p class="project-description">${escapeHtml(project.description)}</p>
-        <ul class="project-stack" aria-label="Technologies used for ${escapeHtml(project.name)}">${project.stack.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <div class="project-actions">
-          <a class="project-action" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <span aria-hidden="true">↗</span></a>${caseButton}
-        </div>
+        <a class="project-name" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.name)} <span aria-hidden="true">↗</span></a>
+        <p class="project-sub">${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
+        ${caseLink}
       </div>
     </article>`;
 };
@@ -92,11 +87,10 @@ const groupBlock = (group) => {
   return `
     <section class="work-group" aria-labelledby="group-${escapeHtml(group.key)}">
       <div class="work-group-head reveal">
-        <div><p>${group.key === 'client' ? 'Verified production work' : 'Transparent classification'}</p><h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3></div>
-        <p>${escapeHtml(group.description)}</p>
-        <span>${String(groupProjects.length).padStart(2, '0')} ${groupProjects.length === 1 ? 'project' : 'projects'}</span>
+        <h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3>
+        <span>${String(groupProjects.length).padStart(2, '0')}</span>
       </div>
-      <div class="work-group-grid work-group-${escapeHtml(group.key)}">${groupProjects.map((project) => projectCard(project, projects.indexOf(project))).join('')}</div>
+      <div class="work-group-grid">${groupProjects.map((project) => projectCard(project, projects.indexOf(project))).join('')}</div>
     </section>`;
 };
 
