@@ -69,7 +69,7 @@ const projectCard = (project, position) => {
           <p>${escapeHtml(new URL(project.url).hostname.replace('www.', ''))}</p>
           <strong><i aria-hidden="true"></i>Live</strong>
         </div>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1000" height="562" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1100" height="618" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
       </a>
 
       <div class="project-info">
