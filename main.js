@@ -56,7 +56,7 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;');
 
-const projectCard = (project, position) => {
+const projectCard = (project) => {
   const caseLink = project.caseStudy
     ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study ↗</button>`
     : '';
@@ -69,7 +69,7 @@ const projectCard = (project, position) => {
           <p>${escapeHtml(new URL(project.url).hostname.replace('www.', ''))}</p>
           <strong><i aria-hidden="true"></i>Live</strong>
         </div>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1440" height="900" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+        <div class="project-cover" aria-hidden="true"><span>${escapeHtml(project.monogram)}</span></div>
       </a>
 
       <div class="project-info">
@@ -90,7 +90,7 @@ const groupBlock = (group) => {
         <h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3>
         <span>${String(groupProjects.length).padStart(2, '0')}</span>
       </div>
-      <div class="work-group-grid">${groupProjects.map((project) => projectCard(project, projects.indexOf(project))).join('')}</div>
+      <div class="work-group-grid work-group-${escapeHtml(group.key)}">${groupProjects.map(projectCard).join('')}</div>
     </section>`;
 };
 
@@ -183,7 +183,7 @@ projectForm?.addEventListener('submit', (event) => {
     status.hidden = false;
     status.textContent = 'Your email application has opened with the project details. Send the email to complete your request.';
   }
-  window.location.href = `mailto:oliveirabtq@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  window.location.href = `mailto:Noryxdigitalllc@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
 });
 
 document.querySelectorAll('[data-current-year]').forEach((element) => { element.textContent = String(new Date().getFullYear()); });
