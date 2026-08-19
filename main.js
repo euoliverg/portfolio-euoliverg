@@ -57,15 +57,12 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll("'", '&#039;');
 
 const projectCard = (project, position) => {
-  const classes = ['project', 'reveal'];
-  if (project.featured) classes.push('project-featured');
-
   const caseButton = project.caseStudy
-    ? `<button class="project-action project-case" type="button" data-case-open="${escapeHtml(project.name)}">View case study <span aria-hidden="true">↗</span></button>`
+    ? `<button class="project-action project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study <span aria-hidden="true">↗</span></button>`
     : '';
 
   return `
-    <article class="${classes.join(' ')}">
+    <article class="project reveal">
       <a class="project-visual" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${escapeHtml(project.name)} live website">
         <div class="project-browser">
           <span aria-hidden="true"><i></i><i></i><i></i></span>
@@ -77,17 +74,12 @@ const projectCard = (project, position) => {
       </a>
 
       <div class="project-info">
-        <div class="project-meta">
-          <span>${escapeHtml(project.index)}</span><span>${escapeHtml(project.industry)}</span><span class="project-status"><i aria-hidden="true"></i>Live project</span>
-        </div>
-        <div class="project-heading">
-          <div><h4>${escapeHtml(project.name)}</h4><p>${escapeHtml(project.location)}</p></div>
-          <span>${escapeHtml(project.projectType)}</span>
-        </div>
+        <p class="project-meta"><span>${escapeHtml(project.index)}</span>${escapeHtml(project.industry)}</p>
+        <div class="project-heading"><h4>${escapeHtml(project.name)}</h4><p>${escapeHtml(project.location)}</p></div>
         <p class="project-description">${escapeHtml(project.description)}</p>
         <ul class="project-stack" aria-label="Technologies used for ${escapeHtml(project.name)}">${project.stack.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
         <div class="project-actions">
-          <a class="project-action" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit live website <span aria-hidden="true">↗</span></a>${caseButton}
+          <a class="project-action" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <span aria-hidden="true">↗</span></a>${caseButton}
         </div>
       </div>
     </article>`;
