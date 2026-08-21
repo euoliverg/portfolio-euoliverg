@@ -111,18 +111,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
   transition: color 160ms ease;
 }
 .primary-nav a:hover, .header-cta:hover { color: var(--white); }
-.header-actions { display: flex; align-items: center; gap: 18px; justify-self: end; }
+.header-actions { display: flex; align-items: center; gap: 10px; justify-self: end; }
 .header-phone {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .035);
   color: var(--white);
   font-size: .74rem;
   font-weight: 700;
   white-space: nowrap;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
-.header-phone i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(99,196,150,.14); }
-.header-phone:hover { color: var(--yellow); }
+.header-phone .icon-phone { width: 13px; height: 13px; color: var(--green); }
+.header-phone:hover { border-color: rgba(99,196,150,.5); background: rgba(99,196,150,.08); color: var(--white); }
 .header-cta {
   display: inline-flex;
   align-items: center;
@@ -175,19 +181,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero-classic .eyebrow, .hero-classic .company-badge { justify-content: center; }
 .hero-classic h1 { max-width: 100%; }
 .hero-classic .hero-summary { max-width: 620px; margin-inline: auto; }
-.hero-actions-classic { justify-content: center; align-items: center; gap: 26px; margin-top: 36px; }
+.hero-actions-classic { justify-content: center; align-items: center; gap: 14px; margin-top: 36px; }
 .button-lg { min-height: 54px; padding: 0 32px; font-size: .92rem; letter-spacing: .01em; }
-.hero-phone-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--white);
-  font-family: var(--mono);
-  font-size: .85rem;
-  font-weight: 700;
-}
-.hero-phone-link::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(99,196,150,.14); }
-.hero-phone-link:hover { color: var(--yellow); }
+.button-call { gap: 10px; border-color: var(--line-strong); background: rgba(99,196,150,.08); color: var(--white); }
+.button-call:hover { border-color: rgba(99,196,150,.55); background: rgba(99,196,150,.14); }
+.icon-phone { width: 16px; height: 16px; flex-shrink: 0; color: var(--green); }
 .hero-stat-line { margin: 32px 0 0; color: #9aa0a8; font-family: var(--mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; }
 .hero-stat-line strong { color: var(--yellow); font-size: .82rem; }
 .eyebrow, .company-badge, .section-index, .trust-grid,
