@@ -1,4 +1,5 @@
 import { groups, projects } from './projects.js';
+import { escapeHtml, renderWork } from './render.js';
 
 const projectGrid = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
@@ -8,56 +9,15 @@ const caseDialog = document.querySelector('[data-case-dialog]');
 const proofDialog = document.querySelector('[data-proof-dialog]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// The production build pre-renders the gallery into the HTML, so only render
+// here when the container arrived empty (dev server, or an unbuilt index.html).
+if (projectGrid && !projectGrid.children.length) {
+  projectGrid.innerHTML = renderWork(groups, projects);
+}
+
 document.querySelectorAll('[data-project-count]').forEach((el) => {
   el.textContent = String(projects.length).padStart(2, '0');
 });
-
-const escapeHtml = (value = '') => String(value)
-  .replaceAll('&', '&amp;')
-  .replaceAll('<', '&lt;')
-  .replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;')
-  .replaceAll("'", '&#039;');
-
-const projectCard = (project, position) => {
-  const caseLink = project.caseStudy
-    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">Case study ↗</button>`
-    : '';
-
-  return `
-    <article class="project reveal">
-      <a class="project-visual" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${escapeHtml(project.name)} live website">
-        <div class="project-browser">
-          <span aria-hidden="true"><i></i><i></i><i></i></span>
-          <p>${escapeHtml(new URL(project.url).hostname.replace('www.', ''))}</p>
-          <strong><i aria-hidden="true"></i>Live</strong>
-        </div>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="1100" height="618" ${position === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
-      </a>
-
-      <div class="project-info">
-        <a class="project-name" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.name)} <span aria-hidden="true">↗</span></a>
-        <p class="project-sub">${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
-        ${caseLink}
-      </div>
-    </article>`;
-};
-
-const groupBlock = (group) => {
-  const groupProjects = projects.filter((project) => project.group === group.key);
-  if (!groupProjects.length) return '';
-
-  return `
-    <section class="work-group" aria-labelledby="group-${escapeHtml(group.key)}">
-      <div class="work-group-head reveal">
-        <h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3>
-        <span>${String(groupProjects.length).padStart(2, '0')}</span>
-      </div>
-      <div class="work-group-grid work-group-${escapeHtml(group.key)}">${groupProjects.map(projectCard).join('')}</div>
-    </section>`;
-};
-
-if (projectGrid) projectGrid.innerHTML = groups.map(groupBlock).join('');
 
 const setNavigation = (open) => {
   document.body.classList.toggle('nav-open', open);
@@ -131,22 +91,59 @@ proofDialog?.addEventListener('click', (event) => { if (event.target === proofDi
 proofDialog?.addEventListener('close', handleDialogClosed);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setNavigation(false); });
 
+// Contact form — posts to Web3Forms.
+// Without JavaScript the form falls back to a native POST to the same endpoint,
+// which redirects to /thanks. mailto: is never used: it fails silently on mobile
+// and for anyone without a configured desktop mail client.
 const projectForm = document.querySelector('[data-project-form]');
-projectForm?.addEventListener('submit', (event) => {
+const formStatus = document.querySelector('[data-form-status]');
+const submitButton = projectForm?.querySelector('.form-submit');
+const submitLabel = submitButton?.innerHTML ?? '';
+
+const showStatus = (message, state) => {
+  if (!formStatus) return;
+  formStatus.hidden = false;
+  formStatus.textContent = message;
+  formStatus.classList.toggle('is-error', state === 'error');
+};
+
+projectForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const data = new FormData(projectForm);
-  const lines = [
-    `Name: ${data.get('name')}`, `Company: ${data.get('company')}`, `Email: ${data.get('email')}`,
-    `Phone: ${data.get('phone') || 'Not provided'}`, `Current website: ${data.get('website') || 'Not provided'}`,
-    `Service: ${data.get('service')}`, '', 'Project details:', String(data.get('details') || '')
-  ];
-  const subject = `[Noryx Project Request] ${data.get('company')} — ${data.get('service')}`;
-  const status = document.querySelector('[data-form-status]');
-  if (status) {
-    status.hidden = false;
-    status.textContent = 'Your email application has opened with the project details. Send the email to complete your request.';
+  if (submitButton?.disabled) return;
+
+  const payload = Object.fromEntries(new FormData(projectForm).entries());
+  delete payload.redirect;
+  payload.subject = `[Project request] ${payload.company || 'Unknown company'} — ${payload.service || 'General'}`;
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending…';
   }
-  window.location.href = `mailto:Noryxdigitalllc@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  showStatus('Sending your request…', 'pending');
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || result.success === false) {
+      throw new Error(result.message || `Request failed (${response.status})`);
+    }
+
+    projectForm.reset();
+    showStatus('Thanks — your request was sent. I\'ll reply by email shortly.', 'success');
+  } catch (error) {
+    console.error('Contact form submission failed:', error);
+    showStatus('Something went wrong sending the form. Please call +1 (470) 297-2385 or email directly instead.', 'error');
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.innerHTML = submitLabel;
+    }
+  }
 });
 
 document.querySelectorAll('[data-current-year]').forEach((element) => { element.textContent = String(new Date().getFullYear()); });
