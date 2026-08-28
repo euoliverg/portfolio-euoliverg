@@ -9,13 +9,11 @@ const output = join(root, 'dist');
 
 const SITE_ORIGIN = 'https://euoliverg.online';
 const WRONG_ORIGIN = /https?:\/\/oliver\.dev/;
-const FORM_KEY_PLACEHOLDER = 'REPLACE_WITH_WEB3FORMS_ACCESS_KEY';
 
 const fail = (message) => { throw new Error(message); };
 
 const copiedFiles = [
   'index.html',
-  'thanks.html',
   'styles.css',
   'main.js',
   'render.js',
@@ -53,7 +51,7 @@ for (const marker of requiredMetadata) {
 // --- Guard: the canonical domain must be euoliverg.online everywhere. ---------
 // A canonical pointing at another domain tells Google this site is a duplicate
 // and breaks every link preview on WhatsApp, Messenger and LinkedIn.
-for (const file of ['index.html', 'thanks.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
+for (const file of ['index.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
   const contents = await readFile(join(root, file), 'utf8');
   if (WRONG_ORIGIN.test(contents)) {
     fail(`${file} still points at the old oliver.dev domain. Every URL must use ${SITE_ORIGIN}.`);
@@ -82,27 +80,6 @@ if (!copiedFiles.includes(ogImagePath)) {
 const ogImage = await readFile(join(root, ogImagePath));
 if (ogImage.readUInt32BE(16) !== 1200 || ogImage.readUInt32BE(20) !== 630) {
   fail(`${ogImagePath} must be 1200x630 for link previews.`);
-}
-
-// --- Guard: the contact form must reach a real inbox. ------------------------
-// mailto: fails silently on mobile and for webmail users, so it is never a
-// valid fallback. The build refuses to ship an unconfigured form.
-if (html.includes(FORM_KEY_PLACEHOLDER)) {
-  fail(
-    'The contact form still has the Web3Forms placeholder access key.\n' +
-    '  1. Get a free key at https://web3forms.com (enter your email, it arrives instantly).\n' +
-    `  2. Replace ${FORM_KEY_PLACEHOLDER} in index.html with that key.\n` +
-    '  3. Run the build again, then submit a real test entry and confirm it arrives.'
-  );
-}
-
-// Matches a mailto: string literal, not the word inside a comment.
-const mainJs = await readFile(join(root, 'main.js'), 'utf8');
-if (/["'`]mailto:/.test(mainJs)) {
-  fail('main.js builds a mailto: URL. The contact form must post to the Web3Forms endpoint instead.');
-}
-if (!html.includes('action="https://api.web3forms.com/submit"')) {
-  fail('The contact form is missing its no-JS fallback action (Web3Forms endpoint).');
 }
 
 // --- Pre-render the project gallery into the HTML. ---------------------------

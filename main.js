@@ -128,56 +128,6 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setNavigation(false);
 });
 
-const projectForm = document.querySelector('[data-project-form]');
-const formStatus = document.querySelector('[data-form-status]');
-const submitButton = projectForm?.querySelector('.form-submit');
-const submitLabel = submitButton?.innerHTML ?? '';
-
-const showStatus = (message, state) => {
-  if (!formStatus) return;
-  formStatus.hidden = false;
-  formStatus.textContent = message;
-  formStatus.classList.toggle('is-error', state === 'error');
-};
-
-projectForm?.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  if (submitButton?.disabled) return;
-
-  const payload = Object.fromEntries(new FormData(projectForm).entries());
-  delete payload.redirect;
-  payload.subject = `[Project request] ${payload.company || 'Unknown company'} — ${payload.service || 'General'}`;
-
-  if (submitButton) {
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending…';
-  }
-  showStatus('Sending your request…', 'pending');
-
-  try {
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || result.success === false) {
-      throw new Error(result.message || `Request failed (${response.status})`);
-    }
-
-    projectForm.reset();
-    showStatus('Thanks — your request was sent. I’ll reply by email shortly.', 'success');
-  } catch (error) {
-    console.error('Contact form submission failed:', error);
-    showStatus('The form could not be sent. Please call +1 (470) 297-2385 or use the email link.', 'error');
-  } finally {
-    if (submitButton) {
-      submitButton.disabled = false;
-      submitButton.innerHTML = submitLabel;
-    }
-  }
-});
-
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });

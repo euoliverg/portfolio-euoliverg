@@ -60,17 +60,9 @@ export const projectCard = (project, options = {}) => {
 
       <div class="project-info">
         <div class="project-index"><span>${escapeHtml(project.index)}</span><i></i><em>${groupKey === 'client' ? 'Client work' : 'Selected'}</em></div>
-        <div class="project-title-row">
-          <div>
-            <h4><a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.name)}</a></h4>
-            <p>${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
-          </div>
-          <span class="project-live"><i aria-hidden="true"></i>Production</span>
-        </div>
+        <h4><a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.name)}</a></h4>
+        <p class="project-meta">${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
         <p class="project-description">${escapeHtml(project.description)}</p>
-        <ul class="project-stack" aria-label="Technologies used for ${escapeHtml(project.name)}">
-          ${project.stack.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
-        </ul>
         <div class="project-actions">
           <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit live website <span aria-hidden="true">↗</span></a>
           ${caseButton}

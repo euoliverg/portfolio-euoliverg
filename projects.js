@@ -20,7 +20,6 @@ export const projects = [
     location: 'Washington, USA',
     industry: 'Vehicle Rental',
     description: 'A production website that organizes rental options, weekly pricing and reservation paths into a direct customer experience.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
     image: 'assets/projects/citywide-rental.webp',
     imageAlt: 'City Wide Rental live website showing weekly rental information and reservation actions',
     url: 'https://citywiderentalwa.com/',
@@ -38,7 +37,6 @@ export const projects = [
     location: 'Seattle, Washington, USA',
     industry: 'Cleaning Services',
     description: 'A local-service website built around service discovery, coverage information and clear quote pathways.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
     image: 'assets/projects/alfa-cleaning.webp',
     imageAlt: 'Alfa Cleaning live website with Seattle cleaning services and quote actions',
     url: 'https://alfacleaningwa.com/',
@@ -56,7 +54,6 @@ export const projects = [
     location: 'Seattle, Washington, USA',
     industry: 'Construction & Home Improvement',
     description: 'A professional contractor website presenting service categories, operating areas and direct estimate requests.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
     image: 'assets/projects/gsn-construction.webp',
     imageAlt: 'GSN Construction LLC live website with home improvement services and estimate request',
     url: 'https://gsnconstructionllc.com/',
@@ -69,14 +66,13 @@ export const projects = [
   {
     index: '01',
     group: 'selected',
-    name: 'Família Arretado',
-    monogram: 'FA',
+    name: 'Botequim Arretado',
+    monogram: 'BA',
     location: 'Niterói, Rio de Janeiro, Brazil',
     industry: 'Food & Hospitality',
     description: 'A restaurant experience connecting brand, menu and contact journeys in a cohesive responsive interface.',
-    stack: ['WordPress', 'Elementor', 'Responsive UI'],
-    image: 'assets/projects/familia-arretado.webp',
-    imageAlt: 'Família Arretado restaurant website home page',
+    image: 'assets/projects/botequim-arretado.webp',
+    imageAlt: 'Botequim Arretado restaurant website home page',
     url: 'https://familiaarretado.com.br/'
   },
   {
@@ -87,7 +83,6 @@ export const projects = [
     location: 'Seattle, Washington, USA',
     industry: 'Enterprise Hospitality',
     description: 'A premium hospitality interface balancing property discovery, editorial presentation and booking actions.',
-    stack: ['Adobe AEM', 'Vue', 'Enterprise Web'],
     image: 'assets/projects/fairmont-olympic.webp',
     imageAlt: 'Fairmont Olympic Hotel Seattle website home page',
     url: 'https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&goto=fiche_hotel&merchantid=seo-maps-US-A580&sourceid=aw-cen'
@@ -100,7 +95,6 @@ export const projects = [
     location: 'Niterói, Rio de Janeiro, Brazil',
     industry: 'Food & Hospitality',
     description: 'A content-led website connecting the restaurant atmosphere, menu, delivery and location.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
     image: 'assets/projects/restaurante-veranda.webp',
     imageAlt: 'Restaurante Veranda website home page',
     url: 'https://restauranteveranda.com.br/'
