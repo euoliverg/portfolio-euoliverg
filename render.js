@@ -45,7 +45,6 @@ export const projectCard = (project, options = {}) => {
     <article class="project ${isFeatured ? 'project-featured' : ''} reveal" data-project-card>
       <a class="project-scene" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">
         <span class="visually-hidden">Open ${escapeHtml(project.name)} website</span>
-        <div class="project-plane project-plane-back" aria-hidden="true"></div>
         <div class="project-device">
           <div class="project-browser">
             <span aria-hidden="true"><i></i><i></i><i></i></span>

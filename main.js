@@ -7,7 +7,6 @@ const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 const caseDialog = document.querySelector('[data-case-dialog]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 if (projectGrid && !projectGrid.children.length) {
   projectGrid.innerHTML = renderWork(groups, projects);
@@ -38,32 +37,6 @@ const updateChrome = () => {
 };
 updateChrome();
 window.addEventListener('scroll', updateChrome, { passive: true });
-
-const bindTilt = (element, strength = 5) => {
-  let frame = 0;
-  const reset = () => {
-    cancelAnimationFrame(frame);
-    element.style.setProperty('--rx', '0deg');
-    element.style.setProperty('--ry', '0deg');
-  };
-
-  element.addEventListener('pointermove', (event) => {
-    const rect = element.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(() => {
-      element.style.setProperty('--rx', `${(-y * strength).toFixed(2)}deg`);
-      element.style.setProperty('--ry', `${(x * strength).toFixed(2)}deg`);
-    });
-  }, { passive: true });
-  element.addEventListener('pointerleave', reset, { passive: true });
-  element.addEventListener('blur', reset, true);
-};
-
-if (!reduceMotion && finePointer) {
-  document.querySelectorAll('[data-tilt]').forEach((element) => bindTilt(element, 4));
-}
 
 let dialogTrigger = null;
 
