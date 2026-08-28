@@ -30,7 +30,6 @@ const copiedFiles = [
   'robots.txt',
   'sitemap.xml',
   'assets/og-cover.png',
-  'assets/proof/citywide-client-feedback.png',
   ...projects.map((project) => project.image)
 ];
 
@@ -107,9 +106,9 @@ if (!html.includes('action="https://api.web3forms.com/submit"')) {
 }
 
 // --- Pre-render the project gallery into the HTML. ---------------------------
-// Without this the gallery, the case studies and the project counter only exist
-// after JavaScript runs, which hides the strongest proof of real work from
-// search engines and from anyone opening a link without JS.
+// Without this the gallery and case studies only exist after JavaScript runs,
+// which hides the strongest proof of real work from search engines and from
+// anyone opening a link without JS.
 const projectsBlock = /<!-- PROJECTS:START[\s\S]*?PROJECTS:END -->/;
 if (!projectsBlock.test(html)) fail('index.html is missing the PROJECTS:START / PROJECTS:END markers.');
 
@@ -121,11 +120,6 @@ for (const project of projects) {
 }
 
 html = html.replace(projectsBlock, `<div class="work-groups" data-projects>${workMarkup}\n        </div>`);
-html = html.replace(
-  /(data-project-count[^>]*>)[^<]*/g,
-  `$1${String(projects.length).padStart(2, '0')}`
-);
-
 if (html.includes('Enable JavaScript to view')) {
   fail('The no-JS gallery message survived pre-rendering — the markers did not match.');
 }

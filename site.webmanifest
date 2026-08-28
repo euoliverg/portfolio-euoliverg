@@ -1,14 +1,14 @@
 {
   "name": "Oliver.dev",
   "short_name": "Oliver",
-  "description": "Websites, landing pages and Google / Meta Ads management for businesses.",
+  "description": "Production-ready websites, landing pages and digital growth systems for businesses.",
   "start_url": "/",
   "scope": "/",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
   ],
-  "theme_color": "#0b0c0f",
-  "background_color": "#0b0c0f",
+  "theme_color": "#090a0d",
+  "background_color": "#090a0d",
   "display": "standalone"
 }

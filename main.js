@@ -6,18 +6,12 @@ const header = document.querySelector('[data-header]');
 const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 const caseDialog = document.querySelector('[data-case-dialog]');
-const proofDialog = document.querySelector('[data-proof-dialog]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// The production build pre-renders the gallery into the HTML, so only render
-// here when the container arrived empty (dev server, or an unbuilt index.html).
 if (projectGrid && !projectGrid.children.length) {
   projectGrid.innerHTML = renderWork(groups, projects);
 }
-
-document.querySelectorAll('[data-project-count]').forEach((el) => {
-  el.textContent = String(projects.length).padStart(2, '0');
-});
 
 const setNavigation = (open) => {
   document.body.classList.toggle('nav-open', open);
@@ -26,13 +20,50 @@ const setNavigation = (open) => {
   if (label) label.textContent = open ? 'Close navigation' : 'Open navigation';
 };
 
-navToggle?.addEventListener('click', () => setNavigation(navToggle.getAttribute('aria-expanded') !== 'true'));
+navToggle?.addEventListener('click', () => {
+  setNavigation(navToggle.getAttribute('aria-expanded') !== 'true');
+});
 nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setNavigation(false)));
-window.addEventListener('resize', () => { if (window.innerWidth > 820) setNavigation(false); });
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 820) setNavigation(false);
+});
 
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
+const updateChrome = () => {
+  header?.classList.toggle('is-scrolled', window.scrollY > 16);
+  const progress = document.querySelector('[data-scroll-progress]');
+  if (!progress) return;
+  const available = document.documentElement.scrollHeight - window.innerHeight;
+  const percentage = available > 0 ? Math.min(1, window.scrollY / available) : 0;
+  progress.style.transform = `scaleX(${percentage})`;
+};
+updateChrome();
+window.addEventListener('scroll', updateChrome, { passive: true });
+
+const bindTilt = (element, strength = 5) => {
+  let frame = 0;
+  const reset = () => {
+    cancelAnimationFrame(frame);
+    element.style.setProperty('--rx', '0deg');
+    element.style.setProperty('--ry', '0deg');
+  };
+
+  element.addEventListener('pointermove', (event) => {
+    const rect = element.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      element.style.setProperty('--rx', `${(-y * strength).toFixed(2)}deg`);
+      element.style.setProperty('--ry', `${(x * strength).toFixed(2)}deg`);
+    });
+  }, { passive: true });
+  element.addEventListener('pointerleave', reset, { passive: true });
+  element.addEventListener('blur', reset, true);
+};
+
+if (!reduceMotion && finePointer) {
+  document.querySelectorAll('[data-tilt]').forEach((element) => bindTilt(element, 4));
+}
 
 let dialogTrigger = null;
 
@@ -42,6 +73,7 @@ const openCaseStudy = (project) => {
     const element = caseDialog.querySelector(selector);
     if (element) element.textContent = value;
   };
+
   setText('[data-case-title]', project.name);
   setText('[data-case-client]', project.name);
   setText('[data-case-industry]', project.industry);
@@ -50,9 +82,18 @@ const openCaseStudy = (project) => {
   setText('[data-case-solution]', project.caseStudy.solution);
 
   const image = caseDialog.querySelector('[data-case-image]');
-  if (image) { image.src = project.image; image.alt = project.imageAlt; }
+  if (image) {
+    image.src = project.image;
+    image.alt = project.imageAlt;
+  }
+
   const services = caseDialog.querySelector('[data-case-services]');
-  if (services) services.innerHTML = project.caseStudy.services.map((service) => `<li>${escapeHtml(service)}</li>`).join('');
+  if (services) {
+    services.innerHTML = project.caseStudy.services
+      .map((service) => `<li>${escapeHtml(service)}</li>`)
+      .join('');
+  }
+
   const link = caseDialog.querySelector('[data-case-link]');
   if (link) link.href = project.url;
 
@@ -62,8 +103,7 @@ const openCaseStudy = (project) => {
 };
 
 const closeDialog = (dialog) => {
-  if (!dialog?.open) return;
-  dialog.close();
+  if (dialog?.open) dialog.close();
 };
 
 const handleDialogClosed = () => {
@@ -72,29 +112,22 @@ const handleDialogClosed = () => {
   dialogTrigger = null;
 };
 
-document.querySelectorAll('[data-case-open]').forEach((button) => button.addEventListener('click', () => {
-  const project = projects.find((item) => item.name === button.dataset.caseOpen);
-  if (project) openCaseStudy(project);
-}));
+document.querySelectorAll('[data-case-open]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const project = projects.find((item) => item.name === button.dataset.caseOpen);
+    if (project) openCaseStudy(project);
+  });
+});
 caseDialog?.querySelector('[data-case-close]')?.addEventListener('click', () => closeDialog(caseDialog));
-caseDialog?.addEventListener('click', (event) => { if (event.target === caseDialog) closeDialog(caseDialog); });
+caseDialog?.addEventListener('click', (event) => {
+  if (event.target === caseDialog) closeDialog(caseDialog);
+});
 caseDialog?.addEventListener('close', handleDialogClosed);
 
-document.querySelector('[data-proof-open]')?.addEventListener('click', (event) => {
-  if (!proofDialog) return;
-  dialogTrigger = event.currentTarget;
-  document.body.classList.add('dialog-open');
-  proofDialog.showModal();
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') setNavigation(false);
 });
-proofDialog?.querySelector('[data-proof-close]')?.addEventListener('click', () => closeDialog(proofDialog));
-proofDialog?.addEventListener('click', (event) => { if (event.target === proofDialog) closeDialog(proofDialog); });
-proofDialog?.addEventListener('close', handleDialogClosed);
-document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setNavigation(false); });
 
-// Contact form — posts to Web3Forms.
-// Without JavaScript the form falls back to a native POST to the same endpoint,
-// which redirects to /thanks. mailto: is never used: it fails silently on mobile
-// and for anyone without a configured desktop mail client.
 const projectForm = document.querySelector('[data-project-form]');
 const formStatus = document.querySelector('[data-form-status]');
 const submitButton = projectForm?.querySelector('.form-submit');
@@ -128,16 +161,15 @@ projectForm?.addEventListener('submit', async (event) => {
       body: JSON.stringify(payload)
     });
     const result = await response.json().catch(() => ({}));
-
     if (!response.ok || result.success === false) {
       throw new Error(result.message || `Request failed (${response.status})`);
     }
 
     projectForm.reset();
-    showStatus('Thanks — your request was sent. I\'ll reply by email shortly.', 'success');
+    showStatus('Thanks — your request was sent. I’ll reply by email shortly.', 'success');
   } catch (error) {
     console.error('Contact form submission failed:', error);
-    showStatus('Something went wrong sending the form. Please call +1 (470) 297-2385 or email directly instead.', 'error');
+    showStatus('The form could not be sent. Please call +1 (470) 297-2385 or use the email link.', 'error');
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
@@ -146,7 +178,9 @@ projectForm?.addEventListener('submit', async (event) => {
   }
 });
 
-document.querySelectorAll('[data-current-year]').forEach((element) => { element.textContent = String(new Date().getFullYear()); });
+document.querySelectorAll('[data-current-year]').forEach((element) => {
+  element.textContent = String(new Date().getFullYear());
+});
 
 const revealItems = document.querySelectorAll('.reveal');
 if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -158,6 +192,6 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -7% 0px', threshold: 0.06 });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
   revealItems.forEach((item) => revealObserver.observe(item));
 }
