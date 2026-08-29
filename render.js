@@ -87,11 +87,7 @@ export const renderWork = (groups, projects) => {
     return `
     <section class="work-group work-group-${escapeHtml(group.key)}" aria-labelledby="group-${escapeHtml(group.key)}">
       <div class="work-group-head reveal">
-        <div>
-          <p>${group.key === 'client' ? 'Verified engagements' : 'Additional published work'}</p>
-          <h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3>
-        </div>
-        <p>${escapeHtml(group.description)}</p>
+        <h3 id="group-${escapeHtml(group.key)}">${escapeHtml(group.label)}</h3>
         <span>${String(groupProjects.length).padStart(2, '0')}</span>
       </div>
       <div class="work-group-grid">${cards}</div>
