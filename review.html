@@ -32,6 +32,11 @@
       <h1 id="review-title">How was the project?</h1>
       <p class="review-intro">A short, honest review is enough. It will be checked before appearing on the portfolio.</p>
 
+      <noscript>
+        <p class="review-status is-error">JavaScript is required to securely submit a review for approval.</p>
+        <style>.review-form { display: none; }</style>
+      </noscript>
+
       <form class="review-form" id="review-form" data-review-form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="a785b438-0229-448e-ba01-d13befc0231e">
         <input type="hidden" name="from_name" value="Oliver.dev client reviews">

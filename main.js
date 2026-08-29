@@ -4,6 +4,8 @@ import { escapeHtml, renderWork } from './render.js';
 const projectGrid = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
 const caseDialog = document.querySelector('[data-case-dialog]');
+const reviewsSection = document.querySelector('[data-reviews-section]');
+const reviewsGrid = document.querySelector('[data-reviews-grid]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // The production build pre-renders the gallery into the HTML, so only render
@@ -74,6 +76,28 @@ caseDialog?.addEventListener('click', (event) => {
   if (event.target === caseDialog) closeDialog(caseDialog);
 });
 caseDialog?.addEventListener('close', handleDialogClosed);
+
+const renderReviews = (reviews) => {
+  if (!reviewsGrid || !reviewsSection || !reviews.length) return;
+  reviewsGrid.innerHTML = reviews.map((review) => `
+    <article class="client-review">
+      <div class="client-review-head">
+        <p class="client-review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}</p>
+        <span>Verified client</span>
+      </div>
+      <blockquote>“${escapeHtml(review.review)}”</blockquote>
+      <footer><strong>${escapeHtml(review.name)}</strong><span>${escapeHtml(review.company)}</span></footer>
+    </article>
+  `).join('');
+  reviewsSection.hidden = false;
+};
+
+if (reviewsSection && reviewsGrid) {
+  fetch('/api/reviews', { headers: { Accept: 'application/json' } })
+    .then((response) => response.ok ? response.json() : Promise.reject(new Error('Reviews unavailable')))
+    .then((result) => renderReviews(Array.isArray(result.reviews) ? result.reviews : []))
+    .catch(() => {});
+}
 
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());

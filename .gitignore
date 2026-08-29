@@ -1,5 +1,9 @@
 dist/
+node_modules/
 *.zip
 lighthouse-report.json
 lighthouse-*.json
 lighthouse-*.png
+
+.vercel
+.env*

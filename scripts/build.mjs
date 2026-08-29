@@ -15,9 +15,11 @@ const fail = (message) => { throw new Error(message); };
 const copiedFiles = [
   'index.html',
   'review.html',
+  'moderate.html',
   'styles.css',
   'main.js',
   'review.js',
+  'moderate.js',
   'render.js',
   'projects.js',
   'favicon.ico',
@@ -45,6 +47,7 @@ if (!manifest.name || !manifest.icons?.length) {
 
 let html = await readFile(join(root, 'index.html'), 'utf8');
 const reviewHtml = await readFile(join(root, 'review.html'), 'utf8');
+const moderateHtml = await readFile(join(root, 'moderate.html'), 'utf8');
 
 const requiredMetadata = ['rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json'];
 for (const marker of requiredMetadata) {
@@ -54,7 +57,7 @@ for (const marker of requiredMetadata) {
 // --- Guard: the canonical domain must be euoliverg.online everywhere. ---------
 // A canonical pointing at another domain tells Google this site is a duplicate
 // and breaks every link preview on WhatsApp, Messenger and LinkedIn.
-for (const file of ['index.html', 'review.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
+for (const file of ['index.html', 'review.html', 'moderate.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
   const contents = await readFile(join(root, file), 'utf8');
   if (WRONG_ORIGIN.test(contents)) {
     fail(`${file} still points at the old oliver.dev domain. Every URL must use ${SITE_ORIGIN}.`);
@@ -100,6 +103,12 @@ if (!/name="access_key" value="[0-9a-f-]{36}"/i.test(reviewHtml)) {
 }
 if (!reviewHtml.includes('Pending moderation')) {
   fail('Client reviews must be marked for moderation before publication.');
+}
+if (!moderateHtml.includes('data-moderate="approve"') || !moderateHtml.includes('data-moderate="reject"')) {
+  fail('The private moderation page must include approve and reject actions.');
+}
+if (!html.includes('data-reviews-section') || !html.includes('data-reviews-grid')) {
+  fail('The portfolio is missing the approved reviews region.');
 }
 
 // --- Pre-render the project gallery into the HTML. ---------------------------

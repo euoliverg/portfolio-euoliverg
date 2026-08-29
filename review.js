@@ -24,10 +24,28 @@ reviewForm?.addEventListener('submit', async (event) => {
   showStatus('Sending your review…');
 
   try {
-    const response = await fetch(reviewForm.action, {
+    const storageResponse = await fetch('/api/reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(payload)
+    });
+    const storageResult = await storageResponse.json().catch(() => ({}));
+    if (!storageResponse.ok || !storageResult.success) {
+      throw new Error(storageResult.message || 'The review could not be saved.');
+    }
+
+    const notificationPayload = {
+      ...payload,
+      review_status: 'Pending moderation',
+      review_id: storageResult.reviewId,
+      'APPROVE OR REJECT': storageResult.moderationUrl,
+      subject: `Review awaiting approval — ${payload.company || 'Unknown company'}`
+    };
+
+    const response = await fetch(reviewForm.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(notificationPayload)
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok || result.success === false) {
@@ -35,7 +53,7 @@ reviewForm?.addEventListener('submit', async (event) => {
     }
 
     reviewForm.reset();
-    showStatus('Thank you. Your review was received and is pending verification.');
+    showStatus('Thank you. Your review was received and is awaiting approval.');
   } catch (error) {
     console.error('Review submission failed:', error);
     showStatus('The review could not be sent. Please try again or contact me by email.', 'error');

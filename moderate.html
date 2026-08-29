@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.className = 'js';</script>
+
+  <title>Review Moderation | Gabriel Oliveira</title>
+  <meta name="description" content="Private client review moderation.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#090a0d">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://euoliverg.online/moderate">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="review-page-body">
+  <header class="review-header">
+    <div class="shell review-header-inner">
+      <a class="brand" href="index.html">Gabriel Oliveira</a>
+      <a class="review-back" href="index.html">← Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="review-page">
+    <section class="shell review-page-inner moderation-panel" aria-labelledby="moderation-title">
+      <p class="review-kicker">Private moderation</p>
+      <h1 id="moderation-title">Review approval</h1>
+      <p class="review-intro" data-moderation-message>Loading the submitted review…</p>
+
+      <article class="moderation-review" data-moderation-review hidden>
+        <div class="moderation-meta">
+          <div><span>Client</span><strong data-review-name></strong></div>
+          <div><span>Company</span><strong data-review-company></strong></div>
+          <div><span>Email</span><a data-review-email></a></div>
+          <div><span>Rating</span><strong data-review-rating></strong></div>
+        </div>
+        <blockquote data-review-copy></blockquote>
+        <p class="moderation-state">Current status: <strong data-review-status></strong></p>
+        <div class="moderation-actions">
+          <button class="review-submit" type="button" data-moderate="approve">Approve & publish</button>
+          <button class="review-reject" type="button" data-moderate="reject">Reject</button>
+        </div>
+        <p class="review-status" data-moderation-status role="status" hidden></p>
+      </article>
+    </section>
+  </main>
+
+  <script src="moderate.js" defer></script>
+</body>
+</html>
