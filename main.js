@@ -4,6 +4,9 @@ import { escapeHtml, renderWork } from './render.js';
 const projectGrid = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
 const caseDialog = document.querySelector('[data-case-dialog]');
+const reviewDialog = document.querySelector('[data-review-dialog]');
+const reviewForm = document.querySelector('[data-review-form]');
+const reviewStatus = document.querySelector('[data-review-status]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // The production build pre-renders the gallery into the HTML, so only render
@@ -74,6 +77,65 @@ caseDialog?.addEventListener('click', (event) => {
   if (event.target === caseDialog) closeDialog(caseDialog);
 });
 caseDialog?.addEventListener('close', handleDialogClosed);
+
+document.querySelector('[data-review-open]')?.addEventListener('click', (event) => {
+  if (!reviewDialog) return;
+  dialogTrigger = event.currentTarget;
+  document.body.classList.add('dialog-open');
+  reviewDialog.showModal();
+});
+reviewDialog?.querySelector('[data-review-close]')?.addEventListener('click', () => closeDialog(reviewDialog));
+reviewDialog?.addEventListener('click', (event) => {
+  if (event.target === reviewDialog) closeDialog(reviewDialog);
+});
+reviewDialog?.addEventListener('close', handleDialogClosed);
+
+const reviewSubmit = reviewForm?.querySelector('.review-submit');
+const reviewSubmitLabel = reviewSubmit?.innerHTML ?? '';
+
+const showReviewStatus = (message, state) => {
+  if (!reviewStatus) return;
+  reviewStatus.hidden = false;
+  reviewStatus.textContent = message;
+  reviewStatus.classList.toggle('is-error', state === 'error');
+};
+
+reviewForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (reviewSubmit?.disabled) return;
+
+  const payload = Object.fromEntries(new FormData(reviewForm).entries());
+  payload.subject = `New ${payload.rating || ''} client review — ${payload.company || 'Unknown company'} / ${payload.project || 'Project'}`;
+
+  if (reviewSubmit) {
+    reviewSubmit.disabled = true;
+    reviewSubmit.textContent = 'Sending…';
+  }
+  showReviewStatus('Sending your review…', 'pending');
+
+  try {
+    const response = await fetch(reviewForm.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success === false) {
+      throw new Error(result.message || `Request failed (${response.status})`);
+    }
+
+    reviewForm.reset();
+    showReviewStatus('Thank you. Your review was received and is pending verification.', 'success');
+  } catch (error) {
+    console.error('Review submission failed:', error);
+    showReviewStatus('The review could not be sent. Please try again or contact me by email.', 'error');
+  } finally {
+    if (reviewSubmit) {
+      reviewSubmit.disabled = false;
+      reviewSubmit.innerHTML = reviewSubmitLabel;
+    }
+  }
+});
 
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());

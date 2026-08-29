@@ -82,6 +82,20 @@ if (ogImage.readUInt32BE(16) !== 1200 || ogImage.readUInt32BE(20) !== 630) {
   fail(`${ogImagePath} must be 1200x630 for link previews.`);
 }
 
+// --- Guard: client reviews must reach moderation, never publish directly. ----
+for (const marker of ['data-review-open', 'data-review-dialog', 'data-review-form']) {
+  if (!html.includes(marker)) fail(`Missing client review marker: ${marker}`);
+}
+if (!html.includes('action="https://api.web3forms.com/submit"')) {
+  fail('The client review form is missing its Web3Forms fallback action.');
+}
+if (!/name="access_key" value="[0-9a-f-]{36}"/i.test(html)) {
+  fail('The client review form is missing a configured access key.');
+}
+if (!html.includes('Pending moderation')) {
+  fail('Client reviews must be marked for moderation before publication.');
+}
+
 // --- Pre-render the project gallery into the HTML. ---------------------------
 // Without this the gallery and case studies only exist after JavaScript runs,
 // which hides the strongest proof of real work from search engines and from
