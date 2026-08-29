@@ -118,7 +118,7 @@
           <a href="tel:+14702972385"><span>Phone</span><strong>+1 (470) 297-2385</strong></a>
           <a href="https://www.linkedin.com/in/gabriel-oliveira-45056a324/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>/in/gabriel-oliveira-45056a324</strong></a>
           <a href="https://www.instagram.com/euoliverg/" target="_blank" rel="noopener noreferrer"><span>Instagram</span><strong>@euoliverg</strong></a>
-          <button type="button" data-review-open><span>Client review</span><strong>Leave a review ↗</strong></button>
+          <a href="review.html"><span>Client review</span><strong>Leave a review ↗</strong></a>
         </div>
       </div>
     </section>
@@ -147,59 +147,6 @@
         <div class="case-services"><h3>Services</h3><ul data-case-services></ul></div>
         <a class="button button-primary" data-case-link href="https://citywiderentalwa.com/" target="_blank" rel="noopener noreferrer">Visit live website <span aria-hidden="true">↗</span></a>
       </div>
-    </div>
-  </dialog>
-
-  <dialog class="review-dialog" data-review-dialog aria-labelledby="review-title">
-    <button class="dialog-close" type="button" data-review-close aria-label="Close review form">×</button>
-    <div class="review-content">
-      <p class="review-kicker">Client feedback</p>
-      <h2 id="review-title">Share your experience.</h2>
-      <p class="review-intro">If we worked together, tell me how the project went. Reviews are checked before they are featured publicly.</p>
-
-      <form class="review-form" data-review-form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="a785b438-0229-448e-ba01-d13befc0231e">
-        <input type="hidden" name="from_name" value="Oliver.dev client reviews">
-        <input type="hidden" name="subject" value="New client review from euoliverg.online">
-        <input type="hidden" name="review_status" value="Pending moderation">
-        <label class="review-honeypot" aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label>
-
-        <div class="review-form-row">
-          <label>Name<input type="text" name="name" autocomplete="name" required maxlength="80"></label>
-          <label>Company<input type="text" name="company" autocomplete="organization" required maxlength="100"></label>
-        </div>
-
-        <div class="review-form-row">
-          <label>Email <span>Not displayed publicly</span><input type="email" name="email" autocomplete="email" required maxlength="120"></label>
-          <label>Project
-            <select name="project" required>
-              <option value="" selected disabled>Select the project</option>
-              <option>City Wide Rental</option>
-              <option>Alfa Cleaning WA</option>
-              <option>GSN Construction LLC</option>
-              <option>Other project</option>
-            </select>
-          </label>
-        </div>
-
-        <fieldset class="rating-fieldset">
-          <legend>Rating</legend>
-          <div class="rating-options">
-            <label><input type="radio" name="rating" value="1 / 5" required><span>1 ★</span></label>
-            <label><input type="radio" name="rating" value="2 / 5"><span>2 ★</span></label>
-            <label><input type="radio" name="rating" value="3 / 5"><span>3 ★</span></label>
-            <label><input type="radio" name="rating" value="4 / 5"><span>4 ★</span></label>
-            <label><input type="radio" name="rating" value="5 / 5"><span>5 ★</span></label>
-          </div>
-        </fieldset>
-
-        <label>Your review<textarea name="review" rows="5" required minlength="20" maxlength="1200" placeholder="Tell me what was delivered and what stood out about the experience."></textarea></label>
-        <label class="review-consent"><input type="checkbox" name="display_permission" value="Approved to display after moderation" required><span>I confirm this review reflects my genuine experience and may be displayed on this portfolio after approval.</span></label>
-
-        <button class="review-submit" type="submit">Submit review <span aria-hidden="true">↗</span></button>
-        <p class="review-note">Your email is used only to verify the review and contact you if clarification is needed.</p>
-        <p class="review-status" data-review-status role="status" hidden></p>
-      </form>
     </div>
   </dialog>
 

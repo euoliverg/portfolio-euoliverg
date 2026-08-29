@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.className = 'js';</script>
+
+  <title>Leave a Review | Gabriel Oliveira</title>
+  <meta name="description" content="Share feedback about a project delivered by Gabriel Oliveira.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#090a0d">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://euoliverg.online/review">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="review-page-body">
+  <a class="skip-link" href="#review-form">Skip to review form</a>
+
+  <header class="review-header">
+    <div class="shell review-header-inner">
+      <a class="brand" href="index.html">Gabriel Oliveira</a>
+      <a class="review-back" href="index.html">← Back to portfolio</a>
+    </div>
+  </header>
+
+  <main class="review-page">
+    <section class="shell review-page-inner" aria-labelledby="review-title">
+      <p class="review-kicker">Client review</p>
+      <h1 id="review-title">How was the project?</h1>
+      <p class="review-intro">A short, honest review is enough. It will be checked before appearing on the portfolio.</p>
+
+      <form class="review-form" id="review-form" data-review-form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="a785b438-0229-448e-ba01-d13befc0231e">
+        <input type="hidden" name="from_name" value="Oliver.dev client reviews">
+        <input type="hidden" name="subject" value="New client review from euoliverg.online">
+        <input type="hidden" name="review_status" value="Pending moderation">
+        <label class="review-honeypot" aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label>
+
+        <label>Name<input type="text" name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Company<input type="text" name="company" autocomplete="organization" required maxlength="100"></label>
+        <label>Email <span>For verification only</span><input type="email" name="email" autocomplete="email" required maxlength="120"></label>
+
+        <fieldset class="rating-fieldset">
+          <legend>Rating</legend>
+          <div class="rating-options">
+            <label><input type="radio" name="rating" value="1 / 5" required><span>1 ★</span></label>
+            <label><input type="radio" name="rating" value="2 / 5"><span>2 ★</span></label>
+            <label><input type="radio" name="rating" value="3 / 5"><span>3 ★</span></label>
+            <label><input type="radio" name="rating" value="4 / 5"><span>4 ★</span></label>
+            <label><input type="radio" name="rating" value="5 / 5"><span>5 ★</span></label>
+          </div>
+        </fieldset>
+
+        <label>Review<textarea name="review" rows="5" required minlength="20" maxlength="1200" placeholder="Tell me about your experience working with me."></textarea></label>
+        <button class="review-submit" type="submit">Send review <span aria-hidden="true">↗</span></button>
+        <p class="review-note">By sending, you allow this review to be considered for publication after verification.</p>
+        <p class="review-status" data-review-status role="status" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="review.js" defer></script>
+</body>
+</html>

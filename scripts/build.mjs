@@ -14,8 +14,10 @@ const fail = (message) => { throw new Error(message); };
 
 const copiedFiles = [
   'index.html',
+  'review.html',
   'styles.css',
   'main.js',
+  'review.js',
   'render.js',
   'projects.js',
   'favicon.ico',
@@ -42,6 +44,7 @@ if (!manifest.name || !manifest.icons?.length) {
 }
 
 let html = await readFile(join(root, 'index.html'), 'utf8');
+const reviewHtml = await readFile(join(root, 'review.html'), 'utf8');
 
 const requiredMetadata = ['rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json'];
 for (const marker of requiredMetadata) {
@@ -51,7 +54,7 @@ for (const marker of requiredMetadata) {
 // --- Guard: the canonical domain must be euoliverg.online everywhere. ---------
 // A canonical pointing at another domain tells Google this site is a duplicate
 // and breaks every link preview on WhatsApp, Messenger and LinkedIn.
-for (const file of ['index.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
+for (const file of ['index.html', 'review.html', 'robots.txt', 'sitemap.xml', 'site.webmanifest']) {
   const contents = await readFile(join(root, file), 'utf8');
   if (WRONG_ORIGIN.test(contents)) {
     fail(`${file} still points at the old oliver.dev domain. Every URL must use ${SITE_ORIGIN}.`);
@@ -82,17 +85,20 @@ if (ogImage.readUInt32BE(16) !== 1200 || ogImage.readUInt32BE(20) !== 630) {
   fail(`${ogImagePath} must be 1200x630 for link previews.`);
 }
 
-// --- Guard: client reviews must reach moderation, never publish directly. ----
-for (const marker of ['data-review-open', 'data-review-dialog', 'data-review-form']) {
-  if (!html.includes(marker)) fail(`Missing client review marker: ${marker}`);
+// --- Guard: client reviews live on a simple, dedicated moderation page. ------
+if (!html.includes('href="review.html"')) {
+  fail('The portfolio is missing its link to the client review page.');
 }
-if (!html.includes('action="https://api.web3forms.com/submit"')) {
+if (!reviewHtml.includes('data-review-form')) {
+  fail('review.html is missing the client review form.');
+}
+if (!reviewHtml.includes('action="https://api.web3forms.com/submit"')) {
   fail('The client review form is missing its Web3Forms fallback action.');
 }
-if (!/name="access_key" value="[0-9a-f-]{36}"/i.test(html)) {
+if (!/name="access_key" value="[0-9a-f-]{36}"/i.test(reviewHtml)) {
   fail('The client review form is missing a configured access key.');
 }
-if (!html.includes('Pending moderation')) {
+if (!reviewHtml.includes('Pending moderation')) {
   fail('Client reviews must be marked for moderation before publication.');
 }
 
