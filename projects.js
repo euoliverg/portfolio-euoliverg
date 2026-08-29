@@ -1,20 +1,6 @@
-export const groups = [
-  {
-    key: 'client',
-    label: 'Client Work',
-    description: 'Websites delivered for operating businesses, linked directly to the live production experience.'
-  },
-  {
-    key: 'selected',
-    label: 'Selected Projects / Experiments',
-    description: 'Additional published work shown separately from confirmed Noryx client engagements.'
-  }
-];
-
 export const projects = [
   {
     index: '01',
-    group: 'client',
     name: 'City Wide Rental',
     monogram: 'CW',
     location: 'Washington, USA',
@@ -31,7 +17,6 @@ export const projects = [
   },
   {
     index: '02',
-    group: 'client',
     name: 'Alfa Cleaning WA',
     monogram: 'AC',
     location: 'Seattle, Washington, USA',
@@ -48,7 +33,6 @@ export const projects = [
   },
   {
     index: '03',
-    group: 'client',
     name: 'GSN Construction LLC',
     monogram: 'GC',
     location: 'Seattle, Washington, USA',
@@ -64,8 +48,7 @@ export const projects = [
     }
   },
   {
-    index: '01',
-    group: 'selected',
+    index: '04',
     name: 'Botequim Arretado',
     monogram: 'BA',
     location: 'Niterói, Rio de Janeiro, Brazil',
@@ -76,8 +59,7 @@ export const projects = [
     url: 'https://familiaarretado.com.br/'
   },
   {
-    index: '02',
-    group: 'selected',
+    index: '05',
     name: 'Fairmont Olympic Hotel',
     monogram: 'FO',
     location: 'Seattle, Washington, USA',
@@ -88,8 +70,7 @@ export const projects = [
     url: 'https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&goto=fiche_hotel&merchantid=seo-maps-US-A580&sourceid=aw-cen'
   },
   {
-    index: '03',
-    group: 'selected',
+    index: '06',
     name: 'Restaurante Veranda',
     monogram: 'RV',
     location: 'Niterói, Rio de Janeiro, Brazil',

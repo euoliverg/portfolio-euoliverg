@@ -1,42 +1,20 @@
-import { groups, projects } from './projects.js';
+import { projects } from './projects.js';
 import { escapeHtml, renderWork } from './render.js';
 
 const projectGrid = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
-const navToggle = document.querySelector('[data-nav-toggle]');
-const nav = document.querySelector('[data-nav]');
 const caseDialog = document.querySelector('[data-case-dialog]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// The production build pre-renders the gallery into the HTML, so only render
+// here when the container arrived empty (dev server, or an unbuilt index.html).
 if (projectGrid && !projectGrid.children.length) {
-  projectGrid.innerHTML = renderWork(groups, projects);
+  projectGrid.innerHTML = renderWork(projects);
 }
 
-const setNavigation = (open) => {
-  document.body.classList.toggle('nav-open', open);
-  navToggle?.setAttribute('aria-expanded', String(open));
-  const label = navToggle?.querySelector('.visually-hidden');
-  if (label) label.textContent = open ? 'Close navigation' : 'Open navigation';
-};
-
-navToggle?.addEventListener('click', () => {
-  setNavigation(navToggle.getAttribute('aria-expanded') !== 'true');
-});
-nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setNavigation(false)));
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 820) setNavigation(false);
-});
-
-const updateChrome = () => {
-  header?.classList.toggle('is-scrolled', window.scrollY > 16);
-  const progress = document.querySelector('[data-scroll-progress]');
-  if (!progress) return;
-  const available = document.documentElement.scrollHeight - window.innerHeight;
-  const percentage = available > 0 ? Math.min(1, window.scrollY / available) : 0;
-  progress.style.transform = `scaleX(${percentage})`;
-};
-updateChrome();
-window.addEventListener('scroll', updateChrome, { passive: true });
+const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
 
 let dialogTrigger = null;
 
@@ -96,10 +74,6 @@ caseDialog?.addEventListener('click', (event) => {
   if (event.target === caseDialog) closeDialog(caseDialog);
 });
 caseDialog?.addEventListener('close', handleDialogClosed);
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') setNavigation(false);
-});
 
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());

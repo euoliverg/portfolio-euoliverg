@@ -1,7 +1,7 @@
 import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { groups, projects } from '../projects.js';
+import { projects } from '../projects.js';
 import { renderWork } from '../render.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -89,14 +89,14 @@ if (ogImage.readUInt32BE(16) !== 1200 || ogImage.readUInt32BE(20) !== 630) {
 const projectsBlock = /<!-- PROJECTS:START[\s\S]*?PROJECTS:END -->/;
 if (!projectsBlock.test(html)) fail('index.html is missing the PROJECTS:START / PROJECTS:END markers.');
 
-const workMarkup = renderWork(groups, projects);
+const workMarkup = renderWork(projects);
 for (const project of projects) {
   if (!workMarkup.includes(project.name.replace(/&/g, '&amp;'))) {
     fail(`Pre-rendered gallery is missing project: ${project.name}`);
   }
 }
 
-html = html.replace(projectsBlock, `<div class="work-groups" data-projects>${workMarkup}\n        </div>`);
+html = html.replace(projectsBlock, `<div class="work-grid" data-projects>${workMarkup}\n        </div>`);
 if (html.includes('Enable JavaScript to view')) {
   fail('The no-JS gallery message survived pre-rendering — the markers did not match.');
 }
