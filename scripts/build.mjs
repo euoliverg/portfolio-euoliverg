@@ -32,6 +32,7 @@ const copiedFiles = [
   'robots.txt',
   'sitemap.xml',
   'assets/og-cover.png',
+  'assets/gabriel-oliveira.webp',
   ...projects.map((project) => project.image)
 ];
 

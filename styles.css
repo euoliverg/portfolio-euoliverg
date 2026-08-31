@@ -263,7 +263,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: .12em;
   text-transform: uppercase;
 }
-.about-body { max-width: 620px; }
+.about-body { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; align-items: start; max-width: 880px; }
+.about-figure { margin: 0; }
+.about-figure img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
+.about-text { max-width: 620px; }
 .about-body p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.7; }
 .about-stack {
   display: flex;
@@ -508,6 +511,12 @@ dialog::backdrop { background: rgba(0, 0, 0, .78); backdrop-filter: blur(6px); }
 @media (max-width: 1000px) {
   .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 18px; }
+  .about-body { grid-template-columns: 150px minmax(0, 1fr); gap: 22px; }
+}
+
+@media (max-width: 520px) {
+  .about-body { grid-template-columns: 1fr; }
+  .about-figure { max-width: 190px; }
 }
 
 @media (max-width: 640px) {
