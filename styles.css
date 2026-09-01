@@ -124,6 +124,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   transition: border-color 160ms ease, color 160ms ease;
 }
 .intro-links a:hover { border-color: var(--yellow); color: var(--yellow); }
+.intro-links a.has-ic { display: inline-flex; align-items: center; gap: 7px; }
+.intro-links a.has-ic svg { flex: 0 0 auto; opacity: .7; }
+.intro-links a.has-ic:hover svg { opacity: 1; }
 .intro-links a.gh-link {
   display: inline-flex;
   align-items: center;
