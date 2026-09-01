@@ -60,17 +60,6 @@ export const projects = [
   },
   {
     index: '05',
-    name: 'Fairmont Olympic Hotel',
-    monogram: 'FO',
-    location: 'Seattle, Washington, USA',
-    industry: 'Enterprise Hospitality',
-    description: 'A premium hospitality interface balancing property discovery, editorial presentation and booking actions.',
-    image: 'assets/projects/fairmont-olympic.webp',
-    imageAlt: 'Fairmont Olympic Hotel Seattle website home page',
-    url: 'https://www.fairmont.com/en/hotels/seattle/fairmont-olympic-hotel.html?code_hotel=A580&goto=fiche_hotel&merchantid=seo-maps-US-A580&sourceid=aw-cen'
-  },
-  {
-    index: '06',
     name: 'Restaurante Veranda',
     monogram: 'RV',
     location: 'Niterói, Rio de Janeiro, Brazil',
