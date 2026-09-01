@@ -114,7 +114,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-size: 1rem;
   line-height: 1.65;
 }
-.intro-links { display: flex; flex-wrap: wrap; gap: 22px; margin: 26px 0 0; }
+.intro-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 26px 0 0; }
 .intro-links a {
   padding-bottom: 3px;
   border-bottom: 1px solid var(--line-strong);
@@ -124,6 +124,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
   transition: border-color 160ms ease, color 160ms ease;
 }
 .intro-links a:hover { border-color: var(--yellow); color: var(--yellow); }
+.intro-links a.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  font-weight: 600;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.intro-links a.gh-link svg { flex: 0 0 auto; }
+.intro-links a.gh-link:hover { border-color: var(--yellow); background: rgba(240, 189, 61, .09); color: var(--yellow); transform: translateY(-1px); }
 
 /* Work — the point of the page. */
 .work { padding-bottom: clamp(72px, 9vw, 110px); }
