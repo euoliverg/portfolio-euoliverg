@@ -114,32 +114,23 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-size: 1rem;
   line-height: 1.65;
 }
-.intro-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 26px 0 0; }
+.intro-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 28px 0 0; }
 .intro-links a {
-  padding-bottom: 3px;
-  border-bottom: 1px solid var(--line-strong);
-  color: var(--white);
-  font-size: .82rem;
-  font-weight: 550;
-  transition: border-color 160ms ease, color 160ms ease;
-}
-.intro-links a:hover { border-color: var(--yellow); color: var(--yellow); }
-.intro-links a.has-ic { display: inline-flex; align-items: center; gap: 7px; }
-.intro-links a.has-ic svg { flex: 0 0 auto; opacity: .7; }
-.intro-links a.has-ic:hover svg { opacity: 1; }
-.intro-links a.gh-link {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   padding: 9px 15px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   background: rgba(255, 255, 255, .04);
+  color: var(--white);
+  font-size: .82rem;
   font-weight: 600;
   transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
 }
-.intro-links a.gh-link svg { flex: 0 0 auto; }
-.intro-links a.gh-link:hover { border-color: var(--yellow); background: rgba(240, 189, 61, .09); color: var(--yellow); transform: translateY(-1px); }
+.intro-links a svg { flex: 0 0 auto; opacity: .8; }
+.intro-links a:hover { border-color: var(--yellow); background: rgba(240, 189, 61, .09); color: var(--yellow); transform: translateY(-1px); }
+.intro-links a:hover svg { opacity: 1; }
 
 /* Work — the point of the page. */
 .work { padding-bottom: clamp(72px, 9vw, 110px); }
@@ -540,7 +531,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .78); backdrop-filter: blur(6px); }
   .primary-nav { gap: 18px; }
   .primary-nav a { font-size: .76rem; }
   .intro { padding: 44px 0 34px; }
-  .intro-links { gap: 16px; }
+  .intro-links { gap: 10px; }
   .work-grid { grid-template-columns: 1fr; }
   .contact-direct a { display: grid; gap: 5px; }
   .review-header-inner { min-height: 58px; }
