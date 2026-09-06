@@ -167,27 +167,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .project:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .project-shot { position: relative; display: block; background: #0e1014; }
-.project-bar {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  height: 30px;
-  padding-inline: 12px;
-  border-bottom: 1px solid var(--line);
-  background: var(--surface-2);
-}
-.project-bar i { width: 6px; height: 6px; border-radius: 50%; background: #4b5058; }
-.project-bar i:first-child { background: var(--yellow); }
-.project-bar em {
-  margin-left: 8px;
-  overflow: hidden;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: .58rem;
-  font-style: normal;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .project-shot img {
   width: 100%;
   height: auto;

@@ -8,14 +8,6 @@ export const escapeHtml = (value = '') => String(value)
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;');
 
-const displayHost = (url) => {
-  try {
-    return new URL(url).hostname.replace('www.', '');
-  } catch {
-    return url;
-  }
-};
-
 const caseStudyBlock = (project) => {
   if (!project.caseStudy) return '';
   const services = project.caseStudy.services
@@ -43,11 +35,7 @@ export const projectCard = (project, position = 0) => {
     <article class="project reveal" data-project-card>
       <a class="project-shot" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">
         <span class="visually-hidden">Open ${escapeHtml(project.name)} website</span>
-        <span class="project-bar" aria-hidden="true">
-          <i></i><i></i><i></i>
-          <em>${escapeHtml(displayHost(project.url))}</em>
-        </span>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1236" ${loading} decoding="async">
+        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1375" ${loading} decoding="async">
       </a>
 
       <div class="project-info">
