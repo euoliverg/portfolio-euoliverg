@@ -209,6 +209,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-actions a:hover, .project-case:hover { border-color: var(--yellow); color: var(--yellow); }
 .project-case { color: var(--yellow); }
 
+/* Inline "opens in new tab" arrow — an SVG so it never renders as a
+   platform emoji the way the ↗ character does on iOS. */
+.i-arrow {
+  width: .82em;
+  height: .82em;
+  margin-left: .28em;
+  vertical-align: -.06em;
+  flex: none;
+}
+
 /* Case study detail — real HTML for crawlers and no-JS visitors; the
    dialog takes over once JavaScript is available. */
 .js .case-static { display: none; }

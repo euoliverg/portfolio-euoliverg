@@ -27,7 +27,7 @@ const caseStudyBlock = (project) => {
 
 export const projectCard = (project, position = 0) => {
   const caseButton = project.caseStudy
-    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">View case study <span aria-hidden="true">↗</span></button>`
+    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">View case study <svg class="i-arrow" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"/></svg></button>`
     : '';
   const loading = position === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
 
@@ -43,7 +43,7 @@ export const projectCard = (project, position = 0) => {
         <p class="project-meta">${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
         <p class="project-description">${escapeHtml(project.description)}</p>
         <div class="project-actions">
-          <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <span aria-hidden="true">↗</span></a>
+          <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <svg class="i-arrow" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"/></svg></a>
           ${caseButton}
         </div>
         ${caseStudyBlock(project)}
