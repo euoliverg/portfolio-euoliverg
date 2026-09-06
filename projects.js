@@ -68,5 +68,21 @@ export const projects = [
     image: 'assets/projects/restaurante-veranda.webp',
     imageAlt: 'Restaurante Veranda website home page',
     url: 'https://restauranteveranda.com.br/'
+  },
+  {
+    index: '06',
+    name: 'LRC Empire Construction',
+    monogram: 'LR',
+    location: 'Metro Atlanta, Georgia, USA',
+    industry: 'Countertop & Stone Fabrication',
+    description: 'A production website presenting premium quartz, marble and granite countertop services with a direct free-estimate request flow.',
+    image: 'assets/projects/lrc-empire-construction.webp',
+    imageAlt: 'LRC Empire Construction live website presenting quartz, marble and granite countertop services across Metro Atlanta',
+    url: 'https://www.lrcempireconstruction.com/',
+    caseStudy: {
+      challenge: 'Present a premium countertop and stone fabrication business in a way that builds trust and turns visitors into estimate requests across the Metro Atlanta market.',
+      solution: 'A responsive business website that leads with the craft, communicates quartz, marble and granite services clearly and guides customers straight into a free-estimate request.',
+      services: ['Website Development', 'Landing Page', 'Responsive Design', 'Conversion-Focused Structure', 'Deployment', 'Domain Configuration']
+    }
   }
 ];
