@@ -8,14 +8,6 @@ export const escapeHtml = (value = '') => String(value)
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;');
 
-const displayHost = (url) => {
-  try {
-    return new URL(url).hostname.replace('www.', '');
-  } catch {
-    return url;
-  }
-};
-
 const caseStudyBlock = (project) => {
   if (!project.caseStudy) return '';
   const services = project.caseStudy.services
@@ -35,7 +27,7 @@ const caseStudyBlock = (project) => {
 
 export const projectCard = (project, position = 0) => {
   const caseButton = project.caseStudy
-    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">View case study <span aria-hidden="true">↗</span></button>`
+    ? `<button class="project-case" type="button" data-case-open="${escapeHtml(project.name)}">View case study <svg class="i-arrow" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"/></svg></button>`
     : '';
   const loading = position === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
 
@@ -43,11 +35,7 @@ export const projectCard = (project, position = 0) => {
     <article class="project reveal" data-project-card>
       <a class="project-shot" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">
         <span class="visually-hidden">Open ${escapeHtml(project.name)} website</span>
-        <span class="project-bar" aria-hidden="true">
-          <i></i><i></i><i></i>
-          <em>${escapeHtml(displayHost(project.url))}</em>
-        </span>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1236" ${loading} decoding="async">
+        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1375" ${loading} decoding="async">
       </a>
 
       <div class="project-info">
@@ -55,7 +43,7 @@ export const projectCard = (project, position = 0) => {
         <p class="project-meta">${escapeHtml(project.industry)} · ${escapeHtml(project.location)}</p>
         <p class="project-description">${escapeHtml(project.description)}</p>
         <div class="project-actions">
-          <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <span aria-hidden="true">↗</span></a>
+          <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">Visit site <svg class="i-arrow" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"/></svg></a>
           ${caseButton}
         </div>
         ${caseStudyBlock(project)}
