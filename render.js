@@ -1,6 +1,14 @@
 // Shared project markup used by both the static build and the browser.
 // Keep this file free of DOM APIs so Node can pre-render the gallery.
 
+// Cache-busting token for /assets, which Vercel serves with a 1-year
+// "immutable" cache. Because screenshots keep the same filenames, bump this
+// whenever an image is replaced so browsers fetch the new version.
+export const ASSET_VERSION = '20260911';
+
+// Append the cache-busting query to a same-origin asset path.
+export const withVersion = (path = '') => `${path}${path.includes('?') ? '&' : '?'}v=${ASSET_VERSION}`;
+
 export const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -35,7 +43,7 @@ export const projectCard = (project, position = 0) => {
     <article class="project reveal" data-project-card>
       <a class="project-shot" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">
         <span class="visually-hidden">Open ${escapeHtml(project.name)} website</span>
-        <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1375" ${loading} decoding="async">
+        <img src="${escapeHtml(withVersion(project.image))}" alt="${escapeHtml(project.imageAlt)}" width="2200" height="1375" ${loading} decoding="async">
       </a>
 
       <div class="project-info">

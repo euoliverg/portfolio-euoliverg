@@ -1,5 +1,5 @@
 import { projects } from './projects.js';
-import { escapeHtml, renderWork } from './render.js';
+import { escapeHtml, renderWork, withVersion } from './render.js';
 
 const projectGrid = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
@@ -36,7 +36,7 @@ const openCaseStudy = (project) => {
 
   const image = caseDialog.querySelector('[data-case-image]');
   if (image) {
-    image.src = project.image;
+    image.src = withVersion(project.image);
     image.alt = project.imageAlt;
   }
 
