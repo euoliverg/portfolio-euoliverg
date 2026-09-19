@@ -84,5 +84,21 @@ export const projects = [
       solution: 'A responsive business website that leads with the craft, communicates quartz, marble and granite services clearly and guides customers straight into a free-estimate request.',
       services: ['Website Development', 'Landing Page', 'Responsive Design', 'Conversion-Focused Structure', 'Deployment', 'Domain Configuration']
     }
+  },
+  {
+    index: '07',
+    name: 'Planet Builders LLC',
+    monogram: 'PB',
+    location: 'Seattle, Washington, USA',
+    industry: 'Roofing & Exterior Construction',
+    description: 'A multilingual contractor website presenting roofing, siding and deck services with strong local trust signals and a direct quote journey.',
+    image: 'assets/projects/planet-builders.png',
+    imageAlt: 'Planet Builders LLC live website presenting roofing, siding and deck services in Seattle',
+    url: 'https://www.planetbuilderswa.com/en',
+    caseStudy: {
+      challenge: 'Present a family-run exterior construction company with more than 15 years of experience while making its roofing, siding and deck services easy to understand.',
+      solution: 'A responsive multilingual website that combines local credibility, service education, project photography, reviews and direct paths to request a free quote.',
+      services: ['Website Development', 'Responsive Design', 'Multilingual Experience', 'Service Architecture', 'Conversion-Focused Structure', 'Deployment']
+    }
   }
 ];
