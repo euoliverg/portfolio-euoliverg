@@ -116,5 +116,16 @@ export const projects = [
       solution: 'A responsive business website that organizes core services, showcases real before-and-after work and guides visitors through a clear free-estimate journey.',
       services: ['Website Development', 'Service Architecture', 'Project Gallery', 'Responsive Design', 'Estimate Request Flow', 'Conversion-Focused Structure', 'Deployment']
     }
+  },
+  {
+    index: '09',
+    name: 'Noryx Digital',
+    monogram: 'ND',
+    location: 'Online · SaaS',
+    industry: 'SaaS Platform',
+    description: 'A software-as-a-service platform by Noryx Digital, bringing digital products and tools together in one web app.',
+    image: 'assets/projects/noryx-digital.webp',
+    imageAlt: 'Noryx Digital — SaaS platform',
+    url: 'https://www.noryxdigital.tech/'
   }
 ];
