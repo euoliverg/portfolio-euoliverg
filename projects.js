@@ -92,7 +92,7 @@ export const projects = [
     location: 'Seattle, Washington, USA',
     industry: 'Roofing & Exterior Construction',
     description: 'A multilingual contractor website with a secure administrative dashboard for customer service, lead follow-up and day-to-day operations.',
-    image: 'assets/projects/planet-builders.png',
+    image: 'assets/projects/planet-builders.webp',
     imageAlt: 'Planet Builders LLC live website presenting roofing, siding and deck services in Seattle',
     url: 'https://www.planetbuilderswa.com/en',
     caseStudy: {
@@ -108,7 +108,7 @@ export const projects = [
     location: 'Ohio Valley, USA',
     industry: 'Property Services & Remodeling',
     description: 'A service-focused website presenting property improvements, real project results and a direct path to request a free estimate.',
-    image: 'assets/projects/dr-property-solutions.png',
+    image: 'assets/projects/dr-property-solutions.webp',
     imageAlt: 'DR Property Solutions LLC live website presenting licensed property services and free estimates',
     url: 'https://www.drpropertysolutionsllc.com/',
     caseStudy: {
