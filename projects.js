@@ -100,5 +100,21 @@ export const projects = [
       solution: 'A responsive multilingual website paired with an authenticated administrative support dashboard, combining local credibility, service education, quote generation and an organized customer-service workflow.',
       services: ['Website Development', 'Admin Dashboard', 'Customer Service Workflow', 'Responsive Design', 'Multilingual Experience', 'Conversion-Focused Structure', 'Deployment']
     }
+  },
+  {
+    index: '08',
+    name: 'DR Property Solutions LLC',
+    monogram: 'DR',
+    location: 'Ohio Valley, USA',
+    industry: 'Property Services & Remodeling',
+    description: 'A service-focused website presenting property improvements, real project results and a direct path to request a free estimate.',
+    image: 'assets/projects/dr-property-solutions.png',
+    imageAlt: 'DR Property Solutions LLC live website presenting licensed property services and free estimates',
+    url: 'https://www.drpropertysolutionsllc.com/',
+    caseStudy: {
+      challenge: 'Bring a broad range of property services into one credible online presence for homeowners and businesses across the Ohio Valley.',
+      solution: 'A responsive business website that organizes core services, showcases real before-and-after work and guides visitors through a clear free-estimate journey.',
+      services: ['Website Development', 'Service Architecture', 'Project Gallery', 'Responsive Design', 'Estimate Request Flow', 'Conversion-Focused Structure', 'Deployment']
+    }
   }
 ];

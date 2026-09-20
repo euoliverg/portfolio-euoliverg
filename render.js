@@ -4,7 +4,7 @@
 // Cache-busting token for /assets, which Vercel serves with a 1-year
 // "immutable" cache. Because screenshots keep the same filenames, bump this
 // whenever an image is replaced so browsers fetch the new version.
-export const ASSET_VERSION = '20260911';
+export const ASSET_VERSION = '20260919';
 
 // Append the cache-busting query to a same-origin asset path.
 export const withVersion = (path = '') => `${path}${path.includes('?') ? '&' : '?'}v=${ASSET_VERSION}`;
