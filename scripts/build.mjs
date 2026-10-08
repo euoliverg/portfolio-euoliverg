@@ -18,6 +18,7 @@ const copiedFiles = [
   'moderate.html',
   'styles.css',
   'main.js',
+  'hero3d.js',
   'review.js',
   'moderate.js',
   'render.js',
@@ -126,7 +127,7 @@ for (const project of projects) {
   }
 }
 
-html = html.replace(projectsBlock, `<div class="repo-grid" data-projects>${workMarkup}\n        </div>`);
+html = html.replace(projectsBlock, `<div class="work-gallery" data-projects>${workMarkup}\n        </div>`);
 if (html.includes('Enable JavaScript to view')) {
   fail('The no-JS gallery message survived pre-rendering — the markers did not match.');
 }

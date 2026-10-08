@@ -1,108 +1,234 @@
 import { projects } from './projects.js';
 import { escapeHtml, renderWork, withVersion } from './render.js';
 
-const projectGrid = document.querySelector('[data-projects]');
+window.__booted = true;
+
+const root = document.documentElement;
+const projectGallery = document.querySelector('[data-projects]');
 const header = document.querySelector('[data-header]');
 const caseDialog = document.querySelector('[data-case-dialog]');
 const reviewsSection = document.querySelector('[data-reviews-section]');
 const reviewsGrid = document.querySelector('[data-reviews-grid]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const smallScreen = window.matchMedia('(max-width: 860px)').matches;
 
 // The production build pre-renders the gallery into the HTML, so only render
 // here when the container arrived empty (dev server, or an unbuilt index.html).
-if (projectGrid && !projectGrid.children.length) {
-  projectGrid.innerHTML = renderWork(projects);
+if (projectGallery && !projectGallery.children.length) {
+  projectGallery.innerHTML = renderWork(projects);
 }
 
-/* ---- Terminal preloader -------------------------------------------------- */
-const preloader = document.querySelector('[data-preloader]');
-const preloaderBar = document.querySelector('[data-preloader-bar]');
-if (preloader && preloaderBar && !reduceMotion) {
-  requestAnimationFrame(() => {
-    preloaderBar.style.transition = 'width 1100ms cubic-bezier(.3, .8, .3, 1)';
-    preloaderBar.style.width = '100%';
-  });
-  setTimeout(() => {
-    preloader.classList.add('is-done');
-    setTimeout(() => preloader.remove(), 560);
-  }, 1250);
-} else if (preloader) {
-  preloader.remove();
-}
+/* ---- Header: scrolled state, hide on scroll down, active section -------- */
+let lastScrollY = window.scrollY;
+const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+const updateHeader = () => {
+  const y = window.scrollY;
+  header?.classList.toggle('is-scrolled', y > 24);
+  const menuOpen = header?.querySelector('.nav-links.is-open');
+  header?.classList.toggle('is-hidden', !menuOpen && y > window.innerHeight * .8 && y > lastScrollY + 2);
+  if (y < lastScrollY - 2) header?.classList.remove('is-hidden');
+  lastScrollY = y;
+};
 
-/* ---- Scroll progress + header shadow ------------------------------------ */
-const progressBar = document.querySelector('[data-scroll-progress]');
-const onScroll = () => {
-  header?.classList.toggle('is-scrolled', window.scrollY > 16);
-  if (progressBar) {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-    progressBar.style.width = `${(pct * 100).toFixed(2)}%`;
-  }
-};
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
-
-/* ---- Scroll-spy tabs with a sliding ink underline ----------------------- */
-const tabs = [...document.querySelectorAll('.gh-tabs a[href^="#"]')];
-const tabInk = document.querySelector('[data-tab-ink]');
-const moveInk = (link) => {
-  if (!tabInk || !link) return;
-  tabInk.style.width = `${link.offsetWidth}px`;
-  tabInk.style.transform = `translateX(${link.offsetLeft}px)`;
-};
-let activeTab = tabs[0] || null;
-const setActiveTab = (link) => {
-  if (!link) return;
-  activeTab = link;
-  tabs.forEach((tab) => tab.classList.toggle('is-active', tab === link));
-  moveInk(link);
-};
-if (tabs.length) {
-  const tabTargets = tabs
+if ('IntersectionObserver' in window && navLinks.length) {
+  const sections = navLinks
     .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
     .filter((entry) => entry.section);
-
-  tabs.forEach((link) => link.addEventListener('click', () => setActiveTab(link)));
-
-  if ('IntersectionObserver' in window) {
-    const spy = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const match = tabTargets.find((entryTarget) => entryTarget.section === entry.target);
-        if (match) setActiveTab(match.link);
-      });
-    }, { rootMargin: '-50% 0px -45% 0px', threshold: 0 });
-    tabTargets.forEach((entry) => spy.observe(entry.section));
-  }
-
-  const initInk = () => setActiveTab(activeTab || tabs[0]);
-  window.addEventListener('load', initInk);
-  window.addEventListener('resize', () => moveInk(activeTab));
-  initInk();
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const match = sections.find((item) => item.section === entry.target);
+      if (match) match.link.classList.toggle('is-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach((item) => spy.observe(item.section));
 }
 
-/* ---- Animated stat counters --------------------------------------------- */
-if (!reduceMotion) {
-  document.querySelectorAll('[data-count-to]').forEach((el) => {
-    const target = Number(el.dataset.countTo);
-    if (!target) return;
-    const start = performance.now();
-    const duration = 900;
-    const tick = (now) => {
-      const k = Math.min(1, (now - start) / duration);
-      el.textContent = String(Math.round(k * target)).padStart(2, '0');
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+/* ---- Mobile menu --------------------------------------------------------- */
+const navToggle = document.querySelector('[data-nav-toggle]');
+const nav = document.querySelector('[data-nav]');
+const setMenu = (open) => {
+  navToggle?.setAttribute('aria-expanded', String(open));
+  nav?.classList.toggle('is-open', open);
+};
+navToggle?.addEventListener('click', () => setMenu(navToggle.getAttribute('aria-expanded') !== 'true'));
+nav?.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && nav?.classList.contains('is-open')) {
+    setMenu(false);
+    navToggle?.focus();
+  }
+});
+
+/* ---- Reveals ------------------------------------------------------------- */
+// Stagger siblings that share a parent so groups cascade instead of popping.
+document.querySelectorAll('.channels, .about-copy, .contact-intro').forEach((group) => {
+  [...group.querySelectorAll('.reveal')].forEach((item, index) => item.style.setProperty('--i', String(index)));
+});
+
+const revealTargets = document.querySelectorAll('.reveal, .split, .work-item');
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  revealTargets.forEach((item) => item.classList.add('is-in'));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+  revealTargets.forEach((item) => revealObserver.observe(item));
+}
+
+/* ---- Scroll-linked motion (parallax, hero exit, showcase scale) ---------- */
+const heroCopy = document.querySelector('[data-hero-copy]');
+const featureMedia = document.querySelector('.feature-media');
+const parallaxItems = [...document.querySelectorAll('[data-parallax]')];
+let scrollTicking = false;
+
+const updateScrollMotion = () => {
+  scrollTicking = false;
+  const vh = window.innerHeight;
+  updateHeader();
+  if (reduceMotion) return;
+
+  if (heroCopy) {
+    const p = Math.min(1, window.scrollY / vh);
+    heroCopy.style.transform = `translate3d(0, ${(p * -70).toFixed(1)}px, 0)`;
+    heroCopy.style.opacity = String(Math.max(0, 1 - p * 1.25).toFixed(3));
+  }
+
+  if (featureMedia) {
+    const rect = featureMedia.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (vh - rect.top) / (vh * .85)));
+    featureMedia.style.setProperty('--s', (.86 + p * .14).toFixed(4));
+  }
+
+  if (!smallScreen) {
+    parallaxItems.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      if (rect.bottom < -200 || rect.top > vh + 200) return;
+      const offset = (rect.top + rect.height / 2 - vh / 2) * Number(item.dataset.parallax || 0);
+      item.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+    });
+  }
+};
+const requestScrollMotion = () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(updateScrollMotion);
+};
+updateScrollMotion();
+window.addEventListener('scroll', requestScrollMotion, { passive: true });
+window.addEventListener('resize', requestScrollMotion, { passive: true });
+
+/* ---- Perspective tilt on project media ----------------------------------- */
+if (finePointer && !reduceMotion) {
+  document.querySelectorAll('[data-tilt]').forEach((element) => {
+    const strength = element.classList.contains('feature-media') ? 7 : 5;
+    element.addEventListener('pointermove', (event) => {
+      const rect = element.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      element.classList.add('is-tracking');
+      element.style.setProperty('--rx', `${((.5 - y) * strength).toFixed(2)}deg`);
+      element.style.setProperty('--ry', `${((x - .5) * strength).toFixed(2)}deg`);
+      element.style.setProperty('--gx', `${(x * 100).toFixed(1)}%`);
+      element.style.setProperty('--gy', `${(y * 100).toFixed(1)}%`);
+    });
+    element.addEventListener('pointerleave', () => {
+      element.classList.remove('is-tracking');
+      element.style.setProperty('--rx', '0deg');
+      element.style.setProperty('--ry', '0deg');
+    });
   });
 }
 
-/* ---- Case study dialog --------------------------------------------------- */
-let dialogTrigger = null;
+/* ---- Magnetic buttons ----------------------------------------------------- */
+if (finePointer && !reduceMotion) {
+  document.querySelectorAll('[data-magnetic]').forEach((button) => {
+    button.addEventListener('pointermove', (event) => {
+      const rect = button.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      button.style.transform = `translate3d(${(x * .18).toFixed(1)}px, ${(y * .28).toFixed(1)}px, 0)`;
+    });
+    button.addEventListener('pointerleave', () => { button.style.transform = ''; });
+  });
+}
 
-const openCaseStudy = (project) => {
+/* ---- Custom cursor (desktop only) ---------------------------------------- */
+const cursorRoot = document.querySelector('[data-cursor-root]');
+if (cursorRoot && finePointer && !reduceMotion) {
+  root.classList.add('has-cursor');
+  const dot = cursorRoot.querySelector('.cursor-dot');
+  const ring = cursorRoot.querySelector('.cursor-ring');
+  const label = cursorRoot.querySelector('[data-cursor-label]');
+  const target = { x: -100, y: -100 };
+  const ringPos = { x: -100, y: -100 };
+  let cursorRaf = 0;
+
+  const loop = () => {
+    ringPos.x += (target.x - ringPos.x) * .2;
+    ringPos.y += (target.y - ringPos.y) * .2;
+    ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0)`;
+    cursorRaf = Math.abs(target.x - ringPos.x) + Math.abs(target.y - ringPos.y) > .1 ? requestAnimationFrame(loop) : 0;
+  };
+
+  window.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    target.x = event.clientX;
+    target.y = event.clientY;
+    dot.style.transform = `translate3d(${target.x}px, ${target.y}px, 0)`;
+    cursorRoot.classList.remove('is-hidden');
+    if (!cursorRaf) cursorRaf = requestAnimationFrame(loop);
+
+    const media = event.target.closest('[data-cursor]');
+    const interactive = event.target.closest('a, button, input, textarea, select, label');
+    cursorRoot.classList.toggle('is-media', Boolean(media));
+    cursorRoot.classList.toggle('is-link', !media && Boolean(interactive));
+    if (media) label.textContent = media.dataset.cursor;
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => cursorRoot.classList.add('is-hidden'));
+  window.addEventListener('pointerdown', () => cursorRoot.classList.add('is-down'));
+  window.addEventListener('pointerup', () => cursorRoot.classList.remove('is-down'));
+}
+
+/* ---- Hero 3D (progressive) ------------------------------------------------ */
+const heroCanvas = document.querySelector('[data-hero-canvas]');
+const supportsWebGL = () => {
+  try {
+    const probe = document.createElement('canvas');
+    return Boolean(probe.getContext('webgl2') || probe.getContext('webgl'));
+  } catch {
+    return false;
+  }
+};
+const capable3D = () => {
+  if (reduceMotion || !heroCanvas) return false;
+  if (navigator.connection?.saveData) return false;
+  const memory = navigator.deviceMemory ?? 8;
+  const cores = navigator.hardwareConcurrency ?? 8;
+  if (memory < 3 || cores < 4) return false;
+  return supportsWebGL();
+};
+
+if (capable3D()) {
+  const boot = () => {
+    import('./hero3d.js')
+      .then(({ initHero3D }) => initHero3D(heroCanvas, { mobile: smallScreen || !finePointer }))
+      .then(() => root.classList.add('has-3d'))
+      .catch(() => {});
+  };
+  if ('requestIdleCallback' in window) requestIdleCallback(boot, { timeout: 1200 });
+  else setTimeout(boot, 300);
+}
+
+/* ---- Case study dialog ---------------------------------------------------- */
+let dialogTrigger = null;
+let sourceRect = null;
+
+const openCaseStudy = (project, trigger) => {
   if (!caseDialog || !project.caseStudy) return;
   const setText = (selector, value) => {
     const element = caseDialog.querySelector(selector);
@@ -132,13 +258,51 @@ const openCaseStudy = (project) => {
   const link = caseDialog.querySelector('[data-case-link]');
   if (link) link.href = project.url;
 
-  dialogTrigger = document.activeElement;
+  dialogTrigger = trigger || document.activeElement;
+  const card = trigger?.closest('[data-project-card]');
+  sourceRect = card?.querySelector('.media-frame')?.getBoundingClientRect() || null;
+
   document.body.classList.add('dialog-open');
   caseDialog.showModal();
+  caseDialog.scrollTop = 0;
+
+  // Grow the dialog out of the project's screenshot.
+  if (!reduceMotion && caseDialog.animate) {
+    const box = caseDialog.getBoundingClientRect();
+    const from = sourceRect
+      ? `inset(${Math.max(0, sourceRect.top - box.top)}px ${Math.max(0, box.right - sourceRect.right)}px ${Math.max(0, box.bottom - sourceRect.bottom)}px ${Math.max(0, sourceRect.left - box.left)}px round 16px)`
+      : 'inset(12% 12% 12% 12% round 16px)';
+    caseDialog.animate(
+      [{ clipPath: from, opacity: .4 }, { clipPath: 'inset(0 0 0 0 round 22px)', opacity: 1 }],
+      { duration: 820, easing: 'cubic-bezier(.16, 1, .3, 1)' }
+    );
+    caseDialog.querySelector('.case-visual img')?.animate(
+      [{ transform: 'scale(1.15)' }, { transform: 'scale(1)' }],
+      { duration: 1200, easing: 'cubic-bezier(.16, 1, .3, 1)' }
+    );
+    caseDialog.querySelector('.case-content')?.animate(
+      [{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 900, delay: 220, easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'backwards' }
+    );
+  }
 };
 
+let closing = false;
 const closeDialog = (dialog) => {
-  if (dialog?.open) dialog.close();
+  if (!dialog?.open || closing) return;
+  if (reduceMotion || !dialog.animate) {
+    dialog.close();
+    return;
+  }
+  closing = true;
+  const animation = dialog.animate(
+    [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(16px) scale(.98)' }],
+    { duration: 320, easing: 'cubic-bezier(.65, 0, .35, 1)' }
+  );
+  animation.onfinish = () => {
+    closing = false;
+    dialog.close();
+  };
 };
 
 const handleDialogClosed = () => {
@@ -150,16 +314,20 @@ const handleDialogClosed = () => {
 document.querySelectorAll('[data-case-open]').forEach((button) => {
   button.addEventListener('click', () => {
     const project = projects.find((item) => item.name === button.dataset.caseOpen);
-    if (project) openCaseStudy(project);
+    if (project) openCaseStudy(project, button);
   });
 });
 caseDialog?.querySelector('[data-case-close]')?.addEventListener('click', () => closeDialog(caseDialog));
 caseDialog?.addEventListener('click', (event) => {
   if (event.target === caseDialog) closeDialog(caseDialog);
 });
+caseDialog?.addEventListener('cancel', (event) => {
+  event.preventDefault();
+  closeDialog(caseDialog);
+});
 caseDialog?.addEventListener('close', handleDialogClosed);
 
-/* ---- Approved client reviews -------------------------------------------- */
+/* ---- Approved client reviews ---------------------------------------------- */
 const renderReviews = (reviews) => {
   if (!reviewsGrid || !reviewsSection || !reviews.length) return;
   reviewsGrid.innerHTML = reviews.map((review) => `
@@ -185,147 +353,3 @@ if (reviewsSection && reviewsGrid) {
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
-
-/* ---- Reveal on scroll --------------------------------------------------- */
-const revealItems = document.querySelectorAll('.reveal');
-if (reduceMotion || !('IntersectionObserver' in window)) {
-  revealItems.forEach((item) => item.classList.add('is-visible'));
-} else {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
-  revealItems.forEach((item) => revealObserver.observe(item));
-}
-
-/* ---- 3D code background reacting to scroll ------------------------------ */
-// A perspective-projected field of code glyphs flying toward the camera, with
-// a receding floor grid. Scrolling accelerates the flight (parallax depth).
-// Pure 2D canvas — no WebGL, no library — so it stays light on every device.
-const initBackground = (canvas) => {
-  const ctx = canvas.getContext('2d', { alpha: true });
-  if (!ctx) return;
-
-  const glyphs = ['{ }', '( )', '=>', '</>', '&&', '||', '::', '$', 'fn', '[]', ';', '01', '==', '++', '#', 'const', 'let', 'async', 'npm', 'git'];
-  const colors = ['63, 185, 80', '88, 166, 255', '188, 140, 255', '247, 129, 102', '139, 148, 158'];
-  const F = 340;
-  const NEAR = 26;
-  const FAR = 1100;
-
-  let w = 0;
-  let h = 0;
-  let cx = 0;
-  let cy = 0;
-  let points = [];
-  let raf = 0;
-  let last = 0;
-  let scrollY = window.scrollY;
-  let boost = 0;
-
-  const makePoint = (z) => ({
-    x: (Math.random() * 2 - 1) * 900,
-    y: (Math.random() * 2 - 1) * 600,
-    z: z ?? (NEAR + Math.random() * (FAR - NEAR)),
-    size: 12 + Math.random() * 11,
-    text: glyphs[(Math.random() * glyphs.length) | 0],
-    color: colors[(Math.random() * colors.length) | 0],
-    a: 0.45 + Math.random() * 0.55
-  });
-
-  const build = () => {
-    const count = Math.min(140, Math.round((w * h) / 14000));
-    points = Array.from({ length: count }, () => makePoint());
-  };
-
-  const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    cx = w / 2;
-    cy = h * 0.46;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    build();
-  };
-
-  const drawGrid = (shift) => {
-    const groundY = 320;
-    ctx.strokeStyle = 'rgba(63, 185, 80, .09)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i < 24; i++) {
-      const z = NEAR + ((i * 56 + shift) % (FAR - NEAR));
-      const s = F / z;
-      const y = cy + groundY * s;
-      const span = 1500 * s;
-      ctx.globalAlpha = Math.max(0, 1 - z / FAR) * 0.9;
-      ctx.beginPath();
-      ctx.moveTo(cx - span, y);
-      ctx.lineTo(cx + span, y);
-      ctx.stroke();
-    }
-    ctx.globalAlpha = 0.05;
-    for (let gx = -6; gx <= 6; gx++) {
-      const near = F / NEAR;
-      const far = F / FAR;
-      ctx.beginPath();
-      ctx.moveTo(cx + gx * 190 * near, cy + groundY * near);
-      ctx.lineTo(cx + gx * 190 * far, cy + groundY * far);
-      ctx.stroke();
-    }
-    ctx.globalAlpha = 1;
-  };
-
-  const frame = (now) => {
-    const dt = Math.min(0.05, (now - last) / 1000);
-    last = now;
-
-    const sy = window.scrollY;
-    const velocity = Math.abs(sy - scrollY);
-    scrollY = sy;
-    const targetBoost = Math.min(620, velocity * 15);
-    boost += (targetBoost - boost) * Math.min(1, dt * 6);
-    const speed = 58 + boost;
-    const shift = sy * 0.5;
-
-    ctx.clearRect(0, 0, w, h);
-    drawGrid(shift);
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    for (const p of points) {
-      p.z -= speed * dt;
-      if (p.z < NEAR) {
-        Object.assign(p, makePoint(FAR));
-        continue;
-      }
-      const s = F / p.z;
-      const sx = cx + p.x * s;
-      const py = cy + p.y * s;
-      if (sx < -80 || sx > w + 80 || py < -80 || py > h + 80) continue;
-      const depth = 1 - (p.z - NEAR) / (FAR - NEAR);
-      const alpha = p.a * Math.min(1, depth * 1.7) * Math.min(1, (FAR - p.z) / 130) * 0.5;
-      if (alpha <= 0.012) continue;
-      ctx.font = `${Math.max(8, p.size * s)}px "IBM Plex Mono", Consolas, monospace`;
-      ctx.fillStyle = `rgba(${p.color}, ${alpha.toFixed(3)})`;
-      ctx.fillText(p.text, sx, py);
-    }
-    raf = requestAnimationFrame(frame);
-  };
-
-  const start = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
-  const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
-
-  resize();
-  start();
-  window.addEventListener('resize', resize, { passive: true });
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-};
-
-const bgCanvas = document.querySelector('[data-bg]');
-if (bgCanvas && !reduceMotion) {
-  initBackground(bgCanvas);
-}

@@ -17,6 +17,17 @@ export const projects = [
   },
   {
     index: '02',
+    name: 'Goldwheel Rental',
+    monogram: 'GW',
+    location: 'Tacoma & Seattle, Washington, USA',
+    industry: 'Car Rental',
+    description: 'A car rental website for the Tacoma–Seattle area presenting the fleet, simple daily and weekly rates and direct call, text or form booking.',
+    image: 'assets/projects/goldwheel-rental.webp',
+    imageAlt: 'Goldwheel Rental live website presenting rental cars in Tacoma and Seattle with daily and weekly rates',
+    url: 'https://www.goldwheelrental.com/'
+  },
+  {
+    index: '03',
     name: 'Alfa Cleaning WA',
     monogram: 'AC',
     location: 'Seattle, Washington, USA',
@@ -32,7 +43,7 @@ export const projects = [
     }
   },
   {
-    index: '03',
+    index: '04',
     name: 'GSN Construction LLC',
     monogram: 'GC',
     location: 'Seattle, Washington, USA',
@@ -48,7 +59,7 @@ export const projects = [
     }
   },
   {
-    index: '04',
+    index: '05',
     name: 'Botequim Arretado',
     monogram: 'BA',
     location: 'Niterói, Rio de Janeiro, Brazil',
@@ -59,7 +70,7 @@ export const projects = [
     url: 'https://familiaarretado.com.br/'
   },
   {
-    index: '05',
+    index: '06',
     name: 'Restaurante Veranda',
     monogram: 'RV',
     location: 'Niterói, Rio de Janeiro, Brazil',
@@ -70,7 +81,7 @@ export const projects = [
     url: 'https://restauranteveranda.com.br/'
   },
   {
-    index: '06',
+    index: '07',
     name: 'LRC Empire Construction',
     monogram: 'LR',
     location: 'Metro Atlanta, Georgia, USA',
@@ -86,7 +97,7 @@ export const projects = [
     }
   },
   {
-    index: '07',
+    index: '08',
     name: 'Planet Builders LLC',
     monogram: 'PB',
     location: 'Seattle, Washington, USA',
@@ -102,7 +113,7 @@ export const projects = [
     }
   },
   {
-    index: '08',
+    index: '09',
     name: 'DR Property Solutions LLC',
     monogram: 'DR',
     location: 'Ohio Valley, USA',
@@ -118,7 +129,7 @@ export const projects = [
     }
   },
   {
-    index: '09',
+    index: '10',
     name: 'Noryx Digital',
     monogram: 'ND',
     location: 'Online · SaaS',
