@@ -14,9 +14,37 @@ if (projectGrid && !projectGrid.children.length) {
   projectGrid.innerHTML = renderWork(projects);
 }
 
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
+const progressBar = document.querySelector('[data-scroll-progress]');
+const onScroll = () => {
+  header?.classList.toggle('is-scrolled', window.scrollY > 16);
+  if (progressBar) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    progressBar.style.width = `${(pct * 100).toFixed(2)}%`;
+  }
+};
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
+
+// Scroll-spy: light up the nav link for the section in view.
+const navLinks = [...document.querySelectorAll('.primary-nav a[href^="#"]')];
+const spyTargets = navLinks
+  .map((link) => {
+    const section = document.querySelector(link.getAttribute('href'));
+    return section ? { link, section } : null;
+  })
+  .filter(Boolean);
+if (spyTargets.length && 'IntersectionObserver' in window) {
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const match = spyTargets.find((target) => target.section === entry.target);
+      if (match) navLinks.forEach((link) => link.classList.toggle('is-active', link === match.link));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  spyTargets.forEach((target) => spyObserver.observe(target.section));
+}
 
 let dialogTrigger = null;
 
@@ -115,4 +143,78 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
     });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
   revealItems.forEach((item) => revealObserver.observe(item));
+}
+
+// Ambient background: faint code glyphs drifting upward behind the content.
+// Deliberately subtle — it signals "developer" without competing with the work.
+// Off for reduced-motion and small screens (where it would just cost battery).
+const initCodeBackground = (canvas) => {
+  const ctx = canvas.getContext('2d', { alpha: true });
+  if (!ctx) return;
+
+  const glyphs = ['{ }', '( )', '=>', '</>', '&&', '||', '::', '$', 'fn', '[]', ';', '01', '==', '++', '#', 'const', 'let', 'async', 'npm'];
+  const palette = ['107, 209, 160', '240, 189, 61', '162, 167, 174'];
+  const rand = (min, max) => min + Math.random() * (max - min);
+
+  let width = 0;
+  let height = 0;
+  let items = [];
+  let raf = 0;
+  let last = 0;
+
+  const build = () => {
+    const count = Math.min(30, Math.round(window.innerWidth / 55));
+    items = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: rand(11, 17),
+      speed: rand(4, 14),
+      drift: rand(-6, 6),
+      phase: Math.random() * Math.PI * 2,
+      text: glyphs[Math.floor(Math.random() * glyphs.length)],
+      color: `rgba(${palette[Math.floor(Math.random() * palette.length)]}, ${rand(0.04, 0.11).toFixed(3)})`
+    }));
+  };
+
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  };
+
+  const frame = (now) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    ctx.clearRect(0, 0, width, height);
+    ctx.textBaseline = 'middle';
+    for (const item of items) {
+      item.y -= item.speed * dt;
+      item.phase += dt * 0.5;
+      if (item.y < -24) {
+        item.y = height + 24;
+        item.x = Math.random() * width;
+      }
+      ctx.font = `${item.size}px "IBM Plex Mono", Consolas, monospace`;
+      ctx.fillStyle = item.color;
+      ctx.fillText(item.text, item.x + Math.sin(item.phase) * item.drift, item.y);
+    }
+    raf = requestAnimationFrame(frame);
+  };
+
+  const start = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+
+  resize();
+  start();
+  window.addEventListener('resize', resize, { passive: true });
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+};
+
+const bgCanvas = document.querySelector('[data-bg]');
+if (bgCanvas && !reduceMotion && window.matchMedia('(min-width: 760px)').matches) {
+  initCodeBackground(bgCanvas);
 }
