@@ -126,7 +126,7 @@ for (const project of projects) {
   }
 }
 
-html = html.replace(projectsBlock, `<div class="work-grid" data-projects>${workMarkup}\n        </div>`);
+html = html.replace(projectsBlock, `<div class="repo-grid" data-projects>${workMarkup}\n        </div>`);
 if (html.includes('Enable JavaScript to view')) {
   fail('The no-JS gallery message survived pre-rendering — the markers did not match.');
 }
